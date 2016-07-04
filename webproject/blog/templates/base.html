@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EveryPython Blog</title>
+</head>
+<body>
+    <div id="header">
+        {% block header %}
+        <h1><a href="{% url 'blog:index' %}">EveryPython Blog</a></h1>
+        {% endblock header %}
+    </div>
+    <div id="sidebar">
+        {% block sidebar %}
+
+        {% endblock sidebar %}
+    </div>
+    <div id="content">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+
+</body>
+</html>
