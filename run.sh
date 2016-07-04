@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 echo "Virtualenv"
-virtualenv -p python3 .venv
+virtualenv -p python3.5 .venv
 . .venv/bin/activate
 
 echo "Requirements"
-pip install -r requirements.txt
+pip install -r requirments.txt
 
 echo "migrate django"
 cd webproject
