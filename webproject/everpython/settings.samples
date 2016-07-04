@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'storages',
     # 태그
     'taggit',
+    # 부트스트랩 테스트 앱
+    'testboot'
 ]
 
 MIDDLEWARE_CLASSES = [
