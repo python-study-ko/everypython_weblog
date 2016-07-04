@@ -1,0 +1,5 @@
+boto==2.41.0
+Django==1.9.7
+django-ckeditor==5.0.3
+django-storages==1.4.1
+django-taggit==0.20.1
