@@ -7,11 +7,12 @@ from blog.models import Category, Post
 
 class Index(TemplateView):
     template_name ='blog/index.html'
+    fcategory = Category.objects.filter(level=1)
 
     def get_context_data(self, **kwargs):
         context = super(Index,self).get_context_data(**kwargs)
         context['post'] = Post
-        context['category'] = Category
+        context['category'] = Category.objects.filter(level=1).reverse()
         return context
 
 class CategoryList(ListView):

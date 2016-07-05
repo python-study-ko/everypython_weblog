@@ -1,1 +1,20 @@
 {% extends 'base_blog.html' %}
+
+{% block sidebar %}
+    {# 카테고리 목록 #}
+    <ul>
+    {% for c1 in category %}
+        <li><h5>1차 카테고리</h5></li>
+        <li><a href="">{{ c1.name }}</a> </li>
+        {% if not c1.under_list() == None %}
+            {% for c2 in c1.under_line %}
+                {# 2차 카테고리 까지만 구현 #}
+                <li><a href="">{{ c2.name }}</a> </li>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endblock %}
+{% block content %}
+    {# 최신 포스트 및 인기있는 포스트  #}
+{% endblock %}
