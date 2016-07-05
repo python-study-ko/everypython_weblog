@@ -11,7 +11,7 @@ class Category(models.Model):
     포스트 카테고리
     level = 카테고리 단계로 총 3단계까지 있음
     name = 카테고리 명
-    under_category = 관계된 카테고리 
+    under_category = 관계된 카테고리
     """
     level = models.IntegerField(choices=[(1,'1차 카테고리'),(2,'2차 카테고리'),(3,'3차 카테고')],default=1)
     name = models.CharField(max_length=20)
