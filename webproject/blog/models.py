@@ -18,6 +18,21 @@ class Category(models.Model):
     name = models.CharField(max_length=20)
     under_category = models.ManyToManyField("self",symmetrical=True,blank=True)
 
+    # 하위 카테고리를 추출해주는 메소드
+    def under_list(self):
+        # 1차 카테고리
+    
+        under_list = []
+        if self.level == 1:
+            cate_list = self.under_category.all().reverse()
+            for x in cate_list:
+                if x.level == 2:
+                    under_list.append(x)
+
+        # 할일 : [ x for x in self.under_category.all() if x.level == 2] 처러 만들기
+        # return under_list
+        return cate_list
+
     def __str__(self):
         return self.name
 
