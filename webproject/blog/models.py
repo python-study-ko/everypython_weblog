@@ -21,17 +21,23 @@ class Category(models.Model):
     # 하위 카테고리를 추출해주는 메소드
     def under_list(self):
         # 1차 카테고리
-    
-        under_list = []
+        cate_list =[]
         if self.level == 1:
-            cate_list = self.under_category.all().reverse()
-            for x in cate_list:
-                if x.level == 2:
-                    under_list.append(x)
+            cate_list = [x for x in self.under_category.all().reverse() if x.level == 2]
+        elif self.level == 2:
+            cate_list = [x for x in self.under_category.all().reverse() if x.level == 3]
+        else:
+            cate_list = []
 
-        # 할일 : [ x for x in self.under_category.all() if x.level == 2] 처러 만들기
-        # return under_list
         return cate_list
+    """
+    템플릿에서 사용시 아래 형식처럼 사용하면 된다.
+    for x in a.under_list():
+        print("하위 카테고리 {}".format(x))
+        if not len(x.under_list()) == 0:
+            print("{}의 하위 카테고리 {}".format(x, x.under_list()))
+
+    """
 
     def __str__(self):
         return self.name
