@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'storages',
     # 태그
     'taggit',
+    # 블로그앱 추가
+    'blog',
 ]
 
 MIDDLEWARE_CLASSES = [
