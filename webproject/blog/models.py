@@ -20,7 +20,14 @@ class Category(models.Model):
 
     # 하위 카테고리를 추출해주는 메소드 : 반환값의 len()이 0일경우 하위카테고리 없음 처리
     def under_list(self):
+        """
+        해당 객체의 하위 카테고리를 추출한다.
+        :return: 하위 카테고리가 없으면 Noen / 있으면 리스트에 해당객체를 담아
+        """
+        # 하위 카테고리 목록 초기화
+        cate_list = None
 
+        # 보조 함수
         def check_list(u_list):
             """
             하위 카테고리 존재여부 확인
@@ -33,17 +40,16 @@ class Category(models.Model):
                 return u_list
 
         # 1차 카테고리
-        cate_list = None
         if self.level == 1:
             u_list = [x for x in self.under_category.all().reverse() if x.level == 2]
             cate_list = check_list(u_list)
 
+        # 2차 카테고리
         elif self.level == 2:
             u_list = [x for x in self.under_category.all().reverse() if x.level == 3]
             cate_list = check_list(u_list)
-
+        # 3차 카테고리 : 하위 카테고리를 가질수 없음
         else:
-            # 3차 카테고리는 하위 카테고리를 가질수 없음
             cate_list = None
 
         return cate_list
@@ -56,7 +62,6 @@ class Category(models.Model):
             print("{}의 하위 카테고리 {}".format(x, x.under_list()))
 
     """
-
     def __str__(self):
         return self.name
 
