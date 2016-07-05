@@ -18,23 +18,41 @@ class Category(models.Model):
     name = models.CharField(max_length=20)
     under_category = models.ManyToManyField("self",symmetrical=True,blank=True)
 
-    # 하위 카테고리를 추출해주는 메소드
+    # 하위 카테고리를 추출해주는 메소드 : 반환값의 len()이 0일경우 하위카테고리 없음 처리
     def under_list(self):
+
+        def check_list(u_list):
+            """
+            하위 카테고리 존재여부 확인
+            :param u_list: 하위 카테고리 리스트
+            :return: 하위 카테고리가 존재하지 않은면 None값을 반환
+            """
+            if len(u_list) == 0:
+                return None
+            else:
+                return u_list
+
         # 1차 카테고리
-        cate_list =[]
+        cate_list = None
         if self.level == 1:
-            cate_list = [x for x in self.under_category.all().reverse() if x.level == 2]
+            u_list = [x for x in self.under_category.all().reverse() if x.level == 2]
+            cate_list = check_list(u_list)
+
         elif self.level == 2:
-            cate_list = [x for x in self.under_category.all().reverse() if x.level == 3]
+            u_list = [x for x in self.under_category.all().reverse() if x.level == 3]
+            cate_list = check_list(u_list)
+
         else:
-            cate_list = []
+            # 3차 카테고리는 하위 카테고리를 가질수 없음
+            cate_list = None
 
         return cate_list
     """
-    템플릿에서 사용시 아래 형식처럼 사용하면 된다.
+    하위 카테고리 사용 예시
+    a = Category.objects.get(id=1)
     for x in a.under_list():
         print("하위 카테고리 {}".format(x))
-        if not len(x.under_list()) == 0:
+        if x.under_list() != None:
             print("{}의 하위 카테고리 {}".format(x, x.under_list()))
 
     """
