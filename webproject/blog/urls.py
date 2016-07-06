@@ -6,4 +6,7 @@ urlpatterns = patterns('',
                        url(r'^$',views.Index.as_view(),name='index'),
                        url(r'^category/(?P<pk>\d+)/$',views.CategoryList.as_view(),name='CategoryList'),
                        url(r'^post/(?P<pk>\d+)/$',views.PostDetail.as_view(),name='PostDetail'),
+                       # 테스트용 코드
+                       url(r'^jinjadef/$',views.jinjadef,name='jinjatest'),
+                       url(r'^jinjaclass/(?P<pk>\d+)/$',views.jinjaclass.as_view(),name='jinjaclass'),
                        )
