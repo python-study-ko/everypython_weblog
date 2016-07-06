@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'taggit',
     # 블로그앱 추가
     'blog',
+    # 장고용 진자
+    'django_jinja',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -61,23 +63,35 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'everpython.urls'
-
+# 진자 기본 템플릿설정으로 변경
 TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates/jinja2'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'environment': 'everpython.jinja2.environment',
+        },
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
-
 WSGI_APPLICATION = 'everpython.wsgi.application'
 
 
@@ -123,7 +137,7 @@ USE_TZ = True
 
 
 ## 템플릿 파일 설정
-TEMPLATES_DIRS=[os.path.join(BASE_DIR,'templates')]
+# TEMPLATES_DIRS=[os.path.join(BASE_DIR,'templates')]
 # ckeditor 설정
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
