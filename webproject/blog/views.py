@@ -1,29 +1,30 @@
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.shortcuts import render, render_to_response
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from django.views.generic import ListView, View
 from django.views.generic.base import TemplateView
 from blog.models import Category, Post
 
-from django_jinja.views.generic.detail import DetailView
 
+from django_jinja.views.generic.detail import DetailView
 # Create your views here.
 
 
-class Index(TemplateView):
-    template_name ='blog/index.html'
+class Index(View):
+    def get(self, request, data=None):
+        # sidbar = Category.objects.all()
+        data = render_to_string("blog/index.jinja", {"post": ['test',2],'categorys': Category},
+                                request=request)
+        return HttpResponse(data)
 
-    def get_context_data(self, **kwargs):
-        context = super(Index,self).get_context_data(**kwargs)
-        context['post'] = Post
-        context['category'] = Category
-        return context
 
 class CategoryList(ListView):
     model = Category
-    template_name = 'blog/category.html'
+    template_name = 'blog/category.jinja'
 
 class PostDetail(DetailView):
     model = Post
-    template_name = 'blog/postdetail.html'
+    template_name = 'blog/postdetail.jinja'
 
 # jinja2 테스트 코드
 def jinjadef(request):

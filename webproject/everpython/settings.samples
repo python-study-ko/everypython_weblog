@@ -67,9 +67,7 @@ ROOT_URLCONF = 'everpython.urls'
 TEMPLATES = [
     {
         'BACKEND': "django_jinja.backend.Jinja2",
-        'DIRS': [
-            #os.path.join(BASE_DIR, 'templates/jinja2'),
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'environment': 'everpython.jinja2.environment',
@@ -78,7 +76,7 @@ TEMPLATES = [
     },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,7 +137,7 @@ USE_TZ = True
 
 
 ## 템플릿 파일 설정
-# TEMPLATES_DIRS=[os.path.join(BASE_DIR,'templates')]
+TEMPLATES_DIRS=[os.path.join(BASE_DIR,'templates')]
 # ckeditor 설정
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
