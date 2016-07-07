@@ -9,8 +9,27 @@
 {% block sidebar %}
 <h3> 카테고리 </h3>
 <ul>
-{% for c in categorys.objects.all() %}
-    <li> {{ c.level }} - {{ c.name }}</li>
+{# 1차 카테고리 #}
+{% for c1 in categorys %}
+    {% if not loop.first %}<br>{% endif %}
+    <li> {{ c1.name }}</li>
+
+    {# 2차 카테고리 #}
+    {% if c1.under_list() %}
+        {% for c2 in c1.under_list() %}
+            <li>|--{{ c2.name }}</li>
+
+                {# 3차 카테고리 #}
+                {% if c2.under_list() %}
+                    {% for c3 in c2.under_list() %}
+                        <li>|----{{ c3.name }}</li>
+                        {# 마지막 3차 카테고리 일시 줄바꿈 #}
+                    {% endfor %}
+                {% endif %}
+
+        {% endfor %}
+    {% endif %}
+
 {% endfor %}
 
 </ul>

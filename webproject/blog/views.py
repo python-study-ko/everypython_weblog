@@ -12,8 +12,8 @@ from django_jinja.views.generic.detail import DetailView
 
 class Index(View):
     def get(self, request, data=None):
-        # sidbar = Category.objects.all()
-        data = render_to_string("blog/index.jinja", {"post": ['test',2],'categorys': Category},
+        level1 = Category.objects.filter(level=1)
+        data = render_to_string("blog/index.jinja", {"post": ['test',2],'categorys': level1},
                                 request=request)
         return HttpResponse(data)
 
