@@ -7,11 +7,9 @@
 
 
 {% block sidebar %}
-list
-{{ categorys.objects.all().reverse() }}
-list
+<h3> 카테고리 </h3>
 <ul>
-{% for c in categorys.objects.all().reverse() %}
+{% for c in categorys.objects.all() %}
     <li> {{ c.level }} - {{ c.name }}</li>
 {% endfor %}
 
