@@ -141,8 +141,8 @@ TEMPLATES_DIRS=[os.path.join(BASE_DIR,'templates')]
 # ckeditor 설정
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(tempfile.gettempdir(), 'ck_static')
-MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'ck_media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 # s3 설정

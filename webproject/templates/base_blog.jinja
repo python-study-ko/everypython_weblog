@@ -3,6 +3,12 @@
 {# html head태그 확장블록 #}
 {% block head %}
 {{ super() }}
+<style>
+{# 카테고리 인덴트  #}
+    #indnt1{ text-indent: 10px; list-style-type: none;}
+    #indnt2{ text-indent: 20px; list-style-type: none;}
+
+</style>
 {% endblock head %}
 
 {# html head태그 확장블록 #}
@@ -19,10 +25,9 @@
         {# 상단바 메뉴 삽입 부분 #}
         <div class="top-bar-right">
             <ul class="menu">
-                <li><a href="#">One</a></li>
-                <li><a href="#">Two</a></li>
-                <li><a href="#">Three</a></li>
-                <li><a href="#">Four</a></li>
+                {% for c1 in categorys %}
+                    <li><a href="#">{{ c1.name }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </div>
@@ -45,12 +50,12 @@
                 {# 2차 카테고리 #}
                 {% if c1.under_list() %}
                     {% for c2 in c1.under_list() %}
-                    <li>|--{{ c2.name }}</li>
+                    <li id="indnt1">{{ c2.name }}</li>
 
                     {# 3차 카테고리 #}
                     {% if c2.under_list() %}
                     {% for c3 in c2.under_list() %}
-                        <li>|----{{ c3.name }}</li>
+                        <li id="indnt2">{{ c3.name }}</li>
                         {# 마지막 3차 카테고리 일시 줄바꿈 #}
                     {% endfor %}
                     {% endif %}
