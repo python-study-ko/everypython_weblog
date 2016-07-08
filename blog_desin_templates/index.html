@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="신재현">
+    <title>EVERYPYTHON</title>
+    
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    
+    <style>
+        body { min-height: 2000px; padding-top: 70px; padding-bottom: 70px; }
+		.navbar-fixed-bottom { background-color: darkgrey }
+		
+		#c2-dropmemu { padding-left: 0; padding-right: 0; }
+		#c3-dropmemu { padding-left: 35px; padding-right: 20px; }
+		
+		#indnt1{ text-indent: 10px; list-style-type: none;}
+		#indnt2{ text-indent: 20px; list-style-type: none;}
+		.noindnt{ text-indent: 0; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">EVERYPYTHON</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                <!-- 추후 부가 앱 개발시 메뉴에 넣기---------------
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">리콜더</a></li>
+                        <li><a href="#">PythonBook</a></li>
+                    </ul>
+                ----------------------------------------- -->
+                    <ul class="nav navbar-nav navbar-right">
+						<!-- 메뉴 (for문으로 처리)-->
+                        <li><a href="#">클라우드</a></li>
+                        <li><a href="#">IOT</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">파이썬<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+								<!-- 2차 카테고리 -->
+								<li class="dropdown-header">
+									<a id="c2-dropmemu" href="#" aria-expanded="false">웹<span class="label label-default pull-right">40</span></a>
+								</li>
+                                	<!-- 3차 카테고리 -->
+									<li><a id="c3-dropmemu" href="#">장고<span class="label label-default pull-right">22</span></a></li>
+									<li><a id="c3-dropmemu" href="#">플라스크<span class="label label-default pull-right">18</span></a></li>
+								<!-- 2차 카테고리 -->
+                                <li class="divider"></li>
+								<li class="dropdown-header">
+									<a id="c2-dropmemu" href="#" class="navbar-link">GUI<span class="label label-default pull-right">40</span></a>
+								</li>
+                                	<!-- 3차 카테고리 -->
+									<li><a id="c3-dropmemu" href="#">Kivy<span class="label label-default pull-right">40</span></a></li>
+                                	<li><a id="c3-dropmemu" href="#">Pyqt<span class="label label-default pull-right">40</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+    </header>
+    
+	<section class="col-xs-12 col-md-9">
+		<div class="container-fluid">
+			<!-- 점보트론 -->
+			<div class="col-xs-12 col-md-12">
+				점보트론
+			</div>
+			
+			<!-- 최신글 -->
+			<div class="col-xs-12 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+    					<h3 class="panel-title">최신글</h3>
+  					</div>
+  					<div class="panel-body">
+    					가장 최근에 올라온 글입니다.
+  					</div>
+					<!-- 글목록 -->
+					<table class="table table-striped">
+						<tr>
+							<th>발행일</th>
+							<th>제목</th>
+							<th>카테고리</th>
+						</tr>
+						<tr>
+							<td>2016-06-12</td>
+							<td><a href="#">죽어라 죽어</a></td>
+							<td><a href="#">리퍼</a></td>
+						</tr>
+						
+						<tr>
+							<td>2016-03-02</td>
+							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">트레이서</a></td>
+						</tr>
+						<tr>
+							<td>2015-06-12</td>
+							<td><a href="#">죽어라 죽어</a></td>
+							<td><a href="#">리퍼</a></td>
+						</tr>
+						
+						<tr>
+							<td>2014-03-02</td>
+							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">트레이서</a></td>
+						</tr>
+						<tr>
+							<td>2013-06-12</td>
+							<td><a href="#">죽어라 죽어</a></td>
+							<td><a href="#">리퍼</a></td>
+						</tr>
+						
+						<tr>
+							<td>2012-03-02</td>
+							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">트레이서</a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+    					<h3 class="panel-title">인기글</h3>
+  					</div>
+  					<div class="panel-body">
+    					가장 인기있는 글목록 입니다.
+  					</div>
+					<!-- 글목록 -->
+					<table class="table table-striped">
+						<tr>
+							<th>조회수</th>
+							<th>제목</th>
+							<th>카테고리</th>
+						</tr>
+						<tr>
+							<td>2322</td>
+							<td><a href="#">죽어라 죽어</a></td>
+							<td><a href="#">리퍼</a></td>
+						</tr>
+						
+						<tr>
+							<td>2016</td>
+							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">트레이서</a></td>
+						</tr>
+						<tr>
+							<td>1322</td>
+							<td><a href="#">죽어라 죽어</a></td>
+							<td><a href="#">리퍼</a></td>
+						</tr>
+						
+						<tr>
+							<td>1016</td>
+							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">트레이서</a></td>
+						</tr>
+						<tr>
+							<td>322</td>
+							<td><a href="#">죽어라 죽어</a></td>
+							<td><a href="#">리퍼</a></td>
+						</tr>
+						
+						<tr>
+							<td>16</td>
+							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">트레이서</a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			 
+		</div>
+    </section>
+	<aside class="col-xs-12 col-md-3">
+		<nav class="row">
+        	<div class="col-xs-6 col-md-12">
+				<h3>카테고리</h3>
+				<ul>
+					<li>파이썬</li>
+					<li id="indnt1">웹<span class="label label-default noindnt pull-right">40</span></li>
+					<li id="indnt2">장고<span class="label label-default noindnt pull-right">40</span></li>
+					<li id="indnt2">플라스크<span class="label label-default noindnt pull-right">40</span></li>
+				</ul>
+			</div>
+			<div class="col-xs-6 col-md-12">
+				<h3>태그</h3>
+				<span class="label label-info label-large">파이썬</span>
+				<span class="label label-info label-large">서버</span>
+				<span class="label label-info label-large">삽질</span>
+				<span class="label label-info label-large">마세</span>
+				<span class="label label-info label-large">문사마</span>
+			</div>
+		</nav>
+    </aside>
+	
+    <footer>
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container">
+				<div class="nav navbar-nav navbar-left">
+				<ol class="breadcrumb">
+  					<li><a href="#">Home</a></li>
+  					<li><a href="#">Library</a></li>
+  					<li class="active">Data</li>
+				</ol>
+				</div>
+                <ul class="nav navbar-nav navbar-right">
+					<li>hahahha</li>
+				</ul>
+            </div>
+        </nav>
+        
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://bootstrapk.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
