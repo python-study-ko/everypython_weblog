@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>EveryPython Blog</title>
+    {# 일단 파운데이션 튜토리얼 템플릿의 css를 불러서 사용하고 추후 자체 css로 변 #}
+    <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+
+    {% block head %}
+    <title>EveryPython</title>
+    {% endblock head %}
 </head>
 <body>
-    <div id="header">
-        {% block header %}
-        <h1><a href=" ">EveryPython Blog</a></h1>
-        {% endblock header %}
-    </div>
-    <div id="sidebar">
-        {% block sidebar %}
+    <header>
+    {% block header %}
+    {% endblock header %}
+    </header>
 
-        {% endblock sidebar %}
-    </div>
-    <div id="content">
-        {% block content %}
+    <aside>
+    {% block aside %}
+    {% endblock aside %}
+    </aside>
 
-        {% endblock content %}
-    </div>
+    <section>
+    {% block section %}
+    {% endblock section %}
+    </section>
 
+    <footer>
+    {% block footer %}
+    {% endblock footer %}
+    </footer>
 </body>
 </html>

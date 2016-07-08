@@ -1,15 +1,76 @@
 {% extends 'base.jinja' %}
 
-{% block header %}
+{# html head태그 확장블록 #}
+{% block head %}
 {{ super() }}
+{% endblock head %}
+
+{# html head태그 확장블록 #}
+{% block header %}
+    {# 상단바 시작 #}
+<nav>
+    <div class="top-bar">
+        {# 상단 메뉴바 블로그명 삽입 부분 #}
+        <div class="top-bar-left">
+            <ul class="menu">
+                <li class="menu-text">EVERYPYTHON</li>
+            </ul>
+        </div>
+        {# 상단바 메뉴 삽입 부분 #}
+        <div class="top-bar-right">
+            <ul class="menu">
+                <li><a href="#">One</a></li>
+                <li><a href="#">Two</a></li>
+                <li><a href="#">Three</a></li>
+                <li><a href="#">Four</a></li>
+            </ul>
+        </div>
+    </div>
+    {# 상단바 종료 #}
+</nav>
 {% endblock header %}
 
+{# html head태그 확장블록 #}
+{% block aside %}
+<nav>
+    {% block nav %}
+        <div class="medium-3 columns sticky-container" data-sticky-container="" style="height: 318px;">
+        <div class="sticky is-anchored is-at-top" data-sticky="ha3c88-sticky" data-anchor="content" data-resize="tz7dls-sticky" data-events="resize" style="max-width: 183.25px; margin-top: 0px; top: 0px; bottom: 1618px;">
+            <h4>카테고리</h4>
+            <ul>
+            {# 1차 카테고리 #}
+            {% for c1 in categorys %}{% if not loop.first %}<br>{% endif %}
+                <li> {{ c1.name }}</li>
 
-{% block sidbar %}
+                {# 2차 카테고리 #}
+                {% if c1.under_list() %}
+                    {% for c2 in c1.under_list() %}
+                    <li>|--{{ c2.name }}</li>
 
-{% endblock sidbar %}
+                    {# 3차 카테고리 #}
+                    {% if c2.under_list() %}
+                    {% for c3 in c2.under_list() %}
+                        <li>|----{{ c3.name }}</li>
+                        {# 마지막 3차 카테고리 일시 줄바꿈 #}
+                    {% endfor %}
+                    {% endif %}
 
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endblock nav %}
+</nav>
+{% endblock aside %}
 
-{% block content %}
+{# html section태그 확장블록 #}
+{% block section %}
 
-{% endblock content %}
+{% endblock section %}
+
+{# html footer태 확장블록 #}
+{% block footer %}
+<p>made by <address>wesky93@gmail.com</address></p>
+{% endblock footer %}

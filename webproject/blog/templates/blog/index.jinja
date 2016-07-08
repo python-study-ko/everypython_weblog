@@ -1,48 +1,28 @@
 {% extends 'base_blog.jinja' %}
 
+{# html head태그 확장블록 #}
+{% block head %}
+{{ super() }}
+{% endblock head %}
+
+{# html head태그 확장블록 #}
 {% block header %}
-{{super()}}
-<h1>여기는 인덱스 페이지 입니다!</h1>
+{{ super() }}
 {% endblock header %}
 
+{# html head태그 확장블록 #}
+{% block aside %}
+    {% block nav %}
+        {{ super() }}
+    {% endblock nav %}
+{% endblock aside %}
 
-{% block sidebar %}
-<h3> 카테고리 </h3>
-<ul>
-{# 1차 카테고리 #}
-{% for c1 in categorys %}
-    {% if not loop.first %}<br>{% endif %}
-    <li> {{ c1.name }}</li>
+{# html section태그 확장블록 #}
+{% block section %}
 
-    {# 2차 카테고리 #}
-    {% if c1.under_list() %}
-        {% for c2 in c1.under_list() %}
-            <li>|--{{ c2.name }}</li>
+{% endblock section %}
 
-                {# 3차 카테고리 #}
-                {% if c2.under_list() %}
-                    {% for c3 in c2.under_list() %}
-                        <li>|----{{ c3.name }}</li>
-                        {# 마지막 3차 카테고리 일시 줄바꿈 #}
-                    {% endfor %}
-                {% endif %}
+{# html footer태 확장블록 #}
+{% block footer %}
 
-        {% endfor %}
-    {% endif %}
-
-{% endfor %}
-
-</ul>
-
-{% endblock sidebar %}
-
-
-{% block content %}
-list
-<ul>
-{% for a in post %}
-    <li> {{ a }} - {{ a }}</li>
-{% endfor %}
-</ul>
-
-{% endblock content %}
+{% endblock footer %}
