@@ -2,7 +2,7 @@
 
 {# html head태그 확장블록 #}
 {% block head %}
-{{ super() }}
+    <title>{% block title %}everypython{% endblock %}</title>
 <style>
 {# 카테고리 인덴트  #}
     #indnt1{ text-indent: 10px; list-style-type: none;}
@@ -14,7 +14,8 @@
 {# html head태그 확장블록 #}
 {% block header %}
     {# 상단바 시작 #}
-<nav>
+    <nav>
+    <!-- 파운데이션 템플릿으로 작성되 있음 부트스트랩으로 변경 필요 -->
     <div class="top-bar">
         {# 상단 메뉴바 블로그명 삽입 부분 #}
         <div class="top-bar-left">
@@ -32,13 +33,14 @@
         </div>
     </div>
     {# 상단바 종료 #}
-</nav>
+    </nav>
 {% endblock header %}
 
 {# html head태그 확장블록 #}
 {% block aside %}
-<nav>
+    <nav>
     {% block nav %}
+        <!-- 파운데이션 템플릿으로 작성됨 부트스트랩으로 변경 필요 -->
         <div class="medium-3 columns sticky-container" data-sticky-container="" style="height: 318px;">
         <div class="sticky is-anchored is-at-top" data-sticky="ha3c88-sticky" data-anchor="content" data-resize="tz7dls-sticky" data-events="resize" style="max-width: 183.25px; margin-top: 0px; top: 0px; bottom: 1618px;">
             <h4>카테고리</h4>
@@ -67,7 +69,7 @@
         </div>
     </div>
     {% endblock nav %}
-</nav>
+    </nav>
 {% endblock aside %}
 
 {# html section태그 확장블록 #}

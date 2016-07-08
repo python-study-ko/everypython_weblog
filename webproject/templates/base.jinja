@@ -2,11 +2,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    {# 일단 파운데이션 튜토리얼 템플릿의 css를 불러서 사용하고 추후 자체 css로 변 #}
-    <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-    {% block head %}
-    <title>EveryPython</title>
-    {% endblock head %}
+    {# 부트스트랩으로 변경 #}
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+.min.css">
+    {% block head %}{% endblock head %}
 </head>
 <body>
     <header>
@@ -28,5 +31,8 @@
     {% block footer %}
     {% endblock footer %}
     </footer>
+
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>
