@@ -14,7 +14,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     
     <style>
-        body { min-height: 2000px; padding-top: 70px; padding-bottom: 70px; }
+        @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+        body, table, div, p {font-family: 'Noto Sans KR', sans-serif;;}
+
+
+        body { background:url("everypython_back_dark_optimize.svg") ;min-height: 2000px; padding-top: 70px; padding-bottom: 70px; }
 		.navbar-fixed-bottom { background-color: darkgrey }
 		
 		#c2-dropmemu { padding-left: 0; padding-right: 0; }
@@ -23,6 +27,17 @@
 		#indnt1{ text-indent: 10px; list-style-type: none;}
 		#indnt2{ text-indent: 20px; list-style-type: none;}
 		.noindnt{ text-indent: 0; }
+
+    {# 패널 디자인 #}
+        {# 패 그림자 #}
+        #p_shadow{
+            -webkit-box-shadow: 0 0 28px 4px black;
+            -moz-box-shadow: 0 0 28px 4px black;
+            box-shadow: 0 0 28px 4px black; }
+        .panel-body{ padding-top: 10px; padding-bottom: 8px;}
+
+    {# 패널 포스트 테이블 #}
+        .table-postlist{}
     </style>
 </head>
 <body>
@@ -84,7 +99,7 @@
 			
 			<!-- 최신글 -->
 			<div class="col-xs-12 col-md-6">
-				<div class="panel panel-primary">
+				<div class="panel panel-primary" id="p_shadow">
 					<div class="panel-heading">
     					<h3 class="panel-title">최신글</h3>
   					</div>
@@ -92,7 +107,7 @@
     					가장 최근에 올라온 글입니다.
   					</div>
 					<!-- 글목록 -->
-					<table class="table table-striped">
+					<table class="table table-striped table-postlist">
 						<tr>
 							<th>발행일</th>
 							<th>제목</th>
@@ -106,7 +121,7 @@
 						
 						<tr>
 							<td>2016-03-02</td>
-							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">쥬금을 마지해라~~</a></td>
 							<td><a href="#">트레이서</a></td>
 						</tr>
 						<tr>
@@ -117,7 +132,7 @@
 						
 						<tr>
 							<td>2014-03-02</td>
-							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">쥬금을 마지해라~~</a></td>
 							<td><a href="#">트레이서</a></td>
 						</tr>
 						<tr>
@@ -128,14 +143,14 @@
 						
 						<tr>
 							<td>2012-03-02</td>
-							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">쥬금을 마지해라~~</a></td>
 							<td><a href="#">트레이서</a></td>
 						</tr>
 					</table>
 				</div>
 			</div>
 			<div class="col-xs-12 col-md-6">
-				<div class="panel panel-success">
+				<div class="panel panel-success" id="p_shadow">
 					<div class="panel-heading">
     					<h3 class="panel-title">인기글</h3>
   					</div>
@@ -143,7 +158,7 @@
     					가장 인기있는 글목록 입니다.
   					</div>
 					<!-- 글목록 -->
-					<table class="table table-striped">
+					<table class="table table-striped table-postlist">
 						<tr>
 							<th>조회수</th>
 							<th>제목</th>
@@ -157,7 +172,7 @@
 						
 						<tr>
 							<td>2016</td>
-							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">쥬금을 마지해라~~</a></td>
 							<td><a href="#">트레이서</a></td>
 						</tr>
 						<tr>
@@ -168,7 +183,7 @@
 						
 						<tr>
 							<td>1016</td>
-							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">쥬금을 마지해라~~</a></td>
 							<td><a href="#">트레이서</a></td>
 						</tr>
 						<tr>
@@ -179,7 +194,7 @@
 						
 						<tr>
 							<td>16</td>
-							<td><a href="#">쥬금을 마지해라~~</td>
+							<td><a href="#">쥬금을 마지해라~~</a></td>
 							<td><a href="#">트레이서</a></td>
 						</tr>
 					</table>
