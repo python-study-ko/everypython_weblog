@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     
     <style>
+        {# noto 웹폰트 #}
         @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
         body, table, div, p {font-family: 'Noto Sans KR', sans-serif;;}
 
@@ -29,12 +30,22 @@
 		.noindnt{ text-indent: 0; }
 
     {# 패널 디자인 #}
-        {# 패 그림자 #}
+        {# 패널 그림자 #}
         #p_shadow{
             -webkit-box-shadow: 0 0 28px 4px black;
             -moz-box-shadow: 0 0 28px 4px black;
             box-shadow: 0 0 28px 4px black; }
+        
+        #p_shadow:hover{ 
+            transition:all 0.3s ease-out;
+            transform: scale(1.02);
+            -webkit-box-shadow: 0 0 40x 8px black;
+            -moz-box-shadow: 0 0 40x 8px black;
+            box-shadow: 0 0 40x 8px black; }
+        
         .panel-body{ padding-top: 10px; padding-bottom: 8px;}
+        .panel-body{ padding-top: 10px; padding-bottom: 8px;}
+        
 
     {# 패널 포스트 테이블 #}
         .table-postlist{}
