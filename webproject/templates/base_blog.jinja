@@ -1,6 +1,6 @@
 {% extends 'base.jinja' %}
 
-{# ---head 시----------------- #}
+{# ---head 시작----------------- #}
 
     {# head tag - link,meta등등 #}
     {% block head %}{% endblock head %}
@@ -11,20 +11,40 @@
     {# style tag #}
     {% block style %}
         {# 블로그 전체에 적용할 범용적인 css #}
-        <!-- 플로팅바를 위한 body 상하여백 조절정& 배경설정 -->
+        {#  플로팅바를 위한 body 상하여백 조절정& 배경설정  #}
+
         body { background:url("https://s3.ap-northeast-2.amazonaws.com/everypython.data/static/background/everypython_back_dark_optimize.svg") ; padding-top: 70px; padding-bottom: 70px; }
 
-        <!-- 상단바 드롭다운 카테고리 스타일 -->
+        {#  상단바 드롭다운 카테고리 스타일  #}
 		#c2-dropmemu { padding-left: 0; padding-right: 0; }
 		#c3-dropmemu { padding-left: 35px; padding-right: 20px; }
 
-        <!-- 사이드바 카테고리를 위한 스타일 -->
+        {#  사이드바 카테고리를 위한 스타일  #}
 		#c1-list{ text-indent: 0; list-style-type: none;}
 		#c2-list{ text-indent: 10px; list-style-type: none;}
 		#c3-list{ text-indent: 20px; list-style-type: none;}
         .noindnt{ text-indent: 0; }
 
-        <!-- tag 트랜지션 -->
+        {#  패널 디자인&트랜지션 #}
+        #p_shadow, #c_shadow{
+            -webkit-box-shadow: 0 0 28px 4px black;
+            -moz-box-shadow: 0 0 28px 4px black;
+            box-shadow: 0 0 28px 4px black; }
+
+        #p_shadow:hover{
+            transition:all 0.3s ease-out;
+            transform: scale(1.02);
+            -webkit-box-shadow: 0 0 40px 8px black;
+            -moz-box-shadow: 0 0 40px 8px black;
+            box-shadow: 0 0 40px 8px black; }
+
+        .panel-body{ padding-top: 10px; padding-bottom: 8px;}
+
+
+    {# 패널 포스트 테이블 #}
+        .table-postlist{}
+
+        {#  tag 트랜지션  #}
         #tag:hover{
             transition:all 0.3s ease-out;
             -webkit-box-shadow: 0 3px 11px 1px black;
@@ -66,10 +86,10 @@
                         <li class="nav-item"><a href="#" class="nav-link disabled">PythonBook</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-						<!-- 메뉴 (for문으로 처리)-->
+						{#  메뉴 (for문으로 처리) #}
                     {# 할일: 카테고리 메뉴 로직 제작 #}
                     </ul>
-                </div><!--/.nav-collapse -->
+                </div>{#  .nav-collapse  #}
             </div>
         </nav>
     {% endblock header %}
@@ -77,7 +97,7 @@
 
     {# 메인 콘텐츠 #}
     <section class="col-xs-12 col-md-9">
-    <!-- 콘텐츠영역의 전체폭은 유동적으로함 -->
+    {#  콘텐츠영역의 전체폭은 유동적으로함  #}
     <div class="container-fluid">
         {% block section %}{% endblock section %}
     </div>
@@ -88,23 +108,23 @@
     각 페이지에 공통적으로 들어갈 수 있는 위젯은 모두 여기에 작성한다.
     각 페이지에서는 사용하지 않을 위젯만 블록확장하여 위젯영역을 초기화 하면된다.
     위젯블록명은 "w-*"의 형식을 가지며 특정 페이지에서만 사용되는 위젯은
-    "w-etctop","w-etcbotten"블록을 확장해 사용한다..
+    "w_etctop","w_etcbotten"블록을 확장해 사용한다..
     이외의 개별
        -----위젯 목록-----
-       - [w-category]   카테고리 위젯
-       - [w-tag]        태그 위젯
+       - [w_category]   카테고리 위젯
+       - [w_tag]        태그 위젯
        -----구현 예정-----
-       - [w-knokknok]   블로그 방문자 위젯
-       - [w-starpost]   조회수 top 5
-       - [w-recentpost] 최근글 top 5
+       - [w_knokknok]   블로그 방문자 위젯
+       - [w_starpost]   조회수 top 5
+       - [w_recentpost] 최근글 top 5
     #}
     <aside class="col-xs-12 col-md-3">
         <nav class="row container-fluid">
         {# 사이드바 하단 개별 페이지 위젯 #}
-            {% block w-etctop %}{% endblock %}
+            {% block w_etctop %}{% endblock %}
 
         {# 카테고리 위젯 #}
-            {% block w-category %}
+            {% block w_category %}
                 <div class="col-xs-12 col-md-12">
                     <div class="panel panel-default" id="c_shadow">
                         <div class="panel-heading">카테고리</div>
@@ -121,10 +141,10 @@
                         </ul>
                     </div>
                 </div>
-            {% endblock w-category %}
+            {% endblock w_category %}
 
         {# 태그 위젯 #}
-            {% block w-tag %}
+            {% block w_tag %}
                 <div class="col-xs-12 col-md-12">
                     <div class="panel panel-default" id="c_shadow">
                         <div class="panel-heading">태그</div>
@@ -137,16 +157,16 @@
                         </div>
                     </div>
                 </div>
-            {% endblock w-tag %}
+            {% endblock w_tag %}
 
         {# 구현 예정
-            {% block w-knokknok %}{% endblock w-knokknok %}
-            {% block w-starpost %}{% endblock w-starpost %}
-            {% block w-recentpost %}{% endblock w-recentpost %}
+            {% block w_knokknok %}{% endblock w_knokknok %}
+            {% block w_starpost %}{% endblock w_starpost %}
+            {% block w_recentpost %}{% endblock w_recentpost %}
         #}
 
         {# 사이드바 하단 개별 페이지 위젯 #}
-            {% block w-etcbotten %}{% endblock %}
+            {% block w_etcbotten %}{% endblock %}
         </nav>
     </aside>
 
