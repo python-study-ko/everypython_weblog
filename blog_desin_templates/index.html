@@ -20,12 +20,11 @@
         #}
 
         body { background:url("https://s3.ap-northeast-2.amazonaws.com/everypython.data/static/background/everypython_back_dark_optimize.svg") ; padding-top: 70px; padding-bottom: 70px; }
-		.navbar-fixed-bottom { background-color: darkgrey }
 		
 		#c2-dropmemu { padding-left: 0; padding-right: 0; }
 		#c3-dropmemu { padding-left: 35px; padding-right: 20px; }
 		
-		#c1-list{ text-indent: 0px; list-style-type: none;}
+		#c1-list{ text-indent: 0; list-style-type: none;}
 		#c2-list{ text-indent: 10px; list-style-type: none;}
 		#c3-list{ text-indent: 20px; list-style-type: none;}
         .noindnt{ text-indent: 0; }
@@ -56,7 +55,7 @@
     {# 태그 #}
         #tag:hover{
             transition:all 0.3s ease-out;
-            -webkit-box-shadow: 0 3px 11px 1px black    ;
+            -webkit-box-shadow: 0 3px 11px 1px black;
             -moz-box-shadow: 0 3px 11px 1px black;
             box-shadow: 0 3px 11px 1px black;}
 
@@ -76,12 +75,10 @@
                     <a class="navbar-brand" href="#">EVERYPYTHON</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                <!-- 추후 부가 앱 개발시 메뉴에 넣기---------------
                     <ul class="nav navbar-nav">
-                        <li><a href="#">리콜더</a></li>
-                        <li><a href="#">PythonBook</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link disabled">리콜더</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link disabled">PythonBook</a></li>
                     </ul>
-                ----------------------------------------- -->
                     <ul class="nav navbar-nav navbar-right">
 						<!-- 메뉴 (for문으로 처리)-->
                         <li><a href="#">클라우드</a></li>
@@ -262,7 +259,7 @@
     </aside>
 	
     <footer>
-        <!-- 하단바는 일단 제
+        <!-- 하단바는 일단 제외
 		<nav class="navbar navbar-default navbar-fixed-bottom">
             <div class="container">
 				<div class="nav navbar-nav navbar-left">
@@ -276,7 +273,7 @@
 					<li>hahahha</li>
 				</ul>
             </div>
-        </nav>외
+        </nav>
         -->
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
