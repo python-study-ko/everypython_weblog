@@ -16,10 +16,10 @@
     <style>
         {# noto 웹폰트 #}
         @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-        body, table, div, p, li {font-family: 'Noto Sans KR', sans-serif;;}
+        body, table, div, p, li, span {font-family: 'Noto Sans KR', sans-serif;;}
 
 
-        body { background:url("everypython_back_dark_optimize.svg") ; padding-top: 70px; padding-bottom: 70px; }
+        body { background:url("https://s3.ap-northeast-2.amazonaws.com/everypython.data/static/background/everypython_back_dark_optimize.svg") ; padding-top: 70px; padding-bottom: 70px; }
 		.navbar-fixed-bottom { background-color: darkgrey }
 		
 		#c2-dropmemu { padding-left: 0; padding-right: 0; }
@@ -35,12 +35,12 @@
 
     {# 패널 디자인 #}
         {# 패널 그림자 #}
-        #p_shadow{
+        #p_shadow, #c_shadow{
             -webkit-box-shadow: 0 0 28px 4px black;
             -moz-box-shadow: 0 0 28px 4px black;
             box-shadow: 0 0 28px 4px black; }
         
-        #p_shadow:hover{ 
+        #p_shadow:hover{
             transition:all 0.3s ease-out;
             transform: scale(1.02);
             -webkit-box-shadow: 0 0 40px 8px black;
@@ -52,6 +52,14 @@
 
     {# 패널 포스트 테이블 #}
         .table-postlist{}
+
+    {# 태그 #}
+        #tag:hover{
+            transition:all 0.3s ease-out;
+            -webkit-box-shadow: 0 3px 11px 1px black    ;
+            -moz-box-shadow: 0 3px 11px 1px black;
+            box-shadow: 0 3px 11px 1px black;}
+
     </style>
 </head>
 <body>
@@ -108,7 +116,10 @@
 		<div class="container-fluid">
 			<!-- 점보트론 -->
 			<div class="col-xs-12 col-md-12">
-				점보트론
+                <div class="jumbotron">
+                    <h1>everypython</h1>
+                    <p>모두를 위한 파이썬</p>
+                </div>
 			</div>
 			
 			<!-- 최신글 -->
@@ -219,7 +230,8 @@
     </section>
 	<aside class="col-xs-12 col-md-3">
 		<nav class="row container-fluid">
-        	<div class="panel panel-default col-xs-12 col-md-12">
+            <div class="col-xs-12 col-md-12">
+        	<div class="panel panel-default" id="c_shadow">
                 <div class="panel-heading">카테고리</div>
 				<ul class="list-group">
 					<li class="list-group-item" id="c1-list"><a href="">파이썬</a> </li>
@@ -233,15 +245,18 @@
 					<li class="list-group-item" id="c3-list">플라스크<span class="label label-default noindnt pull-right">40</span></li>
 				</ul>
 			</div>
-			<div class="panel panel-default col-xs-12 col-md-12">
+            </div>
+            <div class="col-xs-12 col-md-12">
+			<div class="panel panel-default" id="c_shadow">
 				<div class="panel-heading">태그</div>
                 <div class="panel-body">
-				<span class="label label-info label-large">파이썬</span>
-				<span class="label label-info label-large">서버</span>
-				<span class="label label-info label-large">삽질</span>
-				<span class="label label-info label-large">마세</span>
-				<span class="label label-info label-large">문사마</span>
+				<span class="label label-info label-large" id="tag">파이썬</span>
+				<span class="label label-info label-large" id="tag">서버</span>
+				<span class="label label-info label-large" id="tag">삽질</span>
+				<span class="label label-info label-large" id="tag">마세</span>
+				<span class="label label-info label-large" id="tag">문사마</span>
 			    </div>
+            </div>
             </div>
 		</nav>
     </aside>
