@@ -1,83 +1,162 @@
 {% extends 'base.jinja' %}
 
-{# html head태그 확장블록 #}
-{% block head %}
-    <title>{% block title %}everypython{% endblock %}</title>
-<style>
-{# 카테고리 인덴트  #}
-    #indnt1{ text-indent: 10px; list-style-type: none;}
-    #indnt2{ text-indent: 20px; list-style-type: none;}
+{# ---head 시----------------- #}
 
-</style>
-{% endblock head %}
+    {# head tag - link,meta등등 #}
+    {% block head %}{% endblock head %}
 
-{# html head태그 확장블록 #}
-{% block header %}
-    {# 상단바 시작 #}
-    <nav>
-    <!-- 파운데이션 템플릿으로 작성되 있음 부트스트랩으로 변경 필요 -->
-    <div class="top-bar">
-        {# 상단 메뉴바 블로그명 삽입 부분 #}
-        <div class="top-bar-left">
-            <ul class="menu">
-                <li class="menu-text">EVERYPYTHON</li>
-            </ul>
-        </div>
-        {# 상단바 메뉴 삽입 부분 #}
-        <div class="top-bar-right">
-            <ul class="menu">
-                {% for c1 in categorys %}
-                    <li><a href="#">{{ c1.name }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
+    {# head title tag #}
+    {% block title %}EVERYPYTHON{% endblock title %}
+
+    {# style tag #}
+    {% block style %}
+        {# 블로그 전체에 적용할 범용적인 css #}
+        <!-- 플로팅바를 위한 body 상하여백 조절정& 배경설정 -->
+        body { background:url("https://s3.ap-northeast-2.amazonaws.com/everypython.data/static/background/everypython_back_dark_optimize.svg") ; padding-top: 70px; padding-bottom: 70px; }
+
+        <!-- 상단바 드롭다운 카테고리 스타일 -->
+		#c2-dropmemu { padding-left: 0; padding-right: 0; }
+		#c3-dropmemu { padding-left: 35px; padding-right: 20px; }
+
+        <!-- 사이드바 카테고리를 위한 스타일 -->
+		#c1-list{ text-indent: 0; list-style-type: none;}
+		#c2-list{ text-indent: 10px; list-style-type: none;}
+		#c3-list{ text-indent: 20px; list-style-type: none;}
+        .noindnt{ text-indent: 0; }
+
+        <!-- tag 트랜지션 -->
+        #tag:hover{
+            transition:all 0.3s ease-out;
+            -webkit-box-shadow: 0 3px 11px 1px black;
+            -moz-box-shadow: 0 3px 11px 1px black;
+            box-shadow: 0 3px 11px 1px black;}
+
+        {# 개별 페이지 css - 각 페이지에선 아래 블록을 확장하여 css추가하면 #}
+        {% block pagestyle %}{% endblock %}
+
+    {% endblock style %}
+
+    {# head태그에 달아야하는 스크립트 #}
+    {% block headscript %}{% endblock %}
+
+{# ---head 끝------------------- #}
+
+
+{# ---body 시작------------------ #}
+{# 이 템플릿은 전체 레이아웃과 공통 컴포넌트 요소만 정의 #}
+{% block body %}
+    {# 최상단 플로팅바 #}
+    <header>
+    {% block header %}
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">EVERYPYTHON</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item"><a href="#" class="nav-link disabled">리콜더</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link disabled">PythonBook</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+						<!-- 메뉴 (for문으로 처리)-->
+                    {# 할일: 카테고리 메뉴 로직 제작 #}
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+    {% endblock header %}
+    </header>
+
+    {# 메인 콘텐츠 #}
+    <section class="col-xs-12 col-md-9">
+    <!-- 콘텐츠영역의 전체폭은 유동적으로함 -->
+    <div class="container-fluid">
+        {% block section %}{% endblock section %}
     </div>
-    {# 상단바 종료 #}
-    </nav>
-{% endblock header %}
+    </section>
 
-{# html head태그 확장블록 #}
-{% block aside %}
-    <nav>
-    {% block nav %}
-        <!-- 파운데이션 템플릿으로 작성됨 부트스트랩으로 변경 필요 -->
-        <div class="medium-3 columns sticky-container" data-sticky-container="" style="height: 318px;">
-        <div class="sticky is-anchored is-at-top" data-sticky="ha3c88-sticky" data-anchor="content" data-resize="tz7dls-sticky" data-events="resize" style="max-width: 183.25px; margin-top: 0px; top: 0px; bottom: 1618px;">
-            <h4>카테고리</h4>
-            <ul>
-            {# 1차 카테고리 #}
-            {% for c1 in categorys %}{% if not loop.first %}<br>{% endif %}
-                <li> {{ c1.name }}</li>
+    {# 우측 사이드바 #}
+    {#
+    각 페이지에 공통적으로 들어갈 수 있는 위젯은 모두 여기에 작성한다.
+    각 페이지에서는 사용하지 않을 위젯만 블록확장하여 위젯영역을 초기화 하면된다.
+    위젯블록명은 "w-*"의 형식을 가지며 특정 페이지에서만 사용되는 위젯은
+    "w-etctop","w-etcbotten"블록을 확장해 사용한다..
+    이외의 개별
+       -----위젯 목록-----
+       - [w-category]   카테고리 위젯
+       - [w-tag]        태그 위젯
+       -----구현 예정-----
+       - [w-knokknok]   블로그 방문자 위젯
+       - [w-starpost]   조회수 top 5
+       - [w-recentpost] 최근글 top 5
+    #}
+    <aside class="col-xs-12 col-md-3">
+        <nav class="row container-fluid">
+        {# 사이드바 하단 개별 페이지 위젯 #}
+            {% block w-etctop %}{% endblock %}
 
-                {# 2차 카테고리 #}
-                {% if c1.under_list() %}
-                    {% for c2 in c1.under_list() %}
-                    <li id="indnt1">{{ c2.name }}</li>
+        {# 카테고리 위젯 #}
+            {% block w-category %}
+                <div class="col-xs-12 col-md-12">
+                    <div class="panel panel-default" id="c_shadow">
+                        <div class="panel-heading">카테고리</div>
+                        <ul class="list-group">
+                            <li class="list-group-item" id="c1-list"><a href="">파이썬</a> </li>
+                            <li class="list-group-item" id="c2-list">웹<span class="label label-default noindnt pull-right">40</span></li>
+                            <li class="list-group-item" id="c3-list">장고<span class="label label-default noindnt pull-right">40</span></li>
+                            <li class="list-group-item" id="c3-list">플라스크<span class="label label-default noindnt pull-right">40</span></li>
+                            <li class="list-group-item divider"></li>
+                            <li class="list-group-item" id="c1-list">파이썬</li>
+                            <li class="list-group-item" id="c2-list">웹<span class="label label-default noindnt pull-right">40</span></li>
+                            <li class="list-group-item" id="c3-list">장고<span class="label label-default noindnt pull-right">40</span></li>
+                            <li class="list-group-item" id="c3-list">플라스크<span class="label label-default noindnt pull-right">40</span></li>
+                        </ul>
+                    </div>
+                </div>
+            {% endblock w-category %}
 
-                    {# 3차 카테고리 #}
-                    {% if c2.under_list() %}
-                    {% for c3 in c2.under_list() %}
-                        <li id="indnt2">{{ c3.name }}</li>
-                        {# 마지막 3차 카테고리 일시 줄바꿈 #}
-                    {% endfor %}
-                    {% endif %}
+        {# 태그 위젯 #}
+            {% block w-tag %}
+                <div class="col-xs-12 col-md-12">
+                    <div class="panel panel-default" id="c_shadow">
+                        <div class="panel-heading">태그</div>
+                        <div class="panel-body">
+                            <span class="label label-info label-large" id="tag">파이썬</span>
+                            <span class="label label-info label-large" id="tag">서버</span>
+                            <span class="label label-info label-large" id="tag">삽질</span>
+                            <span class="label label-info label-large" id="tag">마세</span>
+                            <span class="label label-info label-large" id="tag">문사마</span>
+                        </div>
+                    </div>
+                </div>
+            {% endblock w-tag %}
 
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
-            </ul>
-        </div>
-    </div>
-    {% endblock nav %}
-    </nav>
-{% endblock aside %}
+        {# 구현 예정
+            {% block w-knokknok %}{% endblock w-knokknok %}
+            {% block w-starpost %}{% endblock w-starpost %}
+            {% block w-recentpost %}{% endblock w-recentpost %}
+        #}
 
-{# html section태그 확장블록 #}
-{% block section %}
+        {# 사이드바 하단 개별 페이지 위젯 #}
+            {% block w-etcbotten %}{% endblock %}
+        </nav>
+    </aside>
 
-{% endblock section %}
+    {# 하단 플로팅바 #}
+    <footer>
+        {% block footer %}{% endblock footer %}
+    </footer>
+{% endblock body %}
 
-{# html footer태 확장블록 #}
-{% block footer %}
-<p>made by <address>wesky93@gmail.com</address></p>
-{% endblock footer %}
+
+    {# 페이지 맨 아래에서 호출할 스크립트 #}
+    {% block bodyscript %}{% endblock %}
+{# ---body 끝-------------------- #}
