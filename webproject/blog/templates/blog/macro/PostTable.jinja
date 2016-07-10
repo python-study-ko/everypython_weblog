@@ -1,8 +1,8 @@
 {# 블로그에서 테이블형식의 글목록을 만들기 위한 매크로템플릿 입니다. #}
 
 {# 글목록 테이블 생성 매크로 -call로 호출하여 내용을 채우면 됩니다 #}
-{% macro table_head(col1,col2,col3,col4="",col5="",table_class="",head_class="") %}
-<table {% if table_class -%}class="{{ table_class }}"{% endif %}>
+{% macro table_head(col1,col2,col3,col4="",col5="",table_class="table table-striped",head_class="") %}
+<table class="{{ table_class }}">
     <thead {% if class -%}class="{{ class }}"{%- endif -%}>
         <th>{{ col1 }}</th>
         <th>{{ col2 }}</th>

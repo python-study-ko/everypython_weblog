@@ -1,6 +1,6 @@
 {% extends 'base_blog.jinja' %}
 {% from "blog/macro/PostTable.jinja" import post_list,table_head %}
-{% from "blog/macro/IndexCompo.jinja" import index_jumbotron %}
+{% from "blog/macro/IndexCompo.jinja" import index_jumbotron,index_panel %}
 
 {# head title tag #}
 {% block title %}EVERYPYTHON{% endblock title %}
@@ -12,46 +12,23 @@
 
 {% block section %}
 <!-- 점보트론 -->
-    {% call index_jumbotron("EveryPython") %}
-        <p>everypython블로그 입니다</p>
+    {% call index_jumbotron("EveryPython",hr="1") %}
+        <p>(Python.productivity + me.creative) x me.crazy(?) = 서비스의 재발견, 세상을 이롭게 하다</p>
+    {% endcall %}
+    <!-- 최신글 -->
+    {% call index_panel("최신글","가장 최근에 올라온 글입니다") %}
+        <!-- 글목록 -->
+        {% call table_head("조회수","제목","카테고리",table_class="table table-striped table-postlist") %}
+                {{ post_list("1열","제목은 보통 길기 마련이지","3열") }}
+        {% endcall %}
     {% endcall %}
 
-    <!-- 최신글 -->
-    <div class="col-xs-12 col-md-6">
-        <div class="panel panel-primary" id="p_shadow">
-            <div class="panel-heading">
-                <h3 class="panel-title">최신글</h3>
-            </div>
-            <div class="panel-body">가장 최근에 올라온 글입니다.	</div>
-            <!-- 글목록 -->
-            <table class="table table-striped table-postlist">
-                <tr>
-                    <th>발행일</th>
-                    <th>제목</th>
-                    <th>카테고리</th>
-                </tr>
-                <tr>
-                    <td>2016-06-12</td>
-                    <td><a href="#">죽어라 죽어</a></td>
-                    <td><a href="#">리퍼</a></td>
-                </tr>
-                {{ post_list(col1="2016-0615",col2="까Rk꿍",col3="카테마테")}}
-					</table>
-				</div>
-			</div>
-    <div class="col-xs-12 col-md-6">
-        <div class="panel panel-success" id="p_shadow">
-            <div class="panel-heading">
-                <h3 class="panel-title">인기글</h3>
-            </div>
-            <div class="panel-body">가장 인기있는 글목록 입니다.</div>
-            <!-- 글목록 -->
-            {% call table_head("조회수","제목","카테고리",table_class="table table-striped table-postlist") %}
+    <!-- 인기글 -->
+    {% call index_panel("인기글","조회수가 가장 많은 글입니다") %}
+        {% call table_head("조회수","제목","카테고리",table_class="table table-striped table-postlist") %}
                 {{ post_list("1열","제목은 보통 길기 마련이지","3열") }}
-            {% endcall %}
-
-        </div>
-    </div>
+        {% endcall %}
+    {% endcall %}
 {% endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}
 {% block bodyscript %}{% endblock %}
