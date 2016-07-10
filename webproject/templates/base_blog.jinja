@@ -45,6 +45,8 @@
         .table-postlist{}
 
         {#  tag 트랜지션  #}
+        #tag{font-size:medium;}
+
         #tag:hover{
             transition:all 0.3s ease-out;
             -webkit-box-shadow: 0 3px 11px 1px black;
@@ -152,7 +154,7 @@
             {% block w_category %}
                 <div class="col-xs-12 col-md-12">
                     <div class="list-group" id="c_shadow">
-                    <a href="#" class="list-group-item active">카테고리</a>
+                    <a class="list-group-item active">카테고리</a>
                         {% for c1 in categorys %}
                             {# 1차 카테고리 #}
                             <a class="list-group-item" id="c1-list" href="">{{ c1.name }}<span class="label label-default noindnt pull-right">40</span></a>
@@ -176,14 +178,16 @@
         {# 태그 위젯 #}
             {% block w_tag %}
                 <div class="col-xs-12 col-md-12">
-                    <div class="panel panel-default" id="c_shadow">
-                        <div class="panel-heading">태그</div>
-                        <div class="panel-body">
-                            <span class="label label-info label-large" id="tag">파이썬</span>
-                            <span class="label label-info label-large" id="tag">서버</span>
-                            <span class="label label-info label-large" id="tag">삽질</span>
-                            <span class="label label-info label-large" id="tag">마세</span>
-                            <span class="label label-info label-large" id="tag">문사마</span>
+                    <div class="list-group" id="c_shadow">
+                        <a class="list-group-item active">태그모음</a>
+                        <div class="list-group-item">
+                            {% if tags %}
+                            {% for tag in tags %}
+                                <span class="label label-info label-large" id="tag">{{ tag }}</span>
+                            {% endfor %}
+                            {% else %}
+                                <p>태그가 없습니다!</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

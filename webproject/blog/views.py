@@ -8,12 +8,12 @@ from blog.models import Category, Post
 
 from django_jinja.views.generic.detail import DetailView
 # Create your views here.
-
+from taggit.models import Tag
 
 class Index(View):
     def get(self, request, data=None):
         level1 = Category.objects.filter(level=1)
-        data = render_to_string("blog/index.jinja", {"post": ['test',2],'categorys': level1},
+        data = render_to_string("blog/index.jinja", {"post": ['test',2],'categorys': level1,'tags':Tag.objects.all().reverse()},
                                 request=request)
         return HttpResponse(data)
 
