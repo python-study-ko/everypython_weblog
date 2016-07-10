@@ -1,4 +1,5 @@
 {% extends 'base_blog.jinja' %}
+{% from "blog/macro/PostTable.jinja" import post_list,table_head %}
 
 {# head title tag #}
 {% block title %}EVERYPYTHON{% endblock title %}
@@ -36,7 +37,7 @@
                     <td><a href="#">죽어라 죽어</a></td>
                     <td><a href="#">리퍼</a></td>
                 </tr>
-                {{ post_list(col1="2016-0615",col2="까꿍",col3="카테마테")}}
+                {{ post_list(col1="2016-0615",col2="까Rk꿍",col3="카테마테")}}
 					</table>
 				</div>
 			</div>
@@ -47,46 +48,10 @@
             </div>
             <div class="panel-body">가장 인기있는 글목록 입니다.</div>
             <!-- 글목록 -->
-            <table class="table table-striped table-postlist">
-                <tr>
-                    <th>조회수</th>
-                    <th>제목</th>
-                    <th>카테고리</th>
-                </tr>
-                <tr>
-                    <td>2322</td>
-                    <td><a href="#">죽어라 죽어</a></td>
-                    <td><a href="#">리퍼</a></td></a>
-                </tr>
+            {% call table_head("조회수","제목","카테고리",table_class="table table-striped table-postlist") %}
+                {{ post_list("1열","제목은 보통 길기 마련이지","3열") }}
+            {% endcall %}
 
-                <tr>
-                    <td>2016</td>
-                    <td><a href="#">쥬금을 마지해라~~</a></td>
-                    <td><a href="#">트레이서</a></td>
-                </tr>
-                <tr>
-                    <td>1322</td>
-                    <td><a href="#">죽어라 죽어</a></td>
-                    <td><a href="#">리퍼</a></td>
-                </tr>
-
-                <tr>
-                    <td>1016</td>
-                    <td><a href="#">쥬금을 마지해라~~</a></td>
-                    <td><a href="#">트레이서</a></td>
-                </tr>
-                <tr>
-                    <td>322</td>
-                    <td><a href="#">죽어라 죽어</a></td>
-                    <td><a href="#">리퍼</a></td>
-                </tr>
-
-                <tr>
-                    <td>16</td>
-                    <td><a href="#">쥬금을 마지해라~~</a></td>
-                    <td><a href="#">트레이서</a></td>
-                </tr>
-            </table>
         </div>
     </div>
 {% endblock section %}

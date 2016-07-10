@@ -1,0 +1,46 @@
+{# 블로그에서 테이블형식의 글목록을 만들기 위한 매크로템플릿 입니다. #}
+
+{# 글목록 테이블 생성 매크로 -call로 호출하여 내용을 채우면 됩니다 #}
+{% macro table_head(col1,col2,col3,col4="",col5="",table_class="",head_class="") %}
+<table {% if table_class -%}class="{{ table_class }}"{% endif %}>
+    <thead {% if class -%}class="{{ class }}"{%- endif -%}>
+        <th>{{ col1 }}</th>
+        <th>{{ col2 }}</th>
+        <th>{{ col3 }}</th>
+        {% if col4 %}<th>{{ col4 }}</th>{% endif %}
+        {% if col5 %}<th>{{ col5 }}</th>{% endif %}
+    </thead>
+    <tbody>
+        {# 테이블 내용 채우기 #}
+        {{ caller() }}
+    </tbody>
+</table>
+{% endmacro %}
+
+
+{# 글목록 테이블 행 추가 매크로  #}
+{% macro post_list(col1,col2,col3,col4="",col5="",col2_link="",col3_link="",col4_link="") %}
+    {# 포스트 목록 테이블엔 최소 3열이 있어야 하며 2,3,4열에 링크가 있을시 링크처리 해준다 #}
+    <tr>
+        {# 첫번쨰 열 #}
+        <td>{{ col1 }}</td>
+
+        {# 두번쨰 열 #}
+        {% if col2_link %}  <td><a href="{{ col2_link }}">{{ col2 }}</a></td>
+        {% else %}          <td>{{ col2 }}</td>
+        {% endif %}
+
+        {# 세번째 열 #}
+        {% if col3_link %}  <td><a href="{{ col3_link }}">{{ col3 }}</a></td>
+        {% else %}          <td>{{ col3 }}</td>
+        {% endif %}
+
+        {# 네번째 열 #}
+        {% if col4_link %}  <td><a href="{{ col4_link }}">{{ col4 }}</a></td>
+        {% elif col4 %}          <td>{{ col4 }}</td>
+        {% endif %}
+
+        {# 다섯번쨰 열 #}
+        {% if col5 %}<td>{{ col5 }}</td>{% endif %}
+    </tr>
+{% endmacro %}
