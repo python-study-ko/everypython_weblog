@@ -1,39 +1,5 @@
 {% extends 'base_blog.jinja' %}
 
-{# 매크로 시작--------- #}
-{# 테이블 글목록 행 생성 매크로  #}
-{% macro post_list(col1,col2,col2_link,col3,col3_link,col4)%}
-    <th>
-        <td>{{ col1 }}</td>
-        {# 두번쨰 열 #}
-        {% if col2_link %}
-            <td><a href="{{ col2_link }}">{{ col2 }}</a></td>
-        {% else %}
-            <td>{{ col2 }}</td>
-        {% endif %}
-
-        {# 세번째 열 #}
-        {% if col3_link %}
-            <td><a href="{{ col3_link }}">{{ col3 }}</a></td>
-        {% else %}
-            <td>{{ col3 }}</td>
-        {% endif %}
-
-        {# 네번째 열 #}
-        {% if col4 %}
-            <td>{{ col4 }}</td>
-        {% endif %}
-    </th>
-{% endmacro %}
-
-
-
-
-
-
-{# 매크로 끝------------ #}
-
-
 {# head title tag #}
 {% block title %}EVERYPYTHON{% endblock title %}
 
@@ -70,34 +36,7 @@
                     <td><a href="#">죽어라 죽어</a></td>
                     <td><a href="#">리퍼</a></td>
                 </tr>
-
-                <tr>
-                    <td>2016-03-02</td>
-                    <td><a href="#">쥬금을 마지해라~~</a></td>
-                    <td><a href="#">트레이서</a></td>
-						</tr>
-						<tr>
-							<td>2015-06-12</td>
-							<td><a href="#">죽어라 죽어</a></td>
-							<td><a href="#">리퍼</a></td>
-						</tr>
-
-						<tr>
-							<td>2014-03-02</td>
-							<td><a href="#">쥬금을 마지해라~~</a></td>
-							<td><a href="#">트레이서</a></td>
-						</tr>
-						<tr>
-							<td>2013-06-12</td>
-							<td><a href="#">죽어라 죽어</a></td>
-							<td><a href="#">리퍼</a></td>
-						</tr>
-
-						<tr>
-							<td>2012-03-02</td>
-							<td><a href="#">쥬금을 마지해라~~</a></td>
-							<td><a href="#">트레이서</a></td>
-						</tr>
+                {{ post_list(col1="2016-0615",col2="까꿍",col3="카테마테")}}
 					</table>
 				</div>
 			</div>
