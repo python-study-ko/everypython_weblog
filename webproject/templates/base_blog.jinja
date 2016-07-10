@@ -151,32 +151,24 @@
         {# 카테고리 위젯 #}
             {% block w_category %}
                 <div class="col-xs-12 col-md-12">
-                    <div class="panel panel-default" id="c_shadow">
-                        <div class="panel-heading">카테고리</div>
-                        <ul class="list-group">
-                            {% for c1 in categorys %}
-                                {% if not loop.first %}<li class="list-group-item divider"></li>{% endif %}
+                    <div class="list-group" id="c_shadow">
+                    <a href="#" class="list-group-item active">카테고리</a>
+                        {% for c1 in categorys %}
+                            {# 1차 카테고리 #}
+                            <a class="list-group-item" id="c1-list" href="">{{ c1.name }}<span class="label label-default noindnt pull-right">40</span></a>
                             {% if c1.under_list() %}
-                                {# 1차 카테고리 #}
-                                <li class="list-group-item" id="c1-list"><a href="">{{ c1.name }}</a> </li>
-
-                                {# 2차 카테고리 #}
-                                {% for c2 in c1.under_list() %}
-                                    <li class="list-group-item" id="c2-list"><a href="">{{ c2.name }}</a><span class="label label-default noindnt pull-right">40</span></li>
-
-                                    {# 3차 카테고리 #}
-                                    {% if c2.under_list() %}
-                                        {% for c3 in c2.under_list() %}
-                                            <li class="list-group-item" id="c3-list"><a href="">{{ c3.name }}</a><span class="label label-default noindnt pull-right">40</span></li>
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endfor %}
-                                </li>
-                            {% else %}
-                                <li class="list-group-item" id="c1-list"><a href="">{{ c1.name }}</a> </li>
-                            {% endif %}
-                        {% endfor %}
-                        </ul>
+                            {# 2차 카테고리 #}
+                            {% for c2 in c1.under_list() %}
+                                <a class="list-group-item" id="c2-list" href="">{{ c2.name }}<span class="label label-default noindnt pull-right">40</span></a>
+                                {# 3차 카테고리 #}
+                                {% if c2.under_list() %}
+                                    {% for c3 in c2.under_list() %}
+                                        <a class="list-group-item" id="c3-list" href="">{{ c3.name }}<span class="label label-default noindnt pull-right">40</span></a>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
                     </div>
                 </div>
             {% endblock w_category %}
