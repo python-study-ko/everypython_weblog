@@ -1,5 +1,6 @@
 {% extends 'base_blog.jinja' %}
 {% from "blog/macro/PostTable.jinja" import post_list,table_head %}
+{% from "blog/macro/IndexCompo.jinja" import index_jumbotron %}
 
 {# head title tag #}
 {% block title %}EVERYPYTHON{% endblock title %}
@@ -11,12 +12,9 @@
 
 {% block section %}
 <!-- 점보트론 -->
-    <div class="col-xs-12 col-md-12">
-        <div class="jumbotron">
-            <h1>everypython</h1>
-            <p>모두를 위한 파이썬</p>
-        </div>
-    </div>
+    {% call index_jumbotron("EveryPython") %}
+        <p>everypython블로그 입니다</p>
+    {% endcall %}
 
     <!-- 최신글 -->
     <div class="col-xs-12 col-md-6">
