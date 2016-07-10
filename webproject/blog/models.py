@@ -57,7 +57,7 @@ class Post(models.Model):
     """
     category = models.ForeignKey('Category',blank=True,null=True)
     title = models.CharField(max_length=40)
-    author = models.ForeignKey(User, unique=True)
+    author = models.ForeignKey(User)
     content = RichTextUploadingField()
     tag = TaggableManager()
     create_date = models.DateTimeField(auto_now_add=True)
