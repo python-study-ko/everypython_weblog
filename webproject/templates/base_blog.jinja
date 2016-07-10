@@ -21,8 +21,8 @@
 
         {#  사이드바 카테고리를 위한 스타일  #}
 		#c1-list{ text-indent: 0; list-style-type: none;}
-		#c2-list{ text-indent: 10px; list-style-type: none;}
-		#c3-list{ text-indent: 20px; list-style-type: none;}
+		#c2-list{ padding-bottom:7px;text-indent: 10px; list-style-type: none;}
+		#c3-list{ padding-top: 6px;padding-bottom=6px;text-indent: 30px; list-style-type: none;}
         .noindnt{ text-indent: 0; }
 
         {#  패널 디자인&트랜지션 #}
@@ -69,7 +69,7 @@
     <header>
     {% block header %}
 
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -86,8 +86,33 @@
                         <li class="nav-item"><a href="#" class="nav-link disabled">PythonBook</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-						{#  메뉴 (for문으로 처리) #}
-                    {# 할일: 카테고리 메뉴 로직 제작 #}
+                    {# 1차 카테고리 #}
+                    {% for c1 in categorys %}
+                        {% if c1.under_list() %}
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ c1.name }}<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+
+                            {# 2차 카테고리 #}
+                            {% for c2 in c1.under_list() %}
+                                {% if not loop.first %}<li class="divider"></li>{% endif %}
+                                <li class="dropdown-header">
+									<a id="c2-dropmemu" href="#" aria-expanded="false">{{ c2.name }}<span class="label label-default pull-right">40</span></a>
+								</li>
+
+                                {# 3차 카테고리 #}
+                                {% if c2.under_list() %}
+                                    {% for c3 in c2.under_list() %}
+                                        <li><a id="c3-dropmemu" href="#">{{ c3.name }}<span class="label label-default pull-right">22</span></a></li>
+                                    {% endfor %}
+                                {% endif %}
+                                {% if loop.last %}</ul>{% endif %}
+                            {% endfor %}
+                            </li>
+                        {% else %}
+                            <li><a href="#">{{ c1.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
                     </ul>
                 </div>{#  .nav-collapse  #}
             </div>
@@ -129,15 +154,28 @@
                     <div class="panel panel-default" id="c_shadow">
                         <div class="panel-heading">카테고리</div>
                         <ul class="list-group">
-                            <li class="list-group-item" id="c1-list"><a href="">파이썬</a> </li>
-                            <li class="list-group-item" id="c2-list">웹<span class="label label-default noindnt pull-right">40</span></li>
-                            <li class="list-group-item" id="c3-list">장고<span class="label label-default noindnt pull-right">40</span></li>
-                            <li class="list-group-item" id="c3-list">플라스크<span class="label label-default noindnt pull-right">40</span></li>
-                            <li class="list-group-item divider"></li>
-                            <li class="list-group-item" id="c1-list">파이썬</li>
-                            <li class="list-group-item" id="c2-list">웹<span class="label label-default noindnt pull-right">40</span></li>
-                            <li class="list-group-item" id="c3-list">장고<span class="label label-default noindnt pull-right">40</span></li>
-                            <li class="list-group-item" id="c3-list">플라스크<span class="label label-default noindnt pull-right">40</span></li>
+                            {% for c1 in categorys %}
+                                {% if not loop.first %}<li class="list-group-item divider"></li>{% endif %}
+                            {% if c1.under_list() %}
+                                {# 1차 카테고리 #}
+                                <li class="list-group-item" id="c1-list"><a href="">{{ c1.name }}</a> </li>
+
+                                {# 2차 카테고리 #}
+                                {% for c2 in c1.under_list() %}
+                                    <li class="list-group-item" id="c2-list"><a href="">{{ c2.name }}</a><span class="label label-default noindnt pull-right">40</span></li>
+
+                                    {# 3차 카테고리 #}
+                                    {% if c2.under_list() %}
+                                        {% for c3 in c2.under_list() %}
+                                            <li class="list-group-item" id="c3-list"><a href="">{{ c3.name }}</a><span class="label label-default noindnt pull-right">40</span></li>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                                </li>
+                            {% else %}
+                                <li class="list-group-item" id="c1-list"><a href="">{{ c1.name }}</a> </li>
+                            {% endif %}
+                        {% endfor %}
                         </ul>
                     </div>
                 </div>
