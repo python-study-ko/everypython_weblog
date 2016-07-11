@@ -21,8 +21,8 @@
 {% endmacro %}
 
 {# 반응형 패널 #}
-{%- macro index_panel(icon,title,body,class="panel-primary",id="p_shadow") %}
-<div class="col-xs-12 col-md-6">
+{%- macro index_panel(icon,title,body,class="panel-primary",id="p_shadow",grid_class="col-xs-12 col-md-6") %}
+<div class="{{ grid_class }}">
     <div class="panel {{ class }}" id="{{ id }}">
         <div class="panel-heading">
             <h3 class="panel-title headtext"><span class="glyphicon {{ icon }}"></span> &nbsp;{{ title }}</h3></div>

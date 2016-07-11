@@ -19,7 +19,7 @@ def sidebar_context():
     context_dic={'categorys': level1,'tags':Tag.objects.all().reverse()}
     return context_dic
 
-def all_under_c(c):
+def under_c(c):
     """
     하위 카테고리 리스트를 만들어 준다
     :param category:
@@ -39,15 +39,14 @@ def all_under_c(c):
         return [c]
 
 def c_postlist(c_list):
-    """
-    카테고리 목록의 모든 글을 가져온다
-    :param c_list:
-    :return:
-    """
+    # 카테고리 목록을 받아 해당 카테고리에 속한 모든 포스트 가져와서 정렬시킨다.
     post_list = []
+    # 모든 포스트를 가져온
     for c in c_list:
         post_list += c.post_set.all()
-    return post_list
+    # 포스트의 번호를 역순으로 하여 정렬한
+    sortlist = sorted(post_list, key=lambda x: x.pk , reverse=True)
+    return sortlist
 
 class Index(View):
     def get(self, request, data=None):
@@ -63,10 +62,9 @@ class Index(View):
 def CategoryList(request,pk):
     category = get_object_or_404(Category,pk=pk)
     # 모든 하위카테고리를 구한후 해당 카테고리들의 모든 포스트를 추출한다.
-    post_list = c_postlist(all_under_c(category))
-
-    # 카테고리 페이지에 넘겨줄 컨텐츠 context
-    context = {}
+    post_list = c_postlist(under_c(category))
+    # 포스트 목록
+    context = {"posts": post_list,"name":category.name}
     # 사이드바에 필요한 context를 합쳐줌
     context.update(sidebar_context())
     # 테스트 코드

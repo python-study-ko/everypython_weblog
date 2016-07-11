@@ -1,4 +1,6 @@
 {% extends 'base_blog.jinja' %}
+{% from "blog/macro/IndexCompo.jinja" import index_panel %}
+{% from "blog/macro/PostTable.jinja" import post_list,table_head %}
 
 
 {# head title tag #}
@@ -6,11 +8,36 @@
 
 {# style tag #}
 {%- block pagestyle %}
-
+#th1 {
+    margin: fix;
+    width: 50px;
+    text-align: center;
+}
+#th2{
+    margin: fix;
+    width: 80px;
+    text-align: center;
+}
+#th3 {
+    margin: auto;
+    width: 300px;
+    text-align: center;
+}
+#th4 {
+    margin: fix;
+    width: 50px;
+    text-align: center;
+}
 {%- endblock pagestyle %}
 
 {%- block section %}
-
+{%- call index_panel("glyphicon-folder-open", name,"해당 카테고리 및 하위 카테고리에 속한 글 목록입니다.", grid_class="col-xs-12 col-md-12") %}
+    {%- call table_head("글번호","작성일","제목","조회수",th1="th1",th2="th2",th3="th3",th4="th4") %}
+        {%- for post in posts  -%}
+            {{ post_list(post.pk,post.create_date|date("Y-m-d"),post.title,"1",clas3="text-left") }}
+        {%- endfor %}
+    {%- endcall -%}
+{%- endcall -%}
 {%- endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}
 {%- block bodyscript -%}{% endblock %}
