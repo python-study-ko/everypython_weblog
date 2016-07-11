@@ -68,10 +68,10 @@
 
 {# ---body 시작------------------ #}
 {# 이 템플릿은 전체 레이아웃과 공통 컴포넌트 요소만 정의 #}
-{% block body %}
+{%- block body -%}
     {# 최상단 플로팅바 #}
     <header>
-    {% block header %}
+    {%- block header -%}
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -91,37 +91,33 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                     {# 1차 카테고리 #}
-                    {% for c1 in categorys %}
-                        {% if c1.under_list() %}
+                    {%- for c1 in categorys -%}
+                        {%- if c1.under_list() -%}
                             <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ c1.name }}<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-
                             {# 2차 카테고리 #}
-                            {% for c2 in c1.under_list() %}
-                                {% if not loop.first %}<li class="divider"></li>{% endif %}
-                                <li class="dropdown-header">
-									<a id="c2-dropmemu" href="#" aria-expanded="false">{{ c2.name }}<span class="label label-default pull-right">40</span></a>
-								</li>
-
+                            {%- for c2 in c1.under_list() -%}
+                                {%- if not loop.first -%}<li class="divider"></li>{%- endif -%}
+                                <li class="dropdown-header"><a id="c2-dropmemu" href="#" aria-expanded="false">{{ c2.name }}<span class="label label-default pull-right">40</span></a></li>
                                 {# 3차 카테고리 #}
-                                {% if c2.under_list() %}
-                                    {% for c3 in c2.under_list() %}
+                                {%- if c2.under_list() -%}
+                                    {% for c3 in c2.under_list() -%}
                                         <li><a id="c3-dropmemu" href="#">{{ c3.name }}<span class="label label-default pull-right">22</span></a></li>
-                                    {% endfor %}
-                                {% endif %}
-                                {% if loop.last %}</ul>{% endif %}
-                            {% endfor %}
+                                    {% endfor -%}
+                                {%- endif -%}
+                                {%- if loop.last -%}</ul>{%- endif %}
+                            {%- endfor %}
                             </li>
-                        {% else %}
+                        {%- else %}
                             <li><a href="#">{{ c1.name }}</a></li>
-                        {% endif %}
-                    {% endfor %}
+                        {%- endif %}
+                    {%- endfor %}
                     </ul>
                 </div>{#  .nav-collapse  #}
             </div>
         </nav>
-    {% endblock header %}
+    {%- endblock header -%}
     </header>
 
     {# 메인 콘텐츠 #}
@@ -131,7 +127,6 @@
         {% block section %}{% endblock section %}
     </div>
     </section>
-
     {# 우측 사이드바 #}
     {#
     각 페이지에 공통적으로 들어갈 수 있는 위젯은 모두 여기에 작성한다.
@@ -150,59 +145,55 @@
     <aside class="col-xs-12 col-md-3">
         <nav class="row container-fluid">
         {# 사이드바 하단 개별 페이지 위젯 #}
-            {% block w_etctop %}{% endblock %}
-
+            {%- block w_etctop -%}{%- endblock -%}
         {# 카테고리 위젯 #}
-            {% block w_category %}
+            {%- block w_category -%}
                 <div class="col-xs-12 col-md-12">
                     <div class="list-group" id="c_shadow">
                     <a class="list-group-item active headtext"><span class="glyphicon glyphicon-list"></span>&nbsp; &nbsp;카테고리</a>
-                        {% for c1 in categorys %}
+                        {%- for c1 in categorys -%}
                             {# 1차 카테고리 #}
                             <a class="list-group-item" id="c1-list" href="">{{ c1.name }}<span class="label label-default pull-right">40</span></a>
-                            {% if c1.under_list() %}
+                            {%- if c1.under_list() %}
                             {# 2차 카테고리 #}
-                            {% for c2 in c1.under_list() %}
+                            {%- for c2 in c1.under_list() -%}
                                 <a class="list-group-item" id="c2-list" href="">{{ c2.name }}<span class="label label-default noindnt pull-right">40</span></a>
                                 {# 3차 카테고리 #}
-                                {% if c2.under_list() %}
-                                    {% for c3 in c2.under_list() %}
+                                {%- if c2.under_list() -%}
+                                    {%- for c3 in c2.under_list() -%}
                                         <a class="list-group-item" id="c3-list" href="">{{ c3.name }}<span class="label label-default noindnt pull-right">40</span></a>
-                                    {% endfor %}
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
+                                    {% endfor -%}
+                                {%- endif -%}
+                            {%- endfor -%}
+                        {%- endif -%}
+                    {%- endfor -%}
                     </div>
                 </div>
-            {% endblock w_category %}
-
+            {%- endblock w_category %}
         {# 태그 위젯 #}
-            {% block w_tag %}
+            {%- block w_tag -%}
                 <div class="col-xs-12 col-md-12">
                     <div class="list-group" id="c_shadow">
                         <a class="list-group-item active headtext"><span class="glyphicon glyphicon-tags"></span>&nbsp; &nbsp;태그모음</a>
                         <div class="list-group-item">
-                            {% if tags %}
-                            {% for tag in tags %}
+                            {%- if tags -%}
+                            {%- for tag in tags -%}
                                 <span class="label label-info label-large" id="tag">{{ tag }}</span>
-                            {% endfor %}
-                            {% else %}
+                            {% endfor -%}
+                            {%- else -%}
                                 <p>태그가 없습니다!</p>
-                            {% endif %}
+                            {%- endif -%}
                         </div>
                     </div>
                 </div>
-            {% endblock w_tag %}
-
+            {%- endblock w_tag -%}
         {# 구현 예정
             {% block w_knokknok %}{% endblock w_knokknok %}
             {% block w_starpost %}{% endblock w_starpost %}
             {% block w_recentpost %}{% endblock w_recentpost %}
         #}
-
         {# 사이드바 하단 개별 페이지 위젯 #}
-            {% block w_etcbotten %}{% endblock %}
+            {%- block w_etcbotten -%}{%- endblock %}
         </nav>
     </aside>
 
