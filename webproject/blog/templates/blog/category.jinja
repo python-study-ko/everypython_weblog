@@ -1,1 +1,16 @@
-{% extends 'base_blog.html' %}
+{% extends 'base_blog.jinja' %}
+
+
+{# head title tag #}
+{%- block title %}EVERYPYTHON{% endblock title %}
+
+{# style tag #}
+{%- block pagestyle %}
+
+{%- endblock pagestyle %}
+
+{%- block section %}
+
+{%- endblock section %}
+{# 페이지 맨 아래에서 호출할 스크립트 #}
+{%- block bodyscript -%}{% endblock %}
