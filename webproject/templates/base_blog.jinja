@@ -21,8 +21,8 @@
 
         {#  사이드바 카테고리를 위한 스타일  #}
 		#c1-list{ text-indent: 0; list-style-type: none;}
-		#c2-list{ padding-bottom:7px;text-indent: 10px; list-style-type: none;}
-		#c3-list{ padding-top: 6px;padding-bottom=6px;text-indent: 30px; list-style-type: none;}
+		#c2-list{ padding-bottom:7px;padding-left: 30px;list-style-type: none;}
+		#c3-list{ padding-top: 6px;padding-bottom=6px;padding-left: 65px; list-style-type: none;}
         .noindnt{ text-indent: 0; }
 
         {#  패널 디자인&트랜지션 #}
@@ -40,6 +40,8 @@
 
         .panel-body{ padding-top: 10px; padding-bottom: 8px;}
 
+        {# 위젯,패널의 제목 텍스트 #}
+        .headtext{font-size:medium;font-weight: bold;}
 
     {# 패널 포스트 테이블 #}
         .table-postlist{}
@@ -84,8 +86,8 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="nav-item"><a href="#" class="nav-link disabled">리콜더</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link disabled">PythonBook</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link disabled" data-placement="bottom" data-toggle="tooltip" title="준비중입니다!">리콜더</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link disabled" data-placement="bottom" data-toggle="tooltip" title="준비중입니다!">PythonBook</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                     {# 1차 카테고리 #}
@@ -154,10 +156,10 @@
             {% block w_category %}
                 <div class="col-xs-12 col-md-12">
                     <div class="list-group" id="c_shadow">
-                    <a class="list-group-item active">카테고리</a>
+                    <a class="list-group-item active headtext"><span class="glyphicon glyphicon-list"></span>&nbsp; &nbsp;카테고리</a>
                         {% for c1 in categorys %}
                             {# 1차 카테고리 #}
-                            <a class="list-group-item" id="c1-list" href="">{{ c1.name }}<span class="label label-default noindnt pull-right">40</span></a>
+                            <a class="list-group-item" id="c1-list" href="">{{ c1.name }}<span class="label label-default pull-right">40</span></a>
                             {% if c1.under_list() %}
                             {# 2차 카테고리 #}
                             {% for c2 in c1.under_list() %}
@@ -179,7 +181,7 @@
             {% block w_tag %}
                 <div class="col-xs-12 col-md-12">
                     <div class="list-group" id="c_shadow">
-                        <a class="list-group-item active">태그모음</a>
+                        <a class="list-group-item active headtext"><span class="glyphicon glyphicon-tags"></span>&nbsp; &nbsp;태그모음</a>
                         <div class="list-group-item">
                             {% if tags %}
                             {% for tag in tags %}
