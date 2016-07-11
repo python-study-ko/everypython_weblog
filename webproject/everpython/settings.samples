@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'blog',
     # 장고용 진자
     'django_jinja',
+    'django_jinja.contrib._humanize',
 ]
 
 MIDDLEWARE_CLASSES = [
