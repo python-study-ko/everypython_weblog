@@ -1,5 +1,8 @@
 {% extends 'base.jinja' %}
 
+{# 매크로 호 #}출
+{% from "blog/macro/aside_widget.jinja" import widgetBox  %}
+
 {# ---head 시작----------------- #}
 
     {# head tag - link,meta등등 #}
@@ -72,7 +75,6 @@
     {# 최상단 플로팅바 #}
     <header>
     {%- block header -%}
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -148,17 +150,15 @@
             {%- block w_etctop -%}{%- endblock -%}
         {# 카테고리 위젯 #}
             {%- block w_category -%}
-                <div class="col-xs-12 col-md-12">
-                    <div class="list-group" id="c_shadow">
-                    <a class="list-group-item active headtext"><span class="glyphicon glyphicon-list"></span>&nbsp; &nbsp;카테고리</a>
-                        {%- for c1 in categorys -%}
-                            {# 1차 카테고리 #}
-                            <a class="list-group-item" id="c1-list" href="">{{ c1.name }}<span class="label label-default pull-right">40</span></a>
-                            {%- if c1.under_list() %}
-                            {# 2차 카테고리 #}
+                {%- call widgetBox('glyphicon-list','카테고리') -%}
+                    {%- for c1 in categorys -%}
+                    {# 1차 카테고리 #}
+                        <a class="list-group-item" id="c1-list" href="">{{ c1.name }}<span class="label label-default pull-right">40</span></a>
+                        {%- if c1.under_list() %}
+                        {# 2차 카테고리 #}
                             {%- for c2 in c1.under_list() -%}
                                 <a class="list-group-item" id="c2-list" href="">{{ c2.name }}<span class="label label-default noindnt pull-right">40</span></a>
-                                {# 3차 카테고리 #}
+                            {# 3차 카테고리 #}
                                 {%- if c2.under_list() -%}
                                     {%- for c3 in c2.under_list() -%}
                                         <a class="list-group-item" id="c3-list" href="">{{ c3.name }}<span class="label label-default noindnt pull-right">40</span></a>
@@ -167,25 +167,21 @@
                             {%- endfor -%}
                         {%- endif -%}
                     {%- endfor -%}
-                    </div>
-                </div>
+                {%- endcall -%}
             {%- endblock w_category %}
         {# 태그 위젯 #}
             {%- block w_tag -%}
-                <div class="col-xs-12 col-md-12">
-                    <div class="list-group" id="c_shadow">
-                        <a class="list-group-item active headtext"><span class="glyphicon glyphicon-tags"></span>&nbsp; &nbsp;태그모음</a>
-                        <div class="list-group-item">
-                            {%- if tags -%}
-                            {%- for tag in tags -%}
-                                <span class="label label-info label-large" id="tag">{{ tag }}</span>
-                            {% endfor -%}
-                            {%- else -%}
-                                <p>태그가 없습니다!</p>
-                            {%- endif -%}
-                        </div>
+                {%- call widgetBox('glyphicon-tags','태그모음') -%}
+                    <div class="list-group-item">
+                        {%- if tags -%}
+                        {%- for tag in tags -%}
+                            <span class="label label-info label-large" id="tag">{{ tag }}</span>
+                        {% endfor -%}
+                        {%- else -%}
+                            <p>태그가 없습니다!</p>
+                        {%- endif -%}
                     </div>
-                </div>
+                {%- endcall  -%}
             {%- endblock w_tag -%}
         {# 구현 예정
             {% block w_knokknok %}{% endblock w_knokknok %}

@@ -1,0 +1,20 @@
+{#
+---매크로 템플릿---
+각종 html태그를 제작해주는 매크로 템플릿 입니다.
+다른 jinja 템플릿에서 아래 두가지 방법중 하나로 import 하시면 됩니다.
+- {% import '<파일명>' as <호출명> %}
+- {% from '<파일>' import <매크로명1> as <호출명>, <매크로명2> %}
+
+---설명---
+블로그 템플릿에서 위젯 영역에 사용되는 매크로모음
+ #}
+
+{#  #}
+{%- macro widgetBox(icon,title) -%}
+    <div class="col-xs-12 col-md-12">
+        <div class="list-group" id="c_shadow">
+            <a class="list-group-item active headtext"><span class="glyphicon {{ icon }}"></span>&nbsp; &nbsp;{{ title }}</a>
+            {{ caller() }}
+        </div>
+    </div>
+{%- endmacro -%}
