@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
+from hitcount.models import HitCountMixin
 # Create your models here.
 
 
@@ -52,7 +53,7 @@ class Category(models.Model):
         return self.name
 
 
-class Post(models.Model):
+class Post(models.Model,HitCountMixin):
     """
     블로그 포스트 모델
     """

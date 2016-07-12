@@ -36,7 +36,7 @@
     {%- call table_head("글번호","작성일","제목","조회수",th1="th1",th2="th2",th3="th3",th4="th4") %}
         {%- for post in posts  -%}
             {% set link=url('blog:PostDetail',kwargs={'pk':post.pk}) %}
-            {{ post_list(post.pk,post.create_date|date("Y-m-d"),post.title,"1",clas3="text-left",col3_link=link) }}
+            {{ post_list(post.pk,post.create_date|date("Y-m-d"),post.title,post.hit_count.hits,clas3="text-left",col3_link=link) }}
         {%- endfor %}
     {%- endcall -%}
 {%- endcall -%}
