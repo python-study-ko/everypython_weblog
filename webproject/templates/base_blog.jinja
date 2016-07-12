@@ -4,7 +4,12 @@
 {% from "blog/macro/aside_widget.jinja" import widgetBox  %}
 
 {% macro c1dropdown() %}
-
+    <li class="dropdown">
+        <a href="{{ url('blog:Category',kwargs={'pk':c_id}) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ c_name }} <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        {{ caller() }}
+    </ul>
+    </li>
 {% endmacro %}
 
 {# ---head 시작----------------- #}
@@ -99,24 +104,27 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                     {# 1차 카테고리 #}
-                    {%- for c in categorytree -%}
-                        {% with %}
-                        {% set c_level,c_id,c_name,c_countpost,c_checkunder = c %}
-                            {% if c_level==1  %}
-                            {% if c_checkunder %}
+                    {%- for c1 in categorys -%}
+                        {%- if c1.under_list() -%}
                             <li class="dropdown">
-                            <a href="{{ url('blog:Category',kwargs={'pk':c_id}) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ c_name }} <span class="caret"></span></a>
+                            <a href="{{ url('blog:Category',kwargs={'pk':c1.id}) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ c1.name }}<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                            {% else %}
-                            <li><a href="{{ url('blog:Category',kwargs={'pk':c_id}) }}">{{ c_name }}<span class="label label-default pull-right">{{ c_countpost }}</span></a></li>
-                            {% continue %}
-                            {% endif %}{% endif %}
                             {# 2차 카테고리 #}
-                            {% if c_level==2 %}<li class="dropdown-header"><a id="c2-dropmemu" href="{{ url('blog:Category',kwargs={'pk':c_id}) }}" aria-expanded="false">{{ c_name }}<span class="label label-default pull-right">{{ c_countpost }}</span></a></li>{% endif %}
-                            {# 3차 카테고리 #}
-                            {%- if c_level==3 -%}<li><a id="c3-dropmemu" href="{{ url('blog:Category',kwargs={'pk':c_id}) }}">{{ c_name }}<span class="label label-default pull-right">{{ c_countpost }}</span></a></li>{% endif %}
+                            {%- for c2 in c1.under_list() -%}
+                                {%- if not loop.first -%}<li class="divider"></li>{%- endif -%}
+                                <li class="dropdown-header"><a id="c2-dropmemu" href="{{ url('blog:Category',kwargs={'pk':c2.id}) }}" aria-expanded="false">{{ c2.name }}<span class="label label-default pull-right">40</span></a></li>
+                                {# 3차 카테고리 #}
+                                {%- if c2.under_list() -%}
+                                    {% for c3 in c2.under_list() -%}
+                                        <li><a id="c3-dropmemu" href="{{ url('blog:Category',kwargs={'pk':c3.id}) }}">{{ c3.name }}<span class="label label-default pull-right">22</span></a></li>
+                                    {% endfor -%}
+                                {%- endif -%}
+                                {%- if loop.last -%}</ul>{%- endif %}
+                            {%- endfor %}
                             </li>
-                        {%- endwith  %}
+                        {%- else %}
+                            <li><a href="#">{{ c1.name }}</a></li>
+                        {%- endif %}
                     {%- endfor %}
                     </ul>
                 </div>{#  .nav-collapse  #}
