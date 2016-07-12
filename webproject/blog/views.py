@@ -1,4 +1,6 @@
 from django.shortcuts import render, render_to_response,get_object_or_404
+from django.template import RequestContext
+from django.template.context_processors import request
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.views.generic import ListView, View
@@ -72,7 +74,11 @@ def CategoryList(request,pk):
 
 class PostDetail(DetailView):
     model = Post
-    template_name = 'blog/postdetail.jinja'
+
+    def get_context_data(self, **kwargs):
+        context = super(PostDetail, self).get_context_data(**kwargs)
+        context.update(sidebar_context())
+        return context
 
 # jinja2 테스트 코드
 def jinjadef(request):

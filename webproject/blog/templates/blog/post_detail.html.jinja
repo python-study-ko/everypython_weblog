@@ -1,12 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>{{ object.title }}</h1><br>
-    <h5>{{ object.author }}</h5><br>
-    {{ object.category }}
-</body>
-</html>
+{% extends 'base_blog.jinja' %}
+{% from "blog/macro/postdetail.jinja" import post_panel %}
+{# head title tag #}
+{%- block title %}EVERYPYTHON{% endblock title %}
+
+{# style tag #}
+{%- block pagestyle %}
+
+{%- endblock pagestyle %}
+
+{%- block section %}
+    <article>
+    {%- call post_panel("glyphicon-folder-open", object.category, grid_class="col-xs-12 col-md-12") %}
+    <div style="margin-top: 20px;" class="page-header"><h1>{{ object.title }}</h1>
+    <p style="margin-bottom: 0;">
+        <span class="glyphicon glyphicon-user"></span>&nbsp;{{ object.author }}&nbsp;&nbsp;&nbsp;
+        <span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ object.create_date|date }}&nbsp;&nbsp;&nbsp;
+        <span class="glyphicon glyphicon-tag"></span>&nbsp;{%- for tag in object.tag.names() -%}<span class="label label-info label-large" id="tag">{{ tag }}</span>{% endfor -%}
+    </p>
+    </div>
+    <p>
+        {%- autoescape off -%}
+        {{ object.content }}
+        {%- endautoescape %}
+    </p>
+    {%- endcall -%}
+    </article>
+{%- endblock section %}
+{# 페이지 맨 아래에서 호출할 스크립트 #}
+{%- block bodyscript -%}{% endblock %}
