@@ -8,9 +8,13 @@ from django.views.generic.base import TemplateView
 from blog.models import Category, Post
 
 
-from django_jinja.views.generic.detail import DetailView
-# Create your views here.
 from taggit.models import Tag
+from django_jinja.views.generic.base import Jinja2TemplateResponseMixin
+from hitcount.views import HitCountDetailView as hitdetailview
+
+
+class DetailView(Jinja2TemplateResponseMixin,hitdetailview):
+    pass
 
 def sidebar_context():
     """
@@ -85,7 +89,7 @@ def TagList(request,pk):
 
 class PostDetail(DetailView):
     model = Post
-
+    count_hit = True
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
         context['tagmodel']=Tag
