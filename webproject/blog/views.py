@@ -18,7 +18,7 @@ def sidebar_context():
     :return:
     """
     level1 = Category.objects.filter(level=1)
-    context_dic={'categorys': level1,'tags':Tag.objects.all().reverse()}
+    context_dic={'categorys': level1,'tags':Tag.objects.all()}
     return context_dic
 
 def under_c(c):
@@ -72,11 +72,23 @@ def CategoryList(request,pk):
     # 테스트 코드
     return render(request,'blog/category.jinja',context)
 
+def TagList(request,pk):
+    tag = Tag.objects.get(id=pk)
+    # 모든 하위카테고리를 구한후 해당 카테고리들의 모든 포스트를 추출한다.
+    post_list = Post.objects.filter(tag__name__in=[tag])
+    # 포스트 목록
+    context = {"posts": post_list,"name":tag.name}
+    # 사이드바에 필요한 context를 합쳐줌
+    context.update(sidebar_context())
+    # 테스트 코드
+    return render(request,'blog/tag.jinja',context)
+
 class PostDetail(DetailView):
     model = Post
 
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
+        context['tagmodel']=Tag
         context.update(sidebar_context())
         return context
 
