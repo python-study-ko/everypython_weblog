@@ -31,6 +31,7 @@
 {%- endblock pagestyle %}
 
 {%- block section %}
+{% if posts %}
 {%- call index_panel("glyphicon-folder-open", name,"해당 카테고리 및 하위 카테고리에 속한 글 목록입니다.", grid_class="col-xs-12 col-md-12") %}
     {%- call table_head("글번호","작성일","제목","조회수",th1="th1",th2="th2",th3="th3",th4="th4") %}
         {%- for post in posts  -%}
@@ -38,6 +39,10 @@
         {%- endfor %}
     {%- endcall -%}
 {%- endcall -%}
+{% else %}
+    {%- call index_panel("glyphicon-folder-open", name,"아직 글이 없습니다.", grid_class="col-xs-12 col-md-12") %}
+    {%- endcall -%}
+{% endif %}
 {%- endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}
 {%- block bodyscript -%}{% endblock %}

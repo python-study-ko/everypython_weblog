@@ -35,6 +35,7 @@ class Category(models.Model):
         # 3차 카테고리 : 하위 카테고리를 가질수 없음
         else:
             cate_list = None
+            return cate_list
 
         return cate_list if len(cate_list) != 0 else None
     """

@@ -14,6 +14,8 @@
     {# style tag #}
     {% block style %}
         {# 블로그 전체에 적용할 범용적인 css #}
+        section.col-xs-12.col-md-9 { padding-left: 0; padding-right: 0; }
+        .container-fluid{ padding-left: 0; padding-right: 0; }
         {#  플로팅바를 위한 body 상하여백 조절정& 배경설정  #}
 
         body { background:url("https://s3.ap-northeast-2.amazonaws.com/everypython.data/static/background/everypython_back_dark_optimize.svg") ; padding-top: 70px; padding-bottom: 70px; }
@@ -84,7 +86,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">EVERYPYTHON</a>
+                    <a class="navbar-brand" href="/blog">EVERYPYTHON</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -96,16 +98,16 @@
                     {%- for c1 in categorys -%}
                         {%- if c1.under_list() -%}
                             <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ c1.name }}<span class="caret"></span></a>
+                            <a href="{{ url('blog:Category',kwargs={'pk':c1.id}) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ c1.name }}<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                             {# 2차 카테고리 #}
                             {%- for c2 in c1.under_list() -%}
                                 {%- if not loop.first -%}<li class="divider"></li>{%- endif -%}
-                                <li class="dropdown-header"><a id="c2-dropmemu" href="#" aria-expanded="false">{{ c2.name }}<span class="label label-default pull-right">40</span></a></li>
+                                <li class="dropdown-header"><a id="c2-dropmemu" href="{{ url('blog:Category',kwargs={'pk':c2.id}) }}" aria-expanded="false">{{ c2.name }}<span class="label label-default pull-right">40</span></a></li>
                                 {# 3차 카테고리 #}
                                 {%- if c2.under_list() -%}
                                     {% for c3 in c2.under_list() -%}
-                                        <li><a id="c3-dropmemu" href="#">{{ c3.name }}<span class="label label-default pull-right">22</span></a></li>
+                                        <li><a id="c3-dropmemu" href="{{ url('blog:Category',kwargs={'pk':c3.id}) }}">{{ c3.name }}<span class="label label-default pull-right">22</span></a></li>
                                     {% endfor -%}
                                 {%- endif -%}
                                 {%- if loop.last -%}</ul>{%- endif %}
@@ -153,15 +155,15 @@
                 {%- call widgetBox('glyphicon-list','카테고리') -%}
                     {%- for c1 in categorys -%}
                     {# 1차 카테고리 #}
-                        <a class="list-group-item" id="c1-list" href="">{{ c1.name }}<span class="label label-default pull-right">40</span></a>
+                        <a class="list-group-item" id="c1-list" href="{{ url('blog:Category',kwargs={'pk':c1.id}) }}">{{ c1.name }}<span class="label label-default pull-right">40</span></a>
                         {%- if c1.under_list() %}
                         {# 2차 카테고리 #}
                             {%- for c2 in c1.under_list() -%}
-                                <a class="list-group-item" id="c2-list" href="">{{ c2.name }}<span class="label label-default noindnt pull-right">40</span></a>
+                                <a class="list-group-item" id="c2-list" href="{{ url('blog:Category',kwargs={'pk':c2.id}) }}">{{ c2.name }}<span class="label label-default noindnt pull-right">40</span></a>
                             {# 3차 카테고리 #}
                                 {%- if c2.under_list() -%}
                                     {%- for c3 in c2.under_list() -%}
-                                        <a class="list-group-item" id="c3-list" href="">{{ c3.name }}<span class="label label-default noindnt pull-right">40</span></a>
+                                        <a class="list-group-item" id="c3-list" href="{{ url('blog:Category',kwargs={'pk':c3.id}) }}">{{ c3.name }}<span class="label label-default noindnt pull-right">40</span></a>
                                     {% endfor -%}
                                 {%- endif -%}
                             {%- endfor -%}
