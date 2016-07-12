@@ -3,14 +3,6 @@
 {# 매크로 호출 #}
 {% from "blog/macro/aside_widget.jinja" import widgetBox  %}
 
-{% macro c1dropdown() %}
-    <li class="dropdown">
-        <a href="{{ url('blog:Category',kwargs={'pk':c_id}) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ c_name }} <span class="caret"></span></a>
-    <ul class="dropdown-menu" role="menu">
-        {{ caller() }}
-    </ul>
-    </li>
-{% endmacro %}
 
 {# ---head 시작----------------- #}
 
