@@ -79,8 +79,6 @@ def categoryinfo():
         c_info.append(groupinfo)
     return c_info
 
-# --------카테고리 함수 끝 ----------
-
 def c_postlist(c_list):
     # 카테고리 목록을 받아 해당 카테고리에 속한 모든 포스트 가져와서 정렬시킨다.
     post_list = []
@@ -88,13 +86,23 @@ def c_postlist(c_list):
     for c in c_list:
         post_list += c.post_set.all()
     # 포스트의 번호를 역순으로 하여 정렬한
-    sortlist = sorted(post_list, key=lambda x: x.pk , reverse=True)
+    post_obj_list = sorted(post_list, key=lambda x: x.pk , reverse=True)
+    posts = postcontext(post_obj_list)
+    return posts
 
+
+# --------카테고리 함수 끝 ----------
+
+# ----------글목록 함수-------------
+
+def postcontext(post_obj_list):
     posts = []
-    for post in sortlist:
-        info = (post.pk,post.create_date,post.title,post.hit_count.hits)
+    for post in post_obj_list:
+        info = (post.pk, post.create_date, post.title, post.hit_count.hits)
         posts.append(info)
     return posts
+
+
 
 class Index(View):
     def get(self, request, data=None):
@@ -121,8 +129,10 @@ def CategoryList(request,pk):
 def TagList(request,pk):
     tag = Tag.objects.get(id=pk)
     # 태그에 속한 모든 포스트를 찾는다
-    post_list = Post.objects.filter(tag__name__in=[tag])
-    context = {"posts": post_list,"name":tag.name}
+    post_obj_list = Post.objects.filter(tag__name__in=[tag])
+    posts = postcontext(post_obj_list)
+
+    context = {"posts": posts,"name":tag.name}
     # 사이드바에 필요한 context를 합쳐줌
     context.update(sidebar_context())
     return render(request,'blog/tag.jinja',context)
