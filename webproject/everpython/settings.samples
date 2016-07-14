@@ -160,3 +160,6 @@ AWS_ACCESS_KEY_ID = 'xxxxxxxxxxxxxxxxxx'
 AWS_SECRET_ACCESS_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 AWS_STORAGE_BUCKET_NAME = 'xxxxxxxxxxxxxxxxxxxxx'
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+
+# 디버깅 툴바 설정
+INTERNAL_IPS = ['0.0.0.0','127.0.0.1','::1']
