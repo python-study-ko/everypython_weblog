@@ -22,6 +22,8 @@
         body { background:url("https://s3.ap-northeast-2.amazonaws.com/everypython.data/static/background/everypython_back_dark_optimize.svg") ; padding-top: 70px; padding-bottom: 70px; }
 
         {#  상단바 드롭다운 카테고리 스타일  #}
+        #c1-drop-label { display: inline-block; padding-right: 0;}
+        #c1-drop-btn { display: inline-block; padding-left: 0; }
 		#c2-dropmemu { padding-left: 0; padding-right: 0; }
 		#c3-dropmemu { padding-left: 35px; padding-right: 20px; }
 
@@ -103,7 +105,8 @@
                             {% with %}
                             {% set under_c = group[1:] %}
                             <li class="dropdown">
-                            <a href="{{ url('blog:Category',kwargs={'pk':c_id}) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ c_name }}<span class="caret"></span></a>
+                            <a id="c1-drop-label" href="{{ url('blog:Category',kwargs={'pk':c_id}) }}" >{{ c_name }}</a>
+                            <a id="c1-drop-btn" role="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></a>
                             <ul class="dropdown-menu" role="menu">
                                 {% for c in under_c %}
                                     {% set c_level,c_id,c_name,c_countpost = c %}
