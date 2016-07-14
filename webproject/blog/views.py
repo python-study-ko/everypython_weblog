@@ -25,10 +25,23 @@ def sidebar_context():
     context.update(sidebar_context())이걸 통해 각페이지 context에 카테고리나 태그정보가 담긴 context를 함께 넘겨준다
     :return:
     """
-    level1 = Category.objects.filter(level=1)
-    context_dic={'categorys': level1,'tags':Tag.objects.all(),'categorytree':categoryinfo()}
+    context_dic={'tags':tags(),'categorytree':categoryinfo()}
     return context_dic
 
+# --------태그 함수-------------
+def tags():
+    """
+    전체 태그정보를 (번호,태그명)형식으로 담아 리스트로 내보낸다
+    :return:
+    """
+    tags = []
+    taglist = Tag.objects.all()
+    for tag in taglist:
+        info = (tag.id,tag.name)
+        tags.append(info)
+    return tags
+
+# --------태그 함수끝-----------
 
 # --------카테고리 함수----------
 
@@ -102,13 +115,11 @@ def CategoryList(request,pk):
 
 def TagList(request,pk):
     tag = Tag.objects.get(id=pk)
-    # 모든 하위카테고리를 구한후 해당 카테고리들의 모든 포스트를 추출한다.
+    # 태그에 속한 모든 포스트를 찾는다
     post_list = Post.objects.filter(tag__name__in=[tag])
-    # 포스트 목록
     context = {"posts": post_list,"name":tag.name}
     # 사이드바에 필요한 context를 합쳐줌
     context.update(sidebar_context())
-    # 테스트 코드
     return render(request,'blog/tag.jinja',context)
 
 class PostDetail(DetailView):
