@@ -14,11 +14,15 @@ from hitcount.views import HitCountDetailView as hitdetailview
 
 
 class DetailView(Jinja2TemplateResponseMixin,hitdetailview):
+    """
+    조회수를 측정할 hitdetailview클래스에 jinjan 템플릿 클래스를 믹스인 시켜준다.
+    """
     pass
 
 def sidebar_context():
     """
-    사이드바 위젯에 들어갈 context을 넘겨주는 함수로 선사이드바가 있는 뷰에 자체 컨텍스트에 이것을 합쳐 템플릿에 넘겨주면 된다.
+    사이드바 위젯에 들어갈 context을 넘겨주는 함수.
+    context.update(sidebar_context())이걸 통해 각페이지 context에 카테고리나 태그정보가 담긴 context를 함께 넘겨준다
     :return:
     """
     level1 = Category.objects.filter(level=1)
@@ -44,23 +48,22 @@ def under_c(c):
         return [c]
 
 def categorytree():
-    # 전체 카테고리다 리스트를 만들어 준다
+    # 전체 카테고리 리스트를 만들어 준다
     c1 = Category.objects.filter(level=1)
     ctree=[]
     for c in c1:
-        ctree += under_c(c)
+        ctree.append(under_c(c))
     return ctree
 
 def categoryinfo():
-    # 카테고리 세부 정보를 모아준다 - (레벨,번호,이름,하위 포스트 갯수,하위카테고리 존제 여부(0:없음,1:존재)
+    # 카테고리 세부 정보를 모아준다 - (레벨,번호,이름,하위 포스트 갯수)
     c_info = []
-    for c in categorytree():
-        # 하위카테고리 존재여부 확인
-        check = 0
-        if c.under_list():
-            check = 1
-        info = (c.level,c.id,c.name,len(c.post_set.all()),check)
-        c_info.append(info)
+    for group in categorytree():
+        groupinfo = []
+        for c in group:
+            info = (c.level,c.id,c.name,len(c.post_set.all()))
+            groupinfo.append(info)
+        c_info.append(groupinfo)
     return c_info
 
 # --------카테고리 함수 끝 ----------
