@@ -89,7 +89,12 @@ def c_postlist(c_list):
         post_list += c.post_set.all()
     # 포스트의 번호를 역순으로 하여 정렬한
     sortlist = sorted(post_list, key=lambda x: x.pk , reverse=True)
-    return sortlist
+
+    posts = []
+    for post in sortlist:
+        info = (post.pk,post.create_date,post.title,post.hit_count.hits)
+        posts.append(info)
+    return posts
 
 class Index(View):
     def get(self, request, data=None):
