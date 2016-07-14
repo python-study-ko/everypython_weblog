@@ -22,11 +22,15 @@ dictest.3 -> {{ dictest.3 }}<br>
 <br>for 구문 테스트<br>
 test.1.a하면 dict['a']를 못찾겠다고 에러뿜음<br>
 test.1[a]하면 정상적으로 딕셔너리 값이 출력됨<br><br>
+{% set row_class = cycler('odd', 'even') %}
 {% for a in test.1 %}
 for a in test.1 <br>
 a = {{ a }}<br>
 test.1.a : {{ test.1.a }}<br>
-test.1[a] : {{ test.1[a] }}<br><br>
+test.1[a] : {{ test.1[a] }}<br>
+사이클1 : {{ loop.cycle('a','b') }}<br>
+사이클1 : {{ loop.cycle(cylist) }}<br>
+사이클2 : {{ row_class }}<br>
 {% endfor %}
 </body>
 </html>

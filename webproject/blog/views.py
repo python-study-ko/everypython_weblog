@@ -120,8 +120,9 @@ class PostDetail(DetailView):
 # jinja2 테스트 코드
 def jinjadef(request):
     test = 'abcd'
+    cycle = 'a','b','c','d'
     manydict = {1:{"first":1,"second":2,"tree":{3:33}}}
-    return render(request,'blog/def.jinja',{'hi' :test,"test":manydict})
+    return render(request,'blog/def.jinja',{'hi' :test,"test":manydict,'cylist':cycle})
 
 class jinjaclass(DetailView):
     model = Post
