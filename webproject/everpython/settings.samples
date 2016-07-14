@@ -52,9 +52,14 @@ INSTALLED_APPS = [
     'django_jinja.contrib._humanize',
     # 카운팅 모듈
     'hitcount',
+    # 디버깅 툴바
+    'debug_toolbar',
 ]
 
 MIDDLEWARE_CLASSES = [
+    # 디버깅 툴바 추가
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 기존코드
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
