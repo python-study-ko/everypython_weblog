@@ -7,7 +7,7 @@ from django.views.generic import ListView, View
 from django.views.generic.base import TemplateView
 from blog.models import Category, Post
 
-
+from hitcount.models import HitCount
 from taggit.models import Tag
 from django_jinja.views.generic.base import Jinja2TemplateResponseMixin
 from hitcount.views import HitCountDetailView as hitdetailview
@@ -91,9 +91,7 @@ def c_postlist(c_list):
     return posts
 
 
-# --------카테고리 함수 끝 ----------
-
-# ----------글목록 함수-------------
+# -----글목록 정보 추출 함수-----------
 
 def postcontext(post_obj_list):
     posts = []
@@ -103,13 +101,24 @@ def postcontext(post_obj_list):
     return posts
 
 
-
 class Index(View):
     def get(self, request, data=None):
-
         # index 페이지에 넘겨줄 컨텐츠 context
-        context ={}
+        # 최신글 목록 추출
+        newposts = []
+        for post in Post.objects.all().order_by('-create_date')[:5]:
+            info = (post.pk, post.create_date, post.title, post.category)
+            newposts.append(info)
+
+        # 인기글 목록 추출
+        starposts = []
+        for sort_hits in HitCount.objects.all()[:5]:
+            post = sort_hits.content_object
+            info = (post.pk, post.hit_count.hits, post.title, post.category)
+            starposts.append(info)
+
         # 사이드바에 필요한 context를 합쳐줌
+        context = {'newposts':newposts,'starposts':starposts}
         context.update(sidebar_context())
         data = render_to_string("blog/index.jinja", context, request=request)
         return HttpResponse(data)

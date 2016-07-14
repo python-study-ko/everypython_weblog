@@ -18,15 +18,19 @@
 <!-- 최신글 -->
     {%- call index_panel('glyphicon-send',"최신글","가장 최근에 올라온 글입니다") -%}
         <!-- 글목록 -->
-        {%- call table_head("조회수","제목","카테고리",table_class="table table-striped table-postlist") -%}
-                {{ post_list("1열","제목은 보통 길기 마련이지","3열") }}
+        {%- call table_head("날짜","제목","카테고리",table_class="table table-striped table-postlist") -%}
+            {% for pk,date,title,category  in newposts %}
+            {{ post_list(date|date('Y-m-d'),title,category,col2_link=url('blog:PostDetail',kwargs={'pk':pk})) }}
+            {% endfor %}
         {%- endcall -%}
     {%- endcall %}
 
 <!-- 인기글 -->
     {%- call index_panel('glyphicon-thumbs-up','인기글',"조회수가 가장 많은 글입니다") -%}
         {%- call table_head("조회수","제목","카테고리",table_class="table table-striped table-postlist") -%}
-                {{ post_list("1열","제목은 보통 길기 마련이지","3열") }}
+            {% for pk,hits,title,category  in starposts %}
+            {{ post_list(hits,title,category,col2_link=url('blog:PostDetail',kwargs={'pk':pk})) }}
+            {% endfor %}
         {%- endcall -%}
     {%- endcall -%}
 {%- endblock section %}
