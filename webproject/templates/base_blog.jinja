@@ -108,8 +108,7 @@
                             <a id="c1-drop-label" href="{{ url('blog:Category',kwargs={'pk':c_id}) }}" >{{ c_name }}</a>
                             <a id="c1-drop-btn" role="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></a>
                             <ul class="dropdown-menu" role="menu">
-                                {% for c in under_c %}
-                                    {% set c_level,c_id,c_name,c_countpost = c %}
+                                {% for c_level,c_id,c_name,c_countpost in under_c %}
                                     {% if c_level==2 %}
                                     <li class="dropdown-header"><a id="c2-dropmemu" href="{{ url('blog:Category',kwargs={'pk':c_id}) }}" aria-expanded="false">{{ c_name }}<span class="label label-default pull-right">{{ c_countpost }}</span></a></li>
                                     {% elif c_level==3 %}
@@ -158,9 +157,7 @@
             {%- block w_category -%}
                 {%- call widgetBox('glyphicon-list','카테고리') -%}
                     {% for group in categorytree %}
-                        {% for c in group %}
-                            {% with %}
-                            {% set c_level,c_id,c_name,c_countpost = c %}
+                        {% for c_level,c_id,c_name,c_countpost in group %}
                                 {% if c_level==1 %}
                                 <a class="list-group-item" id="c1-list" href="{{ url('blog:Category',kwargs={'pk':c_id}) }}">{{ c_name }}<span class="label label-default pull-right">{{ c_countpost }}</span></a>
                                 {# 2차 카테고리 #}
@@ -170,7 +167,6 @@
                                 {%- else -%}
                                 <a class="list-group-item" id="c3-list" href="{{ url('blog:Category',kwargs={'pk':c_id}) }}">{{ c_name }}<span class="label label-default noindnt pull-right">{{ c_countpost }}</span></a>
                                 {%- endif -%}
-                            {% endwith %}
                         {% endfor %}
                     {% endfor %}
                 {%- endcall -%}
