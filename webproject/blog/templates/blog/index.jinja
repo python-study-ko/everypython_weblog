@@ -1,20 +1,19 @@
-{% extends 'base_blog.jinja' %}
-{% from "blog/macro/PostTable.jinja" import post_list,table_head %}
-{% from "blog/macro/IndexCompo.jinja" import index_jumbotron,index_panel %}
+{%- extends 'base_blog.jinja' -%}
+{%- from "blog/macro/PostTable.jinja" import post_list,table_head -%}
+{%- from "blog/macro/IndexCompo.jinja" import index_jumbotron,index_panel -%}
 
 {# head title tag #}
-{%- block title %}EVERYPYTHON{% endblock title %}
+{%- block title -%}EVERYPYTHON{%- endblock title %}
 
 {# style tag #}
 {%- block pagestyle %}
-
 {%- endblock pagestyle %}
 
 {%- block section %}
 <!-- 점보트론 -->
-    {% call index_jumbotron("EveryPython",hr="1") %}
+    {%- call index_jumbotron("EveryPython",hr="1") -%}
         <p>(Python.productivity + me.creative) x me.crazy(?)<br>= 서비스의 재발견, 세상을 이롭게 하다</p>
-    {% endcall %}
+    {%- endcall -%}
 <!-- 최신글 -->
     {%- call index_panel('glyphicon-send',"최신글","가장 최근에 올라온 글입니다") -%}
         <!-- 글목록 -->
