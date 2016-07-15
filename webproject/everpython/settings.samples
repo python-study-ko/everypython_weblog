@@ -108,8 +108,14 @@ WSGI_APPLICATION = 'everpython.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '테이블 이름',
+        'USER': 'root',
+        'PASSWORD': '비밀번호',
+        'HOST': '서버 주소',
+        'POST': '3306',
     }
 }
 
