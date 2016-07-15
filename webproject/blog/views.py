@@ -109,6 +109,7 @@ class Index(View):
 
         # 인기글 목록 추출
         # starposts = HitCount.objects.all().values_list('content_object.pk','hits','content_object.title','content_object.category')[:5]
+        starposts = []
         for sort_hits in HitCount.objects.all()[:5]:
             post = sort_hits.content_object
             info = (post.pk, post.hit_count.hits, post.title, post.category)
