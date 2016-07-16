@@ -108,12 +108,7 @@ class Index(View):
         newposts = Post.objects.all().values_list('pk','create_date','title','category__name').order_by('-create_date')[:5]
 
         # 인기글 목록 추출
-        # starposts = HitCount.objects.all().values_list('content_object.pk','hits','content_object.title','content_object.category')[:5]
-        starposts = []
-        for sort_hits in HitCount.objects.all()[:5]:
-            post = sort_hits.content_object
-            info = (post.pk, post.hit_count.hits, post.title, post.category)
-            starposts.append(info)
+        starposts = HitCount.objects.all().values_list('post__pk', 'hits', 'post__title', 'post__category__name')[:5]
 
         # 사이드바에 필요한 context를 합쳐줌
         context = {'newposts':newposts,'starposts':starposts}
