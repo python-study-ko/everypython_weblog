@@ -2,7 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
-from hitcount.models import HitCountMixin
+from hitcount.models import HitCountMixin, HitCount
+
+# hticount 필드 연결용
+from django.contrib.contenttypes.fields import GenericRelation
 # Create your models here.
 
 
@@ -65,7 +68,8 @@ class Post(models.Model,HitCountMixin):
     create_date = models.DateTimeField(auto_now_add=True)
     edit_date = models.DateTimeField(auto_now=True)
     publish = models.BooleanField(default=False)
-
+    # hitcount 모듈과 연동
+    posthits = GenericRelation(HitCount, related_query_name='post',object_id_field='object_pk')
 
     def __str__(self):
         return self.title
