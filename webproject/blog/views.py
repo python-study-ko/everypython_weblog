@@ -146,3 +146,19 @@ def jinjadef(request):
 class jinjaclass(DetailView):
     model = Post
 
+
+"""
+포스트 글목록 로직
+현재까지 구현한부분
+from django.db.models import Q
+c = Category.objects.get(id=2) #최상위 카테고리중 하나
+Category.objects.filter(Q(name=c.name)|Q(name__in=c.under_category.values_list("name",flat=True)))
+결과 >>> [<Category: 웹프레임워크>, <Category: 파이썬>, <Category: GUI>]
+under_c = Category.objects.filter(Q(name=c.name)|Q(name__in=c.under_category.values_list("name",flat=True))).values_list('name',flat=True)
+결과 >>> ['웹프레임워크', '파이썬', 'GUI']
+--- 최상위 카테고리와 2차 카테고리를 리스트로 만들어줌
+Post.objects.filter(category__name__in=under_c).order_by('-create_date')
+--- 포스트 모델에서 카테고리명이 겹치는 포스트를 불러와 최신순으로 정렬하기
+---카테고리 목록이 구해지면 포스트 목록을 구하는 쿼리는 구현완료
+---하위 카테고리 목록을 구현하는 쿼리 제작해야함
+"""
