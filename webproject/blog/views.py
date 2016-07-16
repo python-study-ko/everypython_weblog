@@ -105,7 +105,7 @@ class Index(View):
     def get(self, request, data=None):
         # index 페이지에 넘겨줄 컨텐츠 context
         # 최신글 목록 추출
-        newposts = Post.objects.all().values_list('pk','create_date','title','category').order_by('-create_date')[:5]
+        newposts = Post.objects.all().values_list('pk','create_date','title','category__name').order_by('-create_date')[:5]
 
         # 인기글 목록 추출
         # starposts = HitCount.objects.all().values_list('content_object.pk','hits','content_object.title','content_object.category')[:5]
