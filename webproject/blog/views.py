@@ -69,28 +69,6 @@ def categoryinfo():
         c_info.append(groupinfo)
     return c_info
 
-def c_postlist(c_list):
-    # 카테고리 목록을 받아 해당 카테고리에 속한 모든 포스트 가져와서 정렬시킨다.
-    post_list = []
-    # 모든 포스트를 가져온
-    for c in c_list:
-        post_list += c.post_set.all()
-    # 포스트의 번호를 역순으로 하여 정렬한
-    post_obj_list = sorted(post_list, key=lambda x: x.pk , reverse=True)
-    posts = postcontext(post_obj_list)
-    return posts
-
-
-# -----글목록 정보 추출 함수-----------
-
-def postcontext(post_obj_list):
-    posts = []
-    for post in post_obj_list:
-        info = (post.pk, post.create_date, post.title, post.hit_count.hits)
-        posts.append(info)
-    return posts
-
-
 class Index(View):
     def get(self, request, data=None):
         # index 페이지에 넘겨줄 컨텐츠 context
@@ -158,22 +136,4 @@ def jinjadef(request):
 
 class jinjaclass(DetailView):
     model = Post
-
-
-"""
-포스트 글목록 로직
-현재까지 구현한부분
-from django.db.models import Q
-c = Category.objects.get(id=2) #최상위 카테고리중 하나
->>> Category.objects.filter(Q(id=c.id)|Q(id__in=c.under_category.values_list("id",flat=True)))
-결과 : [<Category: 웹프레임워크>, <Category: 파이썬>, <Category: GUI>]
->>> under_c = Category.objects.filter(Q(id=c.id)|Q(id__in=c.under_category.values_list("id",flat=True))).values_list('id',flat=True)
-결과 : [1, 2, 12]
---- 최상위 카테고리와 2차 카테고리를 리스트로 만들어줌
-Post.objects.filter(category__id__in=under_c).order_by('-create_date')
---- 포스트 모델에서 카테고리명이 겹치는 포스트를 불러와 최신순으로 정렬하기
----카테고리 목록이 구해지면 포스트 목록을 구하는 쿼리는 구현완료
----하위 카테고리 목록을 구현하는 쿼리 제작해야함
-
-"""
 
