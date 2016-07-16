@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.views.generic import ListView, View
 from django.views.generic.base import TemplateView
 from blog.models import Category, Post
+from django.db.models import Q
+
 
 from hitcount.models import HitCount
 from taggit.models import Tag
@@ -106,14 +108,26 @@ class Index(View):
 
 
 def CategoryList(request,pk):
-    category = get_object_or_404(Category,pk=pk)
+    c = get_object_or_404(Category,pk=pk)
+
+    # 쿼리 최적화
+    if c.level == 1:
+        pass
+    elif c.level == 2:
+        under_C = Category.objects.filter(
+            Q(id=c.id) | Q(id__in=c.under_category.filter(level=3).values_list("id", flat=True))).values_list('id', flat=True)
+    elif c.level == 3:
+        under_C = [c.id]
+
+    post_list = Post.objects.filter(category__id__in=under_C).order_by('-id').values_list('pk', 'create_date', 'title', 'posthits__hits')
+    """
     # 모든 하위카테고리를 구한후 해당 카테고리들의 모든 포스트를 추출한다.
-    post_list = c_postlist(under_c(category))
+    post_list = c_postlist(under_c(c))
+    """
     # 포스트 목록
-    context = {"posts": post_list,"name":category.name}
+    context = {"posts": post_list,"name":c.name}
     # 사이드바에 필요한 context를 합쳐줌
     context.update(sidebar_context())
-    # 테스트 코드
     return render(request,'blog/category.jinja',context)
 
 def TagList(request,pk):
@@ -152,13 +166,15 @@ class jinjaclass(DetailView):
 현재까지 구현한부분
 from django.db.models import Q
 c = Category.objects.get(id=2) #최상위 카테고리중 하나
-Category.objects.filter(Q(name=c.name)|Q(name__in=c.under_category.values_list("name",flat=True)))
-결과 >>> [<Category: 웹프레임워크>, <Category: 파이썬>, <Category: GUI>]
-under_c = Category.objects.filter(Q(name=c.name)|Q(name__in=c.under_category.values_list("name",flat=True))).values_list('name',flat=True)
-결과 >>> ['웹프레임워크', '파이썬', 'GUI']
+>>> Category.objects.filter(Q(id=c.id)|Q(id__in=c.under_category.values_list("id",flat=True)))
+결과 : [<Category: 웹프레임워크>, <Category: 파이썬>, <Category: GUI>]
+>>> under_c = Category.objects.filter(Q(id=c.id)|Q(id__in=c.under_category.values_list("id",flat=True))).values_list('id',flat=True)
+결과 : [1, 2, 12]
 --- 최상위 카테고리와 2차 카테고리를 리스트로 만들어줌
-Post.objects.filter(category__name__in=under_c).order_by('-create_date')
+Post.objects.filter(category__id__in=under_c).order_by('-create_date')
 --- 포스트 모델에서 카테고리명이 겹치는 포스트를 불러와 최신순으로 정렬하기
 ---카테고리 목록이 구해지면 포스트 목록을 구하는 쿼리는 구현완료
 ---하위 카테고리 목록을 구현하는 쿼리 제작해야함
+
 """
+
