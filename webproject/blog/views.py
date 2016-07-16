@@ -112,7 +112,10 @@ def CategoryList(request,pk):
 
     # 쿼리 최적화
     if c.level == 1:
-        pass
+        c2 = c.under_category.filter(level=2)
+        c3 = c2.filter(under_category__level=3).values_list('under_category__id',flat=True)
+        under_C = Category.objects.filter(
+            Q(id=c.id) | Q(id__in=c2.values_list("id", flat=True)) | Q(id__in=c3)).values_list('id',flat=True)
     elif c.level == 2:
         under_C = Category.objects.filter(
             Q(id=c.id) | Q(id__in=c.under_category.filter(level=3).values_list("id", flat=True))).values_list('id', flat=True)
@@ -120,10 +123,7 @@ def CategoryList(request,pk):
         under_C = [c.id]
 
     post_list = Post.objects.filter(category__id__in=under_C).order_by('-id').values_list('pk', 'create_date', 'title', 'posthits__hits')
-    """
-    # 모든 하위카테고리를 구한후 해당 카테고리들의 모든 포스트를 추출한다.
-    post_list = c_postlist(under_c(c))
-    """
+
     # 포스트 목록
     context = {"posts": post_list,"name":c.name}
     # 사이드바에 필요한 context를 합쳐줌
