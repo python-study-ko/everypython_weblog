@@ -45,35 +45,12 @@ def tags():
 
 # --------카테고리 함수----------
 
-def under_c(c):
-    # 하위 카테고리 리스트를 만들어 준다
-    if c.under_list():
-        allc = []
-        allc += [c]
-        for c2 in c.under_list():
-            allc += [c2]
-            if c2.under_list():
-                allc += c2.under_list()
-        return allc
-
-    # 하위 카테고리가 없을 경우
-    else:
-        return [c]
-
-def categorytree():
-    # 전체 카테고리 리스트를 만들어 준다
-    c1 = Category.objects.filter(level=1)
-    ctree=[]
-    for c in c1:
-        ctree.append(under_c(c))
-    return ctree
-
 def categoryinfo():
     # 카테고리 세부 정보를 모아준다 - (레벨,번호,이름,하위 포스트 갯수)
     c_info = []
-    for group in categorytree():
-        groupinfo = []
+    for group in Category.tree.root_category():
         for c in group:
+            c_info.append(Category.tree.under_list(c).values_list('level','id','name'))
             info = (c.level,c.id,c.name,len(c.post_set.all()))
             groupinfo.append(info)
         c_info.append(groupinfo)

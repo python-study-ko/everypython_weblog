@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.query import QuerySet
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
@@ -8,7 +9,40 @@ from hitcount.models import HitCountMixin, HitCount
 from django.contrib.contenttypes.fields import GenericRelation
 # Create your models here.
 
+class CategoryMixin(object):
+    """
+    카테고리 정보를 추출해준다
+    """
+    def root_category(self):
+        """
+        최상단 카테고리를 추출한다
+        :return:
+        """
+        return self.filter(level=1)
 
+    def under_list(self,obj):
+        """
+        하위 카테고리 목록을 추출한다
+        :param obj:
+        :return:
+        """
+        if obj.level == 3:
+            return obj
+        elif obj.level == 2:
+            Category.object.get(under_category.filter(level=3))
+            return clist
+        elif obj.level == 1:
+            for c2 in obj.under_category.filter(level=2):
+                clist += Category.tree.under_list(c2)
+            return clist
+
+
+class CategoryQuerySets(QuerySet,CategoryMixin):
+    pass
+
+class CategoryManager(models.Manager,CategoryMixin):
+    def get_query_set(self):
+        return CategoryQuerySets(self.model, using=self._db)
 
 class Category(models.Model):
     """
@@ -20,7 +54,9 @@ class Category(models.Model):
     level = models.IntegerField(choices=[(1,'1차 카테고리'),(2,'2차 카테고리'),(3,'3차 카테고')],default=1)
     name = models.CharField(max_length=20)
     under_category = models.ManyToManyField("self",symmetrical=True,blank=True)
-
+    object = models.Manager()
+    # 카테고리 매니저
+    tree = CategoryManager()
 
     def under_list(self):
         """
