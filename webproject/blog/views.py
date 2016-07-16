@@ -133,8 +133,7 @@ def CategoryList(request,pk):
 def TagList(request,pk):
     tag = Tag.objects.get(id=pk)
     # 태그에 속한 모든 포스트를 찾는다
-    post_obj_list = Post.objects.filter(tag__name__in=[tag])
-    posts = postcontext(post_obj_list)
+    posts = Post.objects.filter(tag__name__in=[tag]).order_by('-id').values_list('pk', 'create_date', 'title', 'posthits__hits')
 
     context = {"posts": posts,"name":tag.name}
     # 사이드바에 필요한 context를 합쳐줌
