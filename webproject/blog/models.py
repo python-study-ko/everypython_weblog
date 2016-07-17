@@ -68,13 +68,11 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    def clean(self):
-        """
-        카테고리 필드값 검증 및 자동 수정
-        """
-        # 부모 카테고리 검증
-        if self.parent.id == self.id:
-            raise ValidationError('자기자신을 상위카테고리로 지정할수 없습니다.',code='invalid')
+    def save(self, *args, **kwargs):
+        #부모 카테고리 검증
+        if self.parent:
+            if self.parent.id == self.id:
+                raise ValidationError('자기자신을 상위카테고리로 지정할수 없습니다.',code='invalid')
         # 카테고리 레벨 자동 지정
         if not self.parent:
             self.level = 1
@@ -82,6 +80,9 @@ class Category(models.Model):
             self.level = 2
         elif self.parent.level == 2:
             self.level = 3
+        super(Category,self).save(*args, **kwargs)
+
+
 
 
 
