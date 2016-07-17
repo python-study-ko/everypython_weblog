@@ -16,8 +16,8 @@
         <span class="glyphicon glyphicon-user"></span>&nbsp;{{ object.author }}&nbsp;&nbsp;&nbsp;
         <span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ object.create_date|date }}&nbsp;&nbsp;&nbsp;
         <span class="glyphicon glyphicon-tag"></span>&nbsp;
-            {% for tag in object.tag.names() %}
-                <a href="{{ url('blog:Tag',kwargs={'pk':tagmodel.objects.get(name=tag).id}) }}"><span class="label label-info label-large" id="tag">{{ tag }}</span></a>
+            {% for id,name in posttag %}
+                <a href="{{ url('blog:Tag',kwargs={'pk':id}) }}"><span class="label label-info label-large" id="tag">{{ name }}</span></a>
             {%- endfor %}&nbsp;&nbsp;&nbsp;
         조회수: {{ object.hit_count.hits }}
     </p>
