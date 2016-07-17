@@ -4,7 +4,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
 from hitcount.models import HitCountMixin, HitCount
 from django.db.models.query import QuerySet
-from django.db.models import Q
+from django.db.models import Q, Count
 # 오류 발생용
 from django.core.exceptions import ValidationError
 
@@ -24,22 +24,30 @@ class CategoryMixin(object):
         """
         return self.filter(level=1)
 
-    def under_list(self, obj):
+    def under_list(self, c):
         """
-        하위 카테고리 목록을 추출한다
+        하위 카테고리 목록 쿼리셋을 반환한
         :param obj:
         :return:
         """
-        clist =[]
-        if obj.level == 3:
-            return obj
-        elif obj.level == 2:
-            clist += Category.object.get(under_category.filter(level=3))
-            return clist
-        elif obj.level == 1:
-            for c2 in obj.under_category.filter(level=2):
-                clist += Category.tree.under_list(c2)
-            return clist
+        order = "ordercategory__order_num"
+        if c.level == 1:
+            c2 = Category.object.filter(parent=c)
+            c3 = Category.object.filter(parent=c2)
+            under_C = Category.object.filter(
+                Q(id=c.id) | Q(id__in=c2.values_list("id", flat=True)) | Q(id__in=c3.values_list("id", flat=True))).order_by(order)
+        elif c.level == 2:
+            c3 = Category.object.filter(parent=c)
+            under_C = Category.object.filter(Q(id=c.id) | Q(id__in=c3.values_list("id", flat=True))).order_by(order)
+        elif c.level == 3:
+            under_C = Category.object.get(id=c.id)
+        return under_C
+
+    def navi_bar(self):
+        category_tree = []
+        for c1 in Category.tree.root_category():
+            under_tree = Category.tree.under_list(c1).annotate(Count('post')).values_list('id','level','name','post__count')
+            category_tree.append(under_tree)
 
 
 class CategoryQuerySets(QuerySet, CategoryMixin):
@@ -69,11 +77,16 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        #부모 카테고리 검증
+    def clean(self):
+        # 부모 카테고리 검증
         if self.parent:
             if self.parent_id == self.id:
-                raise ValidationError('자기자신을 상위카테고리로 지정할수 없습니다.',code='invalid')
+                raise ValidationError('자기자신을 상위카테고리로 지정할수 없습니다.', code='invalid')
+
+    def save(self, *args, **kwargs):
+        if self.parent:
+            if self.parent_id == self.id:
+                raise ValidationError('자기자신을 상위카테고리로 지정할수 없습니다.', code='invalid')
         # 카테고리 레벨 자동 지정
         if not self.parent:
             self.level = 1
