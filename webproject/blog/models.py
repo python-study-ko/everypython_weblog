@@ -52,7 +52,8 @@ class CategoryManager(models.Manager, CategoryMixin):
 
 class Category(models.Model):
     """
-    포스트 카테고리
+    포스트 카테고리 - 추가,업데이트,삭제 할때마다 카테고리 순서 모델을 갱신시킨다.
+    정규화된 카테고리 이동은 아직 지원 안함, 카테고리 이동시 주의 필
     level = 카테고리 단계로 총 3단계까지 있음
     name = 카테고리 명
     under_category = 관계된 카테고리
@@ -71,7 +72,7 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         #부모 카테고리 검증
         if self.parent:
-            if self.parent.id == self.id:
+            if self.parent_id == self.id:
                 raise ValidationError('자기자신을 상위카테고리로 지정할수 없습니다.',code='invalid')
         # 카테고리 레벨 자동 지정
         if not self.parent:
@@ -81,9 +82,60 @@ class Category(models.Model):
         elif self.parent.level == 2:
             self.level = 3
         super(Category,self).save(*args, **kwargs)
+        # 카테고리 순서 모델을 갱신
+        OrderCategory.order.reset_order()
+
+    def delete(self, *args, **kwargs):
+        super(Category,self).delete(*args, **kwargs)
+        # 카테고리 순서 모델을 갱신
+        OrderCategory.order.reset_order()
 
 
 
+class OrderMixin(object):
+    """
+    카테고리 순서 번호를 갱신한다.
+    """
+    def reset_order(self):
+        OrderCategory.object.all().delete()
+        loop_c1 = 0
+        for c1 in Category.tree.root_category():
+            loop_c1 += 1
+            c1obj = OrderCategory(c_pk_id=c1.id,order_num=10000*loop_c1)
+            c1obj.save()
+            c2s = Category.object.filter(parent_id=c1.id)
+            if c2s.exists():
+                loop_c2 = 0
+                for c2 in c2s:
+                    loop_c2 += 1
+                    c2obj = OrderCategory(c_pk_id=c2.id,order_num=c1obj.order_num+100*loop_c2)
+                    c2obj.save()
+                    c3s = Category.object.filter(parent_id=c2.id)
+                    if c3s.exists():
+                        loop_c3 = 0
+                        for c3 in c3s:
+                            loop_c3 += 1
+                            c3obj = OrderCategory(c_pk_id=c3.id,order_num=c2obj.order_num+1*loop_c3)
+                            c3obj.save()
+                    else:
+                        continue
+            else:
+                continue
+
+
+class OrderQuerySets(QuerySet, OrderMixin):
+    pass
+
+class OrderManager(models.Manager, OrderMixin):
+    def get_query_set(self):
+        return OrderQuerySets(self.model, using=self._db)
+
+class OrderCategory(models.Model):
+    """카테고리 순서 갱신용 모델"""
+    c_pk = models.OneToOneField('Category',unique=True)
+    order_num = models.IntegerField()
+    object = models.Manager()
+    order = OrderManager()
 
 
 class Post(models.Model,HitCountMixin):
