@@ -33,7 +33,7 @@ class CategoryMixin(object):
         order = "ordercategory__order_num"
         if c.level == 1:
             c2 = Category.object.filter(parent=c)
-            c3 = Category.object.filter(parent=c2)
+            c3 = Category.object.filter(parent__in=c2)
             under_C = Category.object.filter(
                 Q(id=c.id) | Q(id__in=c2.values_list("id", flat=True)) | Q(id__in=c3.values_list("id", flat=True))).order_by(order)
         elif c.level == 2:
@@ -46,8 +46,9 @@ class CategoryMixin(object):
     def navi_bar(self):
         category_tree = []
         for c1 in Category.tree.root_category():
-            under_tree = Category.tree.under_list(c1).annotate(Count('post')).values_list('id','level','name','post__count')
+            under_tree = Category.tree.under_list(c1).annotate(Count('post')).values_list('level','id','name','post__count')
             category_tree.append(under_tree)
+        return category_tree
 
 
 class CategoryQuerySets(QuerySet, CategoryMixin):
