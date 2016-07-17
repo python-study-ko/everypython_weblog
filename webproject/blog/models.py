@@ -50,6 +50,9 @@ class CategoryMixin(object):
             category_tree.append(under_tree)
         return category_tree
 
+    def categorys_post(self,c):
+        posts = Category.tree.under_list(c)
+        return posts
 
 class CategoryQuerySets(QuerySet, CategoryMixin):
     pass
