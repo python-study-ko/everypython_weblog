@@ -13,9 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
 from django.conf.urls import url,include,patterns
 from django.conf import settings
 from django.contrib import admin
+from jet.dashboard.dashboard_modules import google_analytics_views
 
 urlpatterns = patterns('',
     url(r'^jet/', include('jet.urls', 'jet')),
