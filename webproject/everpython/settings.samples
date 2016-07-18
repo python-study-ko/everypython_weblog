@@ -32,7 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jet', # for django admin
+    # django jet admin
+    'jet.dashboard',
+    'jet',
+    # django base admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -161,6 +164,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# django jet 설정
+JET_SIDE_MENU_COMPACT = True
+# jet 대쉬보드 지정
+JET_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
+JET_APP_INDEX_DASHBOARD = 'jet.dashboard.DefaultAppIndexDashboard'
+
+# 디버깅 툴바 설정
+INTERNAL_IPS = ['0.0.0.0','127.0.0.1','::1']
+
 # s3 설정
 AWS_S3_HOST = 's3-ap-northeast-2.amazonaws.com' # 서울 리전
 AWS_QUERYSTRING_AUTH = False
@@ -168,6 +181,3 @@ AWS_ACCESS_KEY_ID = 'xxxxxxxxxxxxxxxxxx'
 AWS_SECRET_ACCESS_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 AWS_STORAGE_BUCKET_NAME = 'xxxxxxxxxxxxxxxxxxxxx'
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
-
-# 디버깅 툴바 설정
-INTERNAL_IPS = ['0.0.0.0','127.0.0.1','::1']
