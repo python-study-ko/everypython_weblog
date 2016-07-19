@@ -175,7 +175,7 @@ JET_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 #JET_APP_INDEX_DASHBOARD = 'jet.dashboard.DefaultAppIndexDashboard'
 
 # 디버깅 툴바 설정
-INTERNAL_IPS = ['0.0.0.0','127.0.0.1','::1']
+INTERNAL_IPS = ['127.0.0.1','::1']
 
 # s3 설정
 AWS_S3_HOST = 's3-ap-northeast-2.amazonaws.com' # 서울 리전

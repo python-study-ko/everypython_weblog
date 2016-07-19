@@ -154,6 +154,9 @@ class OrderCategory(models.Model):
     object = models.Manager()
     order = OrderManager()
 
+    def __str__(self):
+        return self.c_pk.name
+
 
 class Post(models.Model,HitCountMixin):
     """
