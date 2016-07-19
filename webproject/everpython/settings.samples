@@ -26,7 +26,7 @@ SECRET_KEY = '!sgwlruvv^@_j6n*n(4&z5q1zj%d8!ogjpxe4^k1e8vem4ujz('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -154,6 +154,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# whitenoise 설정
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 ## 템플릿 파일 설정
 TEMPLATES_DIRS=[os.path.join(BASE_DIR,'templates')]
