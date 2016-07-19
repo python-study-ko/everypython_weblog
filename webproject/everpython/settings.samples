@@ -171,7 +171,7 @@ JET_SIDE_MENU_COMPACT = True
 JET_MODULE_GOOGLE_ANALYTICS_CLIENT_SECRETS_FILE = os.path.join(BASE_DIR, 'client_secrets.json')
 
 # jet 대쉬보드 지정
-#JET_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
+JET_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 #JET_APP_INDEX_DASHBOARD = 'jet.dashboard.DefaultAppIndexDashboard'
 
 # 디버깅 툴바 설정
