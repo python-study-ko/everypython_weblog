@@ -19,7 +19,8 @@
 #### 1. ckeditor에서 파일 업로드를 위한 s3 연동
 settings.py에 아래 항목을 채워넣으시면 됩니다
 
-`# s3 설정
+`
+# s3 설정
 AWS_S3_HOST = 's3-ap-northeast-2.amazonaws.com' # 서울 리전(자신이 만든 버킷의 지역을 입력하세요)
 AWS_QUERYSTRING_AUTH = False    # 수정하면 업로드 안됩니다.
 AWS_ACCESS_KEY_ID = 'xxxxxxxxxxxxxxxxxx'    # 필수
