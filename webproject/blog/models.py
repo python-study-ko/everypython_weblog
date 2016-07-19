@@ -176,8 +176,15 @@ class Post(models.Model,HitCountMixin):
     def __str__(self):
         return self.title
 
+"""
+class setting_info(models.Model):
 
+    name = models.CharField(max_length=60)
+    check = models.NullBooleanField()
+    info =  models.CharField(max_length=60)
 
-
+    def __str__(self):
+        return self.name
+"""
 
 
