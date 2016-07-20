@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 echo "-------파이썬 가상환경 생성기-------"
-if [ ! -d .venv ]
+if [ -d .venv ]
 then
     echo " 이전의 가상환경을 삭제하겠습니다."
     rm -rf .venv
 fi
 
-echo "-------파이썬 가상환경 생성기-------"
+echo "------가상환경을 만들고 있습니다-------"
 virtualenv -p python3.5 .venv
 
 . .venv/bin/activate
