@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 # -*- coding: utf-8 -*-
-=======
-# -*- coding: utf-8 -*- 
->>>>>>> dev
+
 """
 Django settings for everpython project.
 
