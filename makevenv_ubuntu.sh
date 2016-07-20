@@ -3,7 +3,7 @@
 sudo apt-get install libmysqlclient-dev
 
 echo "-------파이썬 가상환경 생성기-------"
-if [ ! -d .venv ]
+if [ -d .venv ]
 then
     echo " 이전의 가상환경을 삭제하겠습니다."
     sudo rm -rf .venv
