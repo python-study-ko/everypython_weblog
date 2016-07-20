@@ -1,0 +1,35 @@
+# everypython weblog 셋팅파일 입니다.
+# 필요한 설정만 변경하시면 됩니다
+[deploy]
+# 시크릿키는 http://www.miniwebtool.com/django-secret-key-generator/ 여기서 발급받아 채우셔도 됩니다.
+SECRET_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+DEBUG: True
+ALLOWED_HOSTS: *
+
+[language]
+LANGUAGE_CODE: ko
+TIME_ZONE: Asia/Seoul
+
+
+[db]
+# DB 엔진 종류
+ENGINE: django.db.backends.mysql
+NAME: <테이블 이름>
+USER: <계정>
+PASSWORD: <비밀번호>
+HOST: <서버 주소>
+POST: <포트:3306>
+
+[jet] # jet 관리자 설정
+# 사이드 메뉴 고정(True), 애니메이션(False)
+SIDE_MENU: True
+
+[s3]
+# s3리전 - 서울은 s3-ap-northeast-2.amazonaws.com
+S3_HOST: s3-ap-northeast-2.amazonaws.com
+# s3 접근 키 정보
+ACCESS_KEY_ID: xxxxxxxxxxxxxxxxxx
+SECRET_ACCESS_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# s3 버킷이름
+BUCKET: xxxxxxxxxxxxxxxxxxxxx
+
