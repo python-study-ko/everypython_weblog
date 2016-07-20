@@ -26,7 +26,7 @@ SECRET_KEY = '!sgwlruvv^@_j6n*n(4&z5q1zj%d8!ogjpxe4^k1e8vem4ujz('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -164,6 +164,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# whitenoise 설정
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # django jet 설정
 JET_SIDE_MENU_COMPACT = True
