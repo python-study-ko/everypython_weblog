@@ -16,6 +16,7 @@ echo "-------필수 모듈을 설치합니다-------"
 pip install -r requirments.txt
 
 deactivate
+
 echo "모든 작업이 완료 되었습니다. 모든 작업은 가상환경에서 실행하세"
 echo "source .venv/bin/activate 로 가상환경을 실행하고"
 echo "deactivate로 가상환경을 종료하면 됩니다"
