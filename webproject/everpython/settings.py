@@ -12,9 +12,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
+import imp
 import os
 import sys
-reload(sys)
+
+imp.reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
