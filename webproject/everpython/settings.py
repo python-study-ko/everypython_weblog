@@ -13,10 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-import sys
-import codecs
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-sys.stderr = codecs.getwriter('utf8')(sys.stderr)
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
