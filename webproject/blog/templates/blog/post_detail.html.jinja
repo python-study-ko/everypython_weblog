@@ -4,7 +4,7 @@
 
 {%- block head %}
     {# facebook 공유를 위한 메타태그 #}
-    <meta property="og:url"                content="{{request.get_full_path()|urlencode}}" />
+    <meta property="og:url"                content="{{request.get_full_path()}}" />
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="{{ object.title }}" />
     <meta property="og:description"        content="{{ object.description }}" />
