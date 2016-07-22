@@ -76,7 +76,7 @@ MIDDLEWARE_CLASSES = [
     # 기존코드
     'django.middleware.security.SecurityMiddleware',
     # whitnoise
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
     # 기존 코드
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
