@@ -82,7 +82,7 @@ class PostDetail(DetailView):
         context = super(PostDetail, self).get_context_data(**kwargs)
         # 포스트 태그 리스트를 생성
         tags = Post.objects.get(pk=self.kwargs.get('pk')).tag.get_queryset().values_list('id','name')
-        context['posttag']= tags
+        context['posttag'] = tags
         # 사이드바에 필요한 context를 합쳐줌
         context.update(sidebar_context())
         return context

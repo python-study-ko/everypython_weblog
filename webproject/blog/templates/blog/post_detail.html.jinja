@@ -1,5 +1,17 @@
 {% extends 'base_blog.jinja' %}
 {% from "blog/macro/postdetail.jinja" import post_panel %}
+
+
+{%- block head %}
+    {# facebook 공유를 위한 메타태그 #}
+    <meta property="og:url"                content="{{request.get_full_path|urlencode}}" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="{{ object.title }}" />
+    <meta property="og:description"        content="{{ object.description }}" />
+    <meta property="og:image"              content="https://www.python.org/static/img/python-logo.png" />
+    <meta property="og:locale"             content="ko_KR" />
+
+{%- endblock head %}
 {# head title tag #}
 {%- block title %}EVERYPYTHON{% endblock title %}
 

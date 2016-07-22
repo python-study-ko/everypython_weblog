@@ -163,13 +163,14 @@ class Post(models.Model,HitCountMixin):
     블로그 포스트 모델
     """
     category = models.ForeignKey('Category',blank=True,null=True)
-    title = models.CharField(max_length=40)
+    title = models.CharField(max_length=60)
     author = models.ForeignKey(User)
+    description = models.CharField(max_length=160,blank=True,null=True,help_text="포스트를 sns에 공유하거나 검색에서 노출될 포스트에 대한 요약입니다.")
     content = RichTextUploadingField()
     tag = TaggableManager()
     create_date = models.DateTimeField(auto_now_add=True)
     edit_date = models.DateTimeField(auto_now=True)
-    publish = models.BooleanField(default=False)
+    publish = models.BooleanField(default=False,help_text="포스트 발행시 외부에 포스트가 공개됩니다. 만약 발행하지 않는다면 작성자만 해당 포스트를 볼 수 있습니다.")
     # hitcount 모듈과 연동
     posthits = GenericRelation(HitCount, related_query_name='post',object_id_field='object_pk')
 
