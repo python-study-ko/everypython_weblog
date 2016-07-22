@@ -26,3 +26,6 @@ if switch_whitnoise == 'True':
     application = DjangoWhiteNoise(get_wsgi_application())
 elif switch_whitnoise == 'False':
     application = get_wsgi_application()
+
+# 테스트 코드 - DjangoWhiteNoise없이도 미들웨어 클래스 만으로 작동하는지 확인
+application = get_wsgi_application()

@@ -69,10 +69,6 @@ INSTALLED_APPS = [
     # 디버깅 툴바
     'debug_toolbar',
 ]
-if config.get('deploy','WHITENOISE')=='True':
-    whitenoise_middle = 'whitenoise.middleware.WhiteNoiseMiddleware'
-elif config.get('deploy','WHITENOISE')=='False':
-    whitenoise_middle = None
 
 MIDDLEWARE_CLASSES = [
     # 디버깅 툴바 추가
@@ -80,7 +76,7 @@ MIDDLEWARE_CLASSES = [
     # 기존코드
     'django.middleware.security.SecurityMiddleware',
     # whitnoise
-    whitenoise_middle,
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     # 기존 코드
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -91,7 +87,12 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
-
+'''
+if config.get('deploy','WHITENOISE')=='True':
+    MIDDLEWARE_CLASSES 'whitenoise.middleware.WhiteNoiseMiddleware',
+elif config.get('deploy','WHITENOISE')=='False':
+    pass
+'''
 ROOT_URLCONF = 'everpython.urls'
 # 진자 기본 템플릿설정으로 변경
 TEMPLATES = [
