@@ -7,7 +7,7 @@
     <meta property="og:site_name"          content="everypython" />
     <meta property="og:url"                content="{{request.build_absolute_uri()}}" />
     <meta property="og:type"               content="article" />
-    <meta property="og:title"              content="{{ object.title }}" />
+    <meta property="og:title"              content="{{ object.title     }}" />
     <meta property="og:description"        content="{{ object.description }}" />
     <meta property="og:image"              content="https://s3.ap-northeast-2.amazonaws.com/djangotestupload/%ED%8E%98%EC%9D%B4%EC%8A%A4%EB%B6%81+%EA%B3%B5%EC%9C%A0%EC%9D%B4%EB%AF%B8%EC%A7%80.png" />
     <meta property="og:image:type"       content="image/png">
@@ -32,10 +32,13 @@
         <span class="glyphicon glyphicon-user"></span>&nbsp;{{ object.author }}&nbsp;&nbsp;&nbsp;
         <span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ object.create_date|date }}&nbsp;&nbsp;&nbsp;
         <span class="glyphicon glyphicon-tag"></span>&nbsp;
-            {% for id,name in posttag %}
-                <a href="{{ url('blog:Tag',kwargs={'pk':id}) }}"><span class="label label-info label-large" id="tag">{{ name }}</span></a>
-            {%- endfor %}&nbsp;&nbsp;&nbsp;
+        {% for id,name in posttag %}
+            <a href="{{ url('blog:Tag',kwargs={'pk':id}) }}"><span class="label label-info label-large" id="tag">{{ name }}</span></a>
+        {%- endfor %}&nbsp;&nbsp;&nbsp;
         조회수: {{ object.hit_count.hits }}
+    </p>
+    <p>
+        <div class="fb-share-button" data-href="{{request.build_absolute_uri()}}" data-layout="button_count" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
     </p>
     </div>
     <p>

@@ -77,6 +77,16 @@
 {# ---body 시작------------------ #}
 {# 이 템플릿은 전체 레이아웃과 공통 컴포넌트 요소만 정의 #}
 {%- block body -%}
+    <!-- Load Facebook SDK for JavaScript -->
+	<div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.7";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
     {# 최상단 플로팅바 #}
     <header>
     {%- block header -%}
