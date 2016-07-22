@@ -87,12 +87,15 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
-'''
+
+# switch whitenoise : CDN사용 여부에 따라 설정파일에서 whitenoise를 켜고 끌수있게 만들어준다.
 if config.get('deploy','WHITENOISE')=='True':
-    MIDDLEWARE_CLASSES 'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'django.middleware.security.SecurityMiddleware'아래에 whitenoise 미들웨어 클래스가 위치해야 한다
+    posithon = MIDDLEWARE_CLASSES.index('django.middleware.security.SecurityMiddleware')+1
+    MIDDLEWARE_CLASSES.insert(posithon,'whitenoise.middleware.WhiteNoiseMiddleware')
 elif config.get('deploy','WHITENOISE')=='False':
     pass
-'''
+
 ROOT_URLCONF = 'everpython.urls'
 # 진자 기본 템플릿설정으로 변경
 TEMPLATES = [
