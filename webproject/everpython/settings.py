@@ -69,6 +69,10 @@ INSTALLED_APPS = [
     # 디버깅 툴바
     'debug_toolbar',
 ]
+if config.get('deploy','WHITENOISE')=='True':
+    whitenoise_middle = 'whitenoise.middleware.WhiteNoiseMiddleware'
+elif config.get('deploy','WHITENOISE')=='False':
+    whitenoise_middle = None
 
 MIDDLEWARE_CLASSES = [
     # 디버깅 툴바 추가
@@ -76,7 +80,7 @@ MIDDLEWARE_CLASSES = [
     # 기존코드
     'django.middleware.security.SecurityMiddleware',
     # whitnoise
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    whitenoise_middle,
     # 기존 코드
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
