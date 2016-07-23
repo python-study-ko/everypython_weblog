@@ -35,3 +35,7 @@ SECRET_ACCESS_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 # s3 버킷이름
 BUCKET: xxxxxxxxxxxxxxxxxxxxx
 
+[disqus]
+# api-key는 http://disqus.com/api/applications/ 여기에서 생성하시면 됩니다.
+API_KEY: xxxxxxxxxxx
+SHORTNAME: xxxxxxxxx

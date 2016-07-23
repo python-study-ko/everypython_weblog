@@ -22,6 +22,7 @@
 {# style tag #}
 {%- block pagestyle %}
 
+
 {%- endblock pagestyle %}
 
 {%- block section %}
@@ -47,6 +48,8 @@
         {%- endautoescape %}
     </p>
     {%- endcall -%}
+    {% load disqus_tags %}
+    {% disqus_show_comments %}
     </article>
 {%- endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}

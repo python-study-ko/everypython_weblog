@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # django base admin
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -68,6 +69,8 @@ INSTALLED_APPS = [
     'hitcount',
     # 디버깅 툴바
     'debug_toolbar',
+    # 댓글 서비스
+    'disqus',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -210,3 +213,7 @@ AWS_ACCESS_KEY_ID = config.get('s3','ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config.get('s3','SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config.get('s3','BUCKET')
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+
+# Disqus 설정
+DISQUS_API_KEY = config.get('disqus','API_KEY')
+DISQUS_WEBSITE_SHORTNAME = config.get('disqus','SHORTNAME')
