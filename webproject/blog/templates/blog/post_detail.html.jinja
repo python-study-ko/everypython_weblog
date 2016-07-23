@@ -48,8 +48,9 @@
         {%- endautoescape %}
     </p>
     {%- endcall -%}
-    {% load disqus_tags %}
-    {% disqus_show_comments %}
+    {#{{ load(parser='disqus_tags',token={'contents':'disqus_tags disqus_show_comments'}) }}#}
+    {{ disqus_tags.disqus_show_comments(context) }}
+
     </article>
 {%- endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}
