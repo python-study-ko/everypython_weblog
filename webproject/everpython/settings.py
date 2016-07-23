@@ -210,3 +210,6 @@ AWS_ACCESS_KEY_ID = config.get('s3','ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config.get('s3','SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config.get('s3','BUCKET')
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+
+# 디스커스 설정
+SHORTNAME = config.get('disqus','SHORTNAME')

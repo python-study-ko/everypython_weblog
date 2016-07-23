@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.views.generic import ListView, View
 from django.views.generic.base import TemplateView
 from blog.models import Category, Post
+from django.conf import settings
+
 from django.db.models import Q
 
 
@@ -83,6 +85,7 @@ class PostDetail(DetailView):
         # 포스트 태그 리스트를 생성
         tags = Post.objects.get(pk=self.kwargs.get('pk')).tag.get_queryset().values_list('id','name')
         context['posttag'] = tags
+        context['shortname'] = getattr(settings,'SHORTNAME')
         # 사이드바에 필요한 context를 합쳐줌
         context.update(sidebar_context())
         return context

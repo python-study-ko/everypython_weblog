@@ -35,3 +35,6 @@ SECRET_ACCESS_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 # s3 버킷이름
 BUCKET: xxxxxxxxxxxxxxxxxxxxx
 
+[disqus]
+# disqus 가입시 할당받는 shortname을 입력하세요.
+SHORTNAME: xxxxxx

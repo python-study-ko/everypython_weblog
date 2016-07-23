@@ -56,7 +56,7 @@
     };
     (function() { // DON'T EDIT BELOW THIS LINE
         var d = document, s = d.createElement('script');
-        s.src = '//everypythonweblog.disqus.com/embed.js';
+        s.src = '//{{ shortname }}.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
@@ -65,6 +65,6 @@
 {%- endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}
 {%- block bodyscript -%}
-<script id="dsq-count-scr" src="//everypythonweblog.disqus.com/count.js" async></script>
+<script id="dsq-count-scr" src="//{{ shortname }}.disqus.com/count.js" async></script>
     {{ super() }}
 {% endblock %}
