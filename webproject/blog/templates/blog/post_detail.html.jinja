@@ -41,13 +41,30 @@
         <div class="fb-share-button" data-href="{{request.build_absolute_uri()}}" data-layout="button_count" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
     </p>
     </div>
-    <p>
+        <p>
         {%- autoescape off -%}
         {{ object.content }}
         {%- endautoescape %}
     </p>
-    {%- endcall -%}
+        <div id="disqus_thread"></div>
+        {%- endcall -%}
     </article>
+    <script>
+    var disqus_config = function () {
+        this.page.url = '{{request.build_absolute_uri()}}';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '{{ object.id }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//everypythonweblog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 {%- endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}
-{%- block bodyscript -%}{% endblock %}
+{%- block bodyscript -%}
+<script id="dsq-count-scr" src="//everypythonweblog.disqus.com/count.js" async></script>
+    {{ super() }}
+{% endblock %}
