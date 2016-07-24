@@ -266,7 +266,7 @@ CKEDITOR_CONFIGS = {
             {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
             '/',
             {'name': 'basicstyles',
-             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+             'items': ['CodeSnippet','Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
             {'name': 'paragraph',
              'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
                        'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
@@ -277,10 +277,11 @@ CKEDITOR_CONFIGS = {
             '/',
             {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
-            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            {'name': 'tools', 'items': ['CodeSnipet','Maximize', 'ShowBlocks','Placeholder']},
             '/',  # put this to force next toolbar on new line
         ],
         'toolbar': 'Posting',
+        'codeSnippet_theme': 'monokai_sublime',
         # 'height': 291,
         # 'width': '100%',
         # 'filebrowserWindowHeight': 725,
@@ -288,6 +289,23 @@ CKEDITOR_CONFIGS = {
         'toolbarCanCollapse': True,
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
+        'extraPlugins': ','.join(
+                        [
+                            # your extra plugins here
+                            'div',
+                            'autolink',
+                            'autoembed',
+                            'embedsemantic',
+                            'autogrow',
+                            # 'devtools',
+                            'widget',
+                            'lineutils',
+                            'clipboard',
+                            'dialog',
+                            'dialogui',
+                            'elementspath',
+                            'codesnippet'
+                        ]),
     }
 }
 #'''
