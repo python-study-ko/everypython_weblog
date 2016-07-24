@@ -211,5 +211,83 @@ AWS_SECRET_ACCESS_KEY = config.get('s3','SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config.get('s3','BUCKET')
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
 
-# 디스커스 설정
+# 디스커스 설
 SHORTNAME = config.get('disqus','SHORTNAME')
+
+# CKEditor 설정
+CKEDITOR_BROWSE_SHOW_DIRS = True
+CKEDITOR_RESTRICT_BY_USER = True # 사용자 별로 본인이 업로드한 이미지만 보이도록함
+'''
+CKEDITOR_CONFIGS = {
+    'skin': 'flat',
+    'toolbar_Basic': [
+        ['Source', '-', 'Bold', 'Italic']
+    ],
+    'toolbar_Full': [
+        ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
+        ['Link', 'Unlink', 'Anchor'],
+        ['Image', 'Flash', 'Table', 'HorizontalRule'],
+        ['TextColor', 'BGColor'],
+        ['Smiley', 'SpecialChar'], ['Source'],
+    ],
+    'toolbar': 'Full',
+    'extraPlugins': ','.join(
+                [
+                    # your extra plugins here
+                    'div',
+                    'autolink',
+                    'autoembed',
+                    'embedsemantic',
+                    'autogrow',
+                    # 'devtools',
+                    'widget',
+                    'lineutils',
+                    'clipboard',
+                    'dialog',
+                    'dialogui',
+                    'elementspath',
+                    'markdown'
+                ]),
+    'height': 291,
+    'width': 835,
+    'filebrowserWindowWidth': 940,
+    'filebrowserWindowHeight': 725,
+
+}
+'''
+#''' 이전 ckeditor 설정
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'flat',
+        # 'skin': 'moono,flat',
+        'toolbar_Posting': [
+            {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
+            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            '/',
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                       'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert',
+             'items': ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar']},
+            '/',
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            '/',  # put this to force next toolbar on new line
+        ],
+        'toolbar': 'Posting',
+        # 'height': 291,
+        # 'width': '100%',
+        # 'filebrowserWindowHeight': 725,
+        # 'filebrowserWindowWidth': 940,
+        'toolbarCanCollapse': True,
+        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'tabSpaces': 4,
+    }
+}
+#'''
