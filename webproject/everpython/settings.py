@@ -67,6 +67,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     # django macro
     'macros',
+    # werkzeug 디버거를 위한 추가
+    'django_extensions',
 ]
 
 MIDDLEWARE_CLASSES = [
