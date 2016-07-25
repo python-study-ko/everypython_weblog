@@ -1,19 +1,12 @@
-from django.shortcuts import render, render_to_response,get_object_or_404
-from django.template import RequestContext
-from django.template.context_processors import request
+from django.shortcuts import render,get_object_or_404
 from django.template.loader import render_to_string
 from django.http import HttpResponse
-from django.views.generic import ListView, View
-from django.views.generic.base import TemplateView
+from django.views.generic import View
 from blog.models import Category, Post
 from django.conf import settings
 
-from django.db.models import Q
-
-
 from hitcount.models import HitCount
 from taggit.models import Tag
-from django_jinja.views.generic.base import Jinja2TemplateResponseMixin
 from hitcount.views import HitCountDetailView
 
 def sidebar_context():
