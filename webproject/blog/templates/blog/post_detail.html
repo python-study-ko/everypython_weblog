@@ -9,6 +9,8 @@
     {% use_macro ogpost url title description %}
     {% endwith %}
     <link href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.010/css/hack.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumgothiccoding/nanumgothiccoding.css">
 {% endblock head %}
 {# head title tag #}
 {% block title %}EVERYPYTHON{% endblock title %}
@@ -16,6 +18,7 @@
 {# style tag #}
 {% block pagestyle %}
     pre {background-color: #3c3c3c;}
+    code { font-family: Hack, NanumGothicCoding, '나눔고딕코딩', monospace; line-height: 1.4em;}
 {% endblock pagestyle %}
 
 {% block headscript  %}
