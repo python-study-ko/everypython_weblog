@@ -1,13 +1,11 @@
-{% extends 'base_blog.jinja' %}
-{% from "blog/macro/IndexCompo.jinja" import index_panel %}
-{% from "blog/macro/PostTable.jinja" import post_list,table_head %}
+{% extends 'base_blog.html' %}
 
 
 {# head title tag #}
-{%- block title %}EVERYPYTHON{% endblock title %}
+{% block title %}EVERYPYTHON{% endblock title %}
 
 {# style tag #}
-{%- block pagestyle %}
+{% block pagestyle %}
 #th1 {
     margin: fix;
     width: 50px;
@@ -28,22 +26,36 @@
     width: 50px;
     text-align: center;
 }
-{%- endblock pagestyle %}
+{% endblock pagestyle %}
 
-{%- block section %}
-{% if posts %}
-{%- call index_panel("glyphicon-folder-open", name,"해당 태그에 속한 글 목록입니다.", grid_class="col-xs-12 col-md-12") %}
-    {%- call table_head("글번호","작성일","제목","조회수",th1="th1",th2="th2",th3="th3",th4="th4") %}
-        {%- for p_pk,cre_date,title,hits in posts  -%}
-            {% set link=url('blog:PostDetail',kwargs={'pk':p_pk}) %}
-            {{ post_list(p_pk,cre_date|date("Y-m-d"),title,hits,clas3="text-left",col3_link=link) }}
-        {%- endfor %}
-    {%- endcall -%}
-{%- endcall -%}
-{% else %}
-    {%- call index_panel("glyphicon-folder-open", name,"아직 글이 없습니다.", grid_class="col-xs-12 col-md-12") %}
-    {%- endcall -%}
-{% endif %}
-{%- endblock section %}
+{% block section %}
+    <div class="col-xs-12 col-md-12">
+        <div class="panel panel-primary" id="p_shadow">
+            <div class="panel-heading"><h3 class="panel-title headtext"><span class="glyphicon glyphicon-folder-open"></span> &nbsp; {{ name }}</h3></div>
+            <div class="panel-body">{{ name }} 태그에 속한 글 목록입니다.</div>
+            <!-- 글목록 -->
+            <table class="table table-striped table-postlist">
+                <thead>
+                    <th id="th1">글번호</th>
+                    <th id="th2">작성일</th>
+                    <th id="th3">제목</th>
+                    <th id="th4">조회수</th>
+                </thead>
+                <tbody>
+                    {% for p_pk,cre_date,title,hits  in posts %}
+                        <tr>
+                            <td class="text-center">{{ p_pk }}</td>
+                            <td class="text-center">{{ cre_date|date }}</td>
+                            <td class="text-left"><a href="{% url 'blog:PostDetail' p_pk %}">{{ title }}</a></td>
+                            <td class="text-center">{{ hits }}</td>
+                        </tr>
+                    {% empty %}
+                        <p>{{ name }} 카테고리에는 아직 글이 없습니다</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}
-{%- block bodyscript -%}{% endblock %}
+{% block bodyscript %}{% endblock %}

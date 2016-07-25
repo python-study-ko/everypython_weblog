@@ -75,7 +75,7 @@ def TagList(request,pk):
     context = {"posts": posts,"name":tag.name}
     # 사이드바에 필요한 context를 합쳐줌
     context.update(sidebar_context())
-    return render(request,'blog/tag.jinja',context)
+    return render(request,'blog/tag.html',context)
 
 class PostDetail(DetailView):
     model = Post
