@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% comment %}
+    everypython 사이트의 메인 템플릿
+    기본적인 부트스트랩과 js를 임포트 했으며 추후 추가할땐 style,headscript,bodyscript에 추가하면 됨
+{% endcomment %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="신재현">
+
+    {# 합쳐지고 최소화된 최신 부트스트랩 CSS  #}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    {# 부가적인 부트스트랩 테마  #}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    {% block head %}{% endblock head %}
+    <title>
+        {# 홈페이지 제목 확장 #}
+        {% block title %}EVERYPYTHON{% endblock title %}
+    </title>
+    <style>
+        {% comment %} 웹폰트는 당분간 제거
+        @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+        body, table, div, p, li, span {font-family: 'Noto Sans KR', sans-serif;;}
+        {% endcomment %}
+
+        {# 커스텀 스타일 태그 #}
+        {% block style %}{% endblock style %}
+    </style>
+
+    {# head태그에 달아야하는 스크립트 #}
+    {% block headscript %}{% endblock %}
+    </head>
+<body>
+    {% block body %}
+    {% endblock body %}
+
+    {# 스크립트 #}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://bootstrapk.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+    {# 페이지 맨 아래에서 호출할 스크립트 #}
+    {% block bodyscript %}{% endblock %}
+</body>
+</html>

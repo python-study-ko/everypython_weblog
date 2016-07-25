@@ -1,0 +1,61 @@
+{% extends 'base_blog.html' %}
+
+
+{# head title tag #}
+{% block title %}EVERYPYTHON{% endblock title %}
+
+{# style tag #}
+{% block pagestyle %}
+#th1 {
+    margin: fix;
+    width: 50px;
+    text-align: center;
+}
+#th2{
+    margin: fix;
+    width: 80px;
+    text-align: center;
+}
+#th3 {
+    margin: auto;
+    width: 300px;
+    text-align: center;
+}
+#th4 {
+    margin: fix;
+    width: 50px;
+    text-align: center;
+}
+{% endblock pagestyle %}
+
+{% block section %}
+    <div class="col-xs-12 col-md-12">
+        <div class="panel panel-primary" id="p_shadow">
+            <div class="panel-heading"><h3 class="panel-title headtext"><span class="glyphicon glyphicon-folder-open"></span> &nbsp; {{ name }}</h3></div>
+            <div class="panel-body">{{ name }} 태그에 속한 글 목록입니다.</div>
+            <!-- 글목록 -->
+            <table class="table table-striped table-postlist">
+                <thead>
+                    <th id="th1">글번호</th>
+                    <th id="th2">작성일</th>
+                    <th id="th3">제목</th>
+                    <th id="th4">조회수</th>
+                </thead>
+                <tbody>
+                    {% for p_pk,cre_date,title,hits  in posts %}
+                        <tr>
+                            <td class="text-center">{{ p_pk }}</td>
+                            <td class="text-center">{{ cre_date|date }}</td>
+                            <td class="text-left"><a href="{% url 'blog:PostDetail' p_pk %}">{{ title }}</a></td>
+                            <td class="text-center">{{ hits }}</td>
+                        </tr>
+                    {% empty %}
+                        <p>{{ name }} 카테고리에는 아직 글이 없습니다</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock section %}
+{# 페이지 맨 아래에서 호출할 스크립트 #}
+{% block bodyscript %}{% endblock %}

@@ -14,14 +14,7 @@ from django.db.models import Q
 from hitcount.models import HitCount
 from taggit.models import Tag
 from django_jinja.views.generic.base import Jinja2TemplateResponseMixin
-from hitcount.views import HitCountDetailView as hitdetailview
-
-
-class DetailView(Jinja2TemplateResponseMixin,hitdetailview):
-    """
-    조회수를 측정할 hitdetailview클래스에 jinjan 템플릿 클래스를 믹스인 시켜준다.
-    """
-    pass
+from hitcount.views import HitCountDetailView
 
 def sidebar_context():
     """
@@ -47,7 +40,7 @@ class Index(View):
         # 사이드바에 필요한 context를 합쳐줌
         context = {'newposts':newposts,'starposts':starposts}
         context.update(sidebar_context())
-        data = render_to_string("blog/index.jinja", context, request=request)
+        data = render_to_string("blog/index.html", context, request=request)
         return HttpResponse(data)
 
 
@@ -65,7 +58,7 @@ def CategoryList(request,pk):
     context = {"posts": post_list,"name":c.name}
     # 사이드바에 필요한 context를 합쳐줌
     context.update(sidebar_context())
-    return render(request,'blog/category.jinja',context)
+    return render(request,'blog/category.html',context)
 
 def TagList(request,pk):
     tag = Tag.objects.get(id=pk)
@@ -75,9 +68,9 @@ def TagList(request,pk):
     context = {"posts": posts,"name":tag.name}
     # 사이드바에 필요한 context를 합쳐줌
     context.update(sidebar_context())
-    return render(request,'blog/tag.jinja',context)
+    return render(request,'blog/tag.html',context)
 
-class PostDetail(DetailView):
+class PostDetail(HitCountDetailView):
     model = Post
     count_hit = True
     def get_context_data(self, **kwargs):
@@ -90,13 +83,4 @@ class PostDetail(DetailView):
         context.update(sidebar_context())
         return context
 
-# jinja2 테스트 코드
-def jinjadef(request):
-    test = 'abcd'
-    cycle = 'a','b','c','d'
-    manydict = {1:{"first":1,"second":2,"tree":{3:33}}}
-    return render(request,'blog/def.jinja',{'hi' :test,"test":manydict,'cylist':cycle})
-
-class jinjaclass(DetailView):
-    model = Post
 
