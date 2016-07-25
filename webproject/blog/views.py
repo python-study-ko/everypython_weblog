@@ -65,7 +65,7 @@ def CategoryList(request,pk):
     context = {"posts": post_list,"name":c.name}
     # 사이드바에 필요한 context를 합쳐줌
     context.update(sidebar_context())
-    return render(request,'blog/category.jinja',context)
+    return render(request,'blog/category.html',context)
 
 def TagList(request,pk):
     tag = Tag.objects.get(id=pk)
