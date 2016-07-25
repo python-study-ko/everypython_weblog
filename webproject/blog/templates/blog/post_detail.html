@@ -1,11 +1,10 @@
-{% extends 'base_blog.jinja' %}
-{% from "blog/macro/postdetail.jinja" import post_panel %}
+{% extends 'base_blog.html' %}
+{% load static %}
 
-
-{%- block head %}
+{% block head %}
     {# facebook 공유를 위한 메타태그 #}
     <meta property="og:site_name"          content="everypython" />
-    <meta property="og:url"                content="{{request.build_absolute_uri()}}" />
+    <meta property="og:url"                content="{{request.build_absolute_uri}}" />
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="{{ object.title     }}" />
     <meta property="og:description"        content="{{ object.description }}" />
@@ -14,49 +13,52 @@
     <meta property="og:image:width"      content="1200">
     <meta property="og:image:height"     content="630">
     <meta property="og:locale"             content="ko_KR" />
-    <link href="{{ static('ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css') }}" rel="stylesheet">
-{%- endblock head %}
+    <link href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css' %}" rel="stylesheet">
+{% endblock head %}
 {# head title tag #}
-{%- block title %}EVERYPYTHON{% endblock title %}
+{% block title %}EVERYPYTHON{% endblock title %}
 
 {# style tag #}
-{%- block pagestyle %}
+{% block pagestyle %}
     pre {background-color: #3c3c3c;}
-{%- endblock pagestyle %}
+{% endblock pagestyle %}
 
-{%- block headscript  %}
-    <script src="{{ static('ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+{% block headscript  %}
+    <script src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js'%}"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-{%- endblock %}
+{% endblock %}
 
-{%- block section %}
+{% block section %}
     <article>
-    {%- call post_panel("glyphicon-folder-open", object.category, grid_class="col-xs-12 col-md-12") %}
-    <div style="margin-top: 20px;" class="page-header"><h1>{{ object.title }}</h1>
-    <p style="margin-bottom: 0;">
-        <span class="glyphicon glyphicon-user"></span>&nbsp;{{ object.author }}&nbsp;&nbsp;&nbsp;
-        <span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ object.create_date|date }}&nbsp;&nbsp;&nbsp;
-        <span class="glyphicon glyphicon-tag"></span>&nbsp;
-        {% for id,name in posttag %}
-            <a href="{{ url('blog:Tag',kwargs={'pk':id}) }}"><span class="label label-info label-large" id="tag">{{ name }}</span></a>
-        {%- endfor %}&nbsp;&nbsp;&nbsp;
-        조회수: {{ object.hit_count.hits }}
-    </p>
-    <p>
-        <div class="fb-share-button" data-href="{{request.build_absolute_uri()}}" data-layout="button_count" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
-    </p>
-    </div>
-        <p>
-        {%- autoescape off -%}
-        {{ object.content }}
-        {%- endautoescape %}
-    </p>
-        <div id="disqus_thread"></div>
-        {%- endcall -%}
+        <div class="col-xs-12 col-md-12">
+            <div class="panel panel-primary" id="postdetail">
+                <div class="panel-heading"><h3 class="panel-title headtext"><span class="glyphicon glyphicon-folder-open"></span> &nbsp;{{ object.category }}</h3></div>
+                <div class="panel-body">
+                    <!-- 포스트 정보 -->
+                    <div style="margin-top: 20px;" class="page-header"><h1>{{ object.title }}</h1>
+                        <p style="margin-bottom: 0;">
+                            <span class="glyphicon glyphicon-user"></span>&nbsp;{{ object.author }}&nbsp;&nbsp;&nbsp;
+                            <span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ object.create_date|date }}&nbsp;&nbsp;&nbsp;
+                            <span class="glyphicon glyphicon-tag"></span>&nbsp;
+                            {% for id,name in posttag %}
+                                <a href="{% url 'blog:Tag' id %}"><span class="label label-info label-large" id="tag">{{ name }}</span></a>
+                            {% endfor %}&nbsp;&nbsp;&nbsp;
+                            조회수: {{ object.hit_count.hits }}
+                        </p>
+                        <!-- 페북 공유 버튼 -->
+                        <p><div class="fb-share-button" data-href="{{request.build_absolute_uri}}" data-layout="button_count" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div></p>
+                    </div>
+                    <!-- 포스트 본문 -->
+                    <p>{% autoescape off %}{{ object.content }}{% endautoescape %}</p>
+                    <!-- disqus 댓글 -->
+                    <div id="disqus_thread"></div>
+                </div>
+            </div>
+        </div>
     </article>
     <script>
     var disqus_config = function () {
-        this.page.url = '{{request.build_absolute_uri()}}';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = '{{request.build_absolute_uri}}';  // Replace PAGE_URL with your page's canonical URL variable
         this.page.identifier = '{{ object.id }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -67,9 +69,9 @@
     })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-{%- endblock section %}
+{% endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}
-{%- block bodyscript -%}
+{% block bodyscript %}
 <script id="dsq-count-scr" src="//{{ shortname }}.disqus.com/count.js" async></script>
-    {{ super() }}
+    {{ super }}
 {% endblock %}

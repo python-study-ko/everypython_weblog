@@ -7,7 +7,4 @@ urlpatterns = patterns('',
                        url(r'^category/(?P<pk>\d+)/$',views.CategoryList,name='Category'),
                        url(r'^tag/(?P<pk>\d+)/$',views.TagList,name='Tag'),
                        url(r'^post/(?P<pk>\d+)/$',views.PostDetail.as_view(),name='PostDetail'),
-                       # 테스트용 코드
-                       url(r'^jinjadef/$',views.jinjadef,name='jinjatest'),
-                       url(r'^jinjaclass/(?P<pk>\d+)/$',views.jinjaclass.as_view(),name='jinjaclass'),
                        )
