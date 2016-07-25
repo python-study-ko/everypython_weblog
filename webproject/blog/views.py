@@ -47,7 +47,7 @@ class Index(View):
         # 사이드바에 필요한 context를 합쳐줌
         context = {'newposts':newposts,'starposts':starposts}
         context.update(sidebar_context())
-        data = render_to_string("blog/index.jinja", context, request=request)
+        data = render_to_string("blog/index.html", context, request=request)
         return HttpResponse(data)
 
 
