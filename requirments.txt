@@ -20,6 +20,7 @@ pytz==2016.4
 rsa==3.4.2
 simplejson==3.8.2
 six==1.10.0
+South==1.0.2
 sqlparse==0.1.19
 uritemplate==0.6
 whitenoise==3.2
