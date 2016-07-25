@@ -61,9 +61,6 @@ INSTALLED_APPS = [
     'taggit',
     # 블로그앱 추가
     'blog',
-    # 장고용 진자
-    'django_jinja',
-    'django_jinja.contrib._humanize',
     # 카운팅 모듈
     'hitcount',
     # 디버깅 툴바
@@ -75,9 +72,6 @@ MIDDLEWARE_CLASSES = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     # 기존코드
     'django.middleware.security.SecurityMiddleware',
-    # whitnoise
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
-    # 기존 코드
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -99,15 +93,6 @@ elif config.get('deploy','WHITENOISE')=='False':
 ROOT_URLCONF = 'everpython.urls'
 # 진자 기본 템플릿설정으로 변경
 TEMPLATES = [
-    {
-        'BACKEND': "django_jinja.backend.Jinja2",
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'environment': 'everpython.jinja2.environment',
-            "app_dirname": "templates",
-        },
-    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates'),],
@@ -217,45 +202,8 @@ SHORTNAME = config.get('disqus','SHORTNAME')
 # CKEditor 설정
 CKEDITOR_BROWSE_SHOW_DIRS = True
 CKEDITOR_RESTRICT_BY_USER = True # 사용자 별로 본인이 업로드한 이미지만 보이도록함
-'''
-CKEDITOR_CONFIGS = {
-    'skin': 'flat',
-    'toolbar_Basic': [
-        ['Source', '-', 'Bold', 'Italic']
-    ],
-    'toolbar_Full': [
-        ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
-        ['Link', 'Unlink', 'Anchor'],
-        ['Image', 'Flash', 'Table', 'HorizontalRule'],
-        ['TextColor', 'BGColor'],
-        ['Smiley', 'SpecialChar'], ['Source'],
-    ],
-    'toolbar': 'Full',
-    'extraPlugins': ','.join(
-                [
-                    # your extra plugins here
-                    'div',
-                    'autolink',
-                    'autoembed',
-                    'embedsemantic',
-                    'autogrow',
-                    # 'devtools',
-                    'widget',
-                    'lineutils',
-                    'clipboard',
-                    'dialog',
-                    'dialogui',
-                    'elementspath',
-                    'markdown'
-                ]),
-    'height': 291,
-    'width': 835,
-    'filebrowserWindowWidth': 940,
-    'filebrowserWindowHeight': 725,
 
-}
-'''
-#''' 이전 ckeditor 설정
+# ckeditor 설정
 CKEDITOR_CONFIGS = {
     'default': {
         'skin': 'flat',
@@ -308,4 +256,3 @@ CKEDITOR_CONFIGS = {
                         ]),
     }
 }
-#'''
