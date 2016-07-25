@@ -36,14 +36,12 @@
     {% endspaceless %}
 {% endmacro %}
 
-{% macro table_body_post posts type %}
+{% macro table_body_post posts %}
     <tbody>
         {% for p_pk,cre_date,title,hits  in posts %}{% spaceless %}
             {% with date=cre_date|date %}
             {% use_macro post_list p_pk date title col4=hits col3_link='blog:PostDetail' col3_pk=p_pk clas3='text-left' %}
             {% endwith %}{% endspaceless %}
-        {% empty %}
-            <p>{{ name }} {{ type }}는 아직 글이 없습니다</p>
         {% endfor %}
     </tbody>
 {% endmacro %}

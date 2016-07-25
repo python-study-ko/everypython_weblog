@@ -33,12 +33,16 @@
     <div class="col-xs-12 col-md-12">
         <div class="panel panel-primary" id="p_shadow">
             <div class="panel-heading"><h3 class="panel-title headtext"><span class="glyphicon glyphicon-folder-open"></span> &nbsp; {{ name }}</h3></div>
+            {% if posts %}
             <div class="panel-body">{{ name }} 카테고리 및 하위 카테고리에 속한 글 목록입니다.</div>
             <!-- 글목록 -->
             <table class="table table-striped table-postlist">
                 {% use_macro table_head '글번호' '작성일' '제목' col4='조회수' th1='th1' th2='th2' th3='th3' th4='th4'%}
-                {% use_macro table_body_post posts '카테고리' %}
+                {% use_macro table_body_post posts %}
             </table>
+            {% else %}
+            <div class="panel-body">{{ name }} 카테고리 및 하위 카테고리에 속한 글이 없습니다.</div>
+            {% endif %}
         </div>
     </div>
 {% endblock section %}
