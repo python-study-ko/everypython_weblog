@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     'hitcount',
     # 디버깅 툴바
     'debug_toolbar',
+    # django macro
+    'macros',
 ]
 
 MIDDLEWARE_CLASSES = [
