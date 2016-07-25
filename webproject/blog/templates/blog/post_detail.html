@@ -1,18 +1,13 @@
 {% extends 'base_blog.html' %}
 {% load static %}
+{% load macros %}
+{% loadmacros 'blog/macro/ogtag.html' %}
 
 {% block head %}
     {# facebook 공유를 위한 메타태그 #}
-    <meta property="og:site_name"          content="everypython" />
-    <meta property="og:url"                content="{{request.build_absolute_uri}}" />
-    <meta property="og:type"               content="article" />
-    <meta property="og:title"              content="{{ object.title     }}" />
-    <meta property="og:description"        content="{{ object.description }}" />
-    <meta property="og:image"              content="https://s3.ap-northeast-2.amazonaws.com/djangotestupload/%ED%8E%98%EC%9D%B4%EC%8A%A4%EB%B6%81+%EA%B3%B5%EC%9C%A0%EC%9D%B4%EB%AF%B8%EC%A7%80.png" />
-    <meta property="og:image:type"       content="image/png">
-    <meta property="og:image:width"      content="1200">
-    <meta property="og:image:height"     content="630">
-    <meta property="og:locale"             content="ko_KR" />
+    {% with url=request.build_absolute_uri title=object.title description=object.description %}
+    {% use_macro ogpost url title description %}
+    {% endwith %}
     <link href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css' %}" rel="stylesheet">
 {% endblock head %}
 {# head title tag #}

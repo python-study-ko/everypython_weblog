@@ -1,0 +1,17 @@
+{% load macros %}
+{% comment %}
+페이스북 공유를 위한 오픈그래프 태그
+{% endcomment %}
+{% macro ogpost url title description img_type="image/png" img_height="630" img_width="1200" site='everypython' type='article' local='ko_KR' img="https://s3.ap-northeast-2.amazonaws.com/djangotestupload/%ED%8E%98%EC%9D%B4%EC%8A%A4%EB%B6%81+%EA%B3%B5%EC%9C%A0%EC%9D%B4%EB%AF%B8%EC%A7%80.png" %}
+    {# facebook 공유를 위한 메타태그 #}
+    <meta property="og:site_name"          content="{{ site }}" />
+    <meta property="og:url"                content="{{ url }}" />
+    <meta property="og:type"               content="{{ type }}" />
+    <meta property="og:title"              content="{{ title }}" />
+    <meta property="og:description"        content="{{ description }}" />
+    <meta property="og:image"              content="{{ img }}" />
+    <meta property="og:image:type"       content="{{ img_type }}"/>
+    <meta property="og:image:width"      content="{{ img_width }}"/>
+    <meta property="og:image:height"     content="{{ img_height }}"/>
+    <meta property="og:locale"             content="{{ local }}" />
+{% endmacro %}
