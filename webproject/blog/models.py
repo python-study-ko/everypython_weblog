@@ -34,21 +34,21 @@ class CategoryMixin(object):
         """
         order = "ordercategory__order_num"
         if c.level == 1:
-            c2 = Category.object.filter(parent=c)
-            c3 = Category.object.filter(parent__in=c2)
-            under_C = Category.object.filter(
+            c2 = Category.objects.filter(parent=c)
+            c3 = Category.objects.filter(parent__in=c2)
+            under_C = Category.objects.filter(
                 Q(id=c.id) | Q(id__in=c2.values_list("id", flat=True)) | Q(id__in=c3.values_list("id", flat=True))).order_by(order)
         elif c.level == 2:
-            c3 = Category.object.filter(parent=c)
-            under_C = Category.object.filter(Q(id=c.id) | Q(id__in=c3.values_list("id", flat=True))).order_by(order)
+            c3 = Category.objects.filter(parent=c)
+            under_C = Category.objects.filter(Q(id=c.id) | Q(id__in=c3.values_list("id", flat=True))).order_by(order)
         elif c.level == 3:
-            under_C = Category.object.get(id=c.id)
+            under_C = Category.objects.get(id=c.id)
         return under_C
 
     def navi_bar(self):
         category_tree = []
         for c1 in Category.tree.root_category():
-            under_tree = Category.tree.under_list(c1).annotate(Count('post')).values_list('level','id','name','post__count')
+            under_tree = Category.tree.under_list(c1).filter(post__publish=True).annotate(postcount=Count('post')).values_list('level', 'id', 'name', 'postcount')
             category_tree.append(under_tree)
         return category_tree
 
@@ -77,7 +77,7 @@ class Category(models.Model):
     parent = models.ForeignKey('self',limit_choices_to=Q(level=1)|Q(level=2),on_delete=models.CASCADE,blank=True,null=True,help_text="상위 카테고리를 정해주세요,미지정시 최상위 카테고리가 됩니")
     name = models.CharField(max_length=15,unique=True,help_text="카테고리 이름을 입력하세요")
     level = models.IntegerField(choices=[(1, '최상위 카테고리'), (2, '2차 카테고리'), (3, '3차 카테고리')], blank=True)
-    object = models.Manager()
+    objects = models.Manager()
     # 카테고리 매니저
     tree = CategoryManager()
 
@@ -117,20 +117,20 @@ class OrderMixin(object):
     카테고리 순서 번호를 갱신한다.
     """
     def reset_order(self):
-        OrderCategory.object.all().delete()
+        OrderCategory.objects.all().delete()
         loop_c1 = 0
         for c1 in Category.tree.root_category():
             loop_c1 += 1
             c1obj = OrderCategory(c_pk_id=c1.id,order_num=10000*loop_c1)
             c1obj.save()
-            c2s = Category.object.filter(parent_id=c1.id)
+            c2s = Category.objects.filter(parent_id=c1.id)
             if c2s.exists():
                 loop_c2 = 0
                 for c2 in c2s:
                     loop_c2 += 1
                     c2obj = OrderCategory(c_pk_id=c2.id,order_num=c1obj.order_num+100*loop_c2)
                     c2obj.save()
-                    c3s = Category.object.filter(parent_id=c2.id)
+                    c3s = Category.objects.filter(parent_id=c2.id)
                     if c3s.exists():
                         loop_c3 = 0
                         for c3 in c3s:
@@ -155,7 +155,7 @@ class OrderCategory(models.Model):
     """카테고리 순서 갱신용 모델"""
     c_pk = models.OneToOneField('Category',unique=True)
     order_num = models.IntegerField()
-    object = models.Manager()
+    objects = models.Manager()
     order = OrderManager()
 
     def __str__(self):
@@ -200,7 +200,7 @@ class Post(models.Model,HitCountMixin):
     # hitcount 모듈과 연동
     posthits = GenericRelation(HitCount, related_query_name='post',object_id_field='object_pk')
 
-    object = models.Manager()
+    objects = models.Manager()
     # 발행 포스트 관리 매니저
     published = PublishManager()
 

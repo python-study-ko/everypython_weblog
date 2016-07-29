@@ -15,7 +15,7 @@ def sidebar_context():
     context.update(sidebar_context())이걸 통해 각페이지 context에 카테고리나 태그정보가 담긴 context를 함께 넘겨준다
     :return:
     """
-    tags = Tag.objects.all().values_list('id','name')
+    tags = Tag.objects.all().filter(post__publish=True).values_list('id','name')
     categorytree = Category.tree.navi_bar()
     context_dic={'tags':tags,'categorytree':categorytree}
     return context_dic
@@ -25,10 +25,10 @@ class Index(View):
     def get(self, request, data=None):
         # index 페이지에 넘겨줄 컨텐츠 context
         # 최신글 목록 추출
-        newposts = Post.objects.all().values_list('pk','create_date','title','category__name').order_by('-create_date')[:5]
+        newposts = Post.published.publish().values_list('pk','create_date','title','category__name').order_by('-create_date')[:5]
 
         # 인기글 목록 추출
-        starposts = HitCount.objects.all().values_list('post__pk', 'hits', 'post__title', 'post__category__name')[:5]
+        starposts = HitCount.objects.all().filter(post__publish=True).values_list('post__pk', 'hits', 'post__title', 'post__category__name')[:5]
 
         # 사이드바에 필요한 context를 합쳐줌
         context = {'newposts':newposts,'starposts':starposts}
@@ -41,11 +41,11 @@ def CategoryList(request,pk):
     c = get_object_or_404(Category,pk=pk)
     categorys = Category.tree.under_list(c)
     if c.level == 3:
-        post_list = Post.objects.filter(category=c).order_by('-id').values_list('pk', 'create_date',
+        post_list = Post.published.publish().filter(category=c).order_by('-id').values_list('pk', 'create_date',
                                                                                             'title', 'posthits__hits')
     else:
         categorys = Category.tree.under_list(c)
-        post_list = Post.objects.filter(category__in=categorys).order_by('-id').values_list('pk', 'create_date', 'title', 'posthits__hits')
+        post_list = Post.published.publish().filter(category__in=categorys).order_by('-id').values_list('pk', 'create_date', 'title', 'posthits__hits')
 
     # 포스트 목록
     context = {"posts": post_list,"name":c.name}
@@ -56,7 +56,7 @@ def CategoryList(request,pk):
 def TagList(request,pk):
     tag = Tag.objects.get(id=pk)
     # 태그에 속한 모든 포스트를 찾는다
-    posts = Post.objects.filter(tag__name__in=[tag]).order_by('-id').values_list('pk', 'create_date', 'title', 'posthits__hits')
+    posts = Post.published.publish().filter(tag__name__in=[tag]).order_by('-id').values_list('pk', 'create_date', 'title', 'posthits__hits')
 
     context = {"posts": posts,"name":tag.name}
     # 사이드바에 필요한 context를 합쳐줌
