@@ -15,6 +15,10 @@ TIME_ZONE: Asia/Seoul
 
 [db]
 # DB 엔진 종류
+# sqlite > django.db.backends.sqlite3
+# mysql > django.db.backends.mysql
+# pgsql > django.db.backends.postgresql_psycopg2
+
 ENGINE: django.db.backends.mysql
 NAME: <테이블 이름>
 USER: <계정>
