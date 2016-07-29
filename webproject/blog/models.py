@@ -12,6 +12,8 @@ from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.fields import GenericRelation
 # Create your models here.
 
+
+# 카테고리 목록 매니저
 class CategoryMixin(object):
     """
     카테고리 정보를 추출해준다
@@ -62,6 +64,7 @@ class CategoryManager(models.Manager, CategoryMixin):
     def get_query_set(self):
         return CategoryQuerySets(self.model, using=self._db)
 
+# 카테고리 모델
 class Category(models.Model):
     """
     포스트 카테고리 - 추가,업데이트,삭제 할때마다 카테고리 순서 모델을 갱신시킨다.
@@ -108,7 +111,7 @@ class Category(models.Model):
         OrderCategory.order.reset_order()
 
 
-
+# 카테고리 정렬 매니저
 class OrderMixin(object):
     """
     카테고리 순서 번호를 갱신한다.
@@ -147,6 +150,7 @@ class OrderManager(models.Manager, OrderMixin):
     def get_query_set(self):
         return OrderQuerySets(self.model, using=self._db)
 
+# 카테고리 정렬 모델
 class OrderCategory(models.Model):
     """카테고리 순서 갱신용 모델"""
     c_pk = models.OneToOneField('Category',unique=True)
@@ -158,6 +162,27 @@ class OrderCategory(models.Model):
         return self.c_pk.name
 
 
+# 포스트 발행 관리 매니저
+class PublishMixin(object):
+    """
+    포스트 발행 관리를 위한 믹스인
+    """
+    def publish(self):
+        """발행된 포스트 목록"""
+        return self.filter(publish=True)
+
+    def dreft(self):
+        """미발행 포스트(초안) 목록"""
+        return self.filter(publish=False)
+
+class PublishQuerySets(QuerySet, PublishMixin):
+    pass
+
+class PublishManager(models.Manager,PublishMixin):
+    def get_query_set(self):
+        return PublishQuerySets(self.model,using=self._db)
+
+# 포스트 모델
 class Post(models.Model,HitCountMixin):
     """
     블로그 포스트 모델
@@ -171,8 +196,13 @@ class Post(models.Model,HitCountMixin):
     create_date = models.DateTimeField(auto_now_add=True)
     edit_date = models.DateTimeField(auto_now=True)
     publish = models.BooleanField(default=False,help_text="포스트 발행시 외부에 포스트가 공개됩니다. 만약 발행하지 않는다면 작성자만 해당 포스트를 볼 수 있습니다.")
+
     # hitcount 모듈과 연동
     posthits = GenericRelation(HitCount, related_query_name='post',object_id_field='object_pk')
+
+    object = models.Manager()
+    # 발행 포스트 관리 매니저
+    published = PublishManager()
 
     def __str__(self):
         return self.title
