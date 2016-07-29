@@ -187,15 +187,15 @@ class Post(models.Model,HitCountMixin):
     """
     블로그 포스트 모델
     """
-    category = models.ForeignKey('Category',blank=True,null=True)
-    title = models.CharField(max_length=60)
-    author = models.ForeignKey(User)
-    description = models.CharField(max_length=160,blank=True,null=True,help_text="포스트를 sns에 공유하거나 검색에서 노출될 포스트에 대한 요약입니다.")
-    content = RichTextUploadingField()
+    category = models.ForeignKey('Category',blank=True,null=True, verbose_name='카테고리')
+    title = models.CharField(verbose_name='제목', max_length=60)
+    author = models.ForeignKey(User, verbose_name='글쓴이')
+    description = models.CharField(verbose_name='요약', max_length=160,blank=True,null=True,help_text="포스트를 sns에 공유하거나 검색에서 노출될 포스트에 대한 요약입니다.")
+    content = RichTextUploadingField(verbose_name='내용')
     tag = TaggableManager()
-    create_date = models.DateTimeField(auto_now_add=True)
-    edit_date = models.DateTimeField(auto_now=True)
-    publish = models.BooleanField(default=False,help_text="포스트 발행시 외부에 포스트가 공개됩니다. 만약 발행하지 않는다면 작성자만 해당 포스트를 볼 수 있습니다.")
+    create_date = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
+    edit_date = models.DateTimeField(verbose_name='수정일', auto_now=True)
+    publish = models.BooleanField(verbose_name='발행여부', default=False,help_text="포스트 발행시 외부에 포스트가 공개됩니다. 만약 발행하지 않는다면 작성자만 해당 포스트를 볼 수 있습니다.")
 
     # hitcount 모듈과 연동
     posthits = GenericRelation(HitCount, related_query_name='post',object_id_field='object_pk')
