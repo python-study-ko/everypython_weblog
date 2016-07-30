@@ -4,6 +4,8 @@ from django.utils.html import format_html
 
 def Tag_list(obj):
     tags = obj.tag.get_queryset().values_list('name',flat=True)
+    if len(tags) >= 4:
+        tags = tags[:3]+['...']
     return ', '.join(tag for tag in tags)
 
 Tag_list.short_description = '태그'
