@@ -27,25 +27,19 @@ class CategoryMixin(object):
         return self.filter(level=1)
 
     def under_list(self, c):
-        """
-        하위 카테고리 목록 쿼리셋을 반환한
-        :param obj:
-        :return:
-        """
+        """ 입력받은 카테고리에 대한 하위카테고리 목록을 쿼리셋으로 돌려준 """
         order = "ordercategory__order_num"
         if c.level == 1:
             c2 = Category.objects.filter(parent=c)
-            c3 = Category.objects.filter(parent__in=c2)
-            under_C = Category.objects.filter(
-                Q(id=c.id) | Q(id__in=c2.values_list("id", flat=True)) | Q(id__in=c3.values_list("id", flat=True))).order_by(order)
+            under_C = Category.objects.filter(Q(name=c) | Q(parent=c) | Q(parent__in=c2)).order_by(order)
         elif c.level == 2:
-            c3 = Category.objects.filter(parent=c)
-            under_C = Category.objects.filter(Q(id=c.id) | Q(id__in=c3.values_list("id", flat=True))).order_by(order)
+            under_C = Category.objects.filter(Q(name=c) | Q(parent=c)).order_by(order)
         elif c.level == 3:
-            under_C = Category.objects.get(id=c.id)
+            under_C = c
         return under_C
 
     def navi_bar(self):
+        """ 네비게이션 바에 뿌려줄 카테고리 목록을 만들어주는 함수"""
         category_tree = []
         for c1 in Category.tree.root_category():
             under_tree = Category.tree.under_list(c1).filter(post__publish=True).annotate(postcount=Count('post')).values_list('level', 'id', 'name', 'postcount')
