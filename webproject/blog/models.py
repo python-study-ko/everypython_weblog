@@ -4,7 +4,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
 from hitcount.models import HitCountMixin, HitCount
 from django.db.models.query import QuerySet
-from django.db.models import Q, Count
+from django.db.models import Q, Count, Sum, Case, When, IntegerField
 # 오류 발생용
 from django.core.exceptions import ValidationError
 
@@ -39,11 +39,31 @@ class CategoryMixin(object):
         return under_C
 
     def navi_bar(self):
-        """ 네비게이션 바에 뿌려줄 카테고리 목록을 만들어주는 함수"""
+        """
+        네비게이션 바에 뿌려줄 카테고리 목록을 만들어주는 함수
+        전체 카테고리에 대한 정보를 추출하여 뷰와 템플릿에서 처리하기 쉽도록 아래의 구조로 바꿔준다.
+        -- return값 구조
+            카테고리 리스트엔 각 최상위 카테고리와 그 하위 카테고리 정보가 담긴 리스트들로 구성되있다.
+            예시 : [ [(카테고리1),(카테고리1-1),..], [(카테고리2),(카테고리2-1),...] ]
+        """
+        c_list = Category.objects.all().order_by("ordercategory__order_num")
+        # 발행된 포스트만 계수하기 위한 ORM : 발행=1, 미발행=0으로 하여 총 합을 구한다.
+        postcount=Sum(Case(When(post__publish=True, then=1), default=0, output_field=IntegerField()))
+        #  전체 카테고리의 정보를 튜플로 추출한다.
+        c_info = c_list.annotate(count_posts=postcount).values_list('level', 'id', 'name', 'count_posts')
+
+        # 카테고리 정보를 뷰와 템플릿에서 처리하기 쉽도록 구조를 변경한다.
         category_tree = []
-        for c1 in Category.tree.root_category():
-            under_tree = Category.tree.under_list(c1).filter(post__publish=True).annotate(postcount=Count('post')).values_list('level', 'id', 'name', 'postcount')
-            category_tree.append(under_tree)
+        c_underlist = []
+        for c in c_info:
+            if c[0]==1: # 최상위 카테고리
+                if c_underlist: # 이전 최상위 카테고리 목록이 존재할 경우 카테고리 목록 초기화
+                    category_tree.append(c_underlist)
+                    c_underlist = []
+                c_underlist.append(c)
+            else: # 차상위 카테고리
+                c_underlist.append(c)
+        category_tree.append(c_underlist) # 마지막 촤상위 카테고리 목록 추가
         return category_tree
 
     def categorys_post(self,c):
