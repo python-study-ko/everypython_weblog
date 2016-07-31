@@ -76,7 +76,7 @@ class Category(models.Model):
 
     parent = models.ForeignKey('self',limit_choices_to=Q(level=1)|Q(level=2),on_delete=models.CASCADE,blank=True,null=True,help_text="상위 카테고리를 정해주세요,미지정시 최상위 카테고리가 됩니", verbose_name='상위 카테고리')
     name = models.CharField(max_length=15,unique=True,help_text="카테고리 이름을 입력하세요", verbose_name='이름')
-    level = models.IntegerField(choices=[(1, '최상위 카테고리'), (2, '2차 카테고리'), (3, '3차 카테고리')], blank=True, verbose_name='카테고리 단계')
+    level = models.IntegerField(choices=[(1, '최상위 카테고리'), (2, '2차 카테고리'), (3, '3차 카테고리')], blank=True, verbose_name='단계')
     objects = models.Manager()
     # 카테고리 매니저
     tree = CategoryManager()

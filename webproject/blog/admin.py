@@ -34,6 +34,19 @@ class PostAdmin(admin.ModelAdmin):
     make_published.short_description = "선택한 포스트를 발행하기"
     make_unpublish.short_description = "선택한 포스트의 발행을 취소하기   "
 
-admin.site.register(Category)
+def Indent_category(obj):
+    if obj.level == 1:
+        return obj.name
+    else:
+        name = '|'+'----|'*(obj.level-1)+'&raquo;&nbsp;'+ obj.name
+        return format_html("{}".format(name))
+Indent_category.short_description = '이름'
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = [Indent_category,'level']
+    ordering = ['ordercategory__order_num']
+
+
+admin.site.register(Category,CategoryAdmin)
 admin.site.register(OrderCategory)
 admin.site.register(Post,PostAdmin)
