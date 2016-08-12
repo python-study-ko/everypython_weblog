@@ -206,6 +206,7 @@ class Post(models.Model,HitCountMixin):
     author = models.ForeignKey(User, verbose_name='글쓴이')
     description = models.CharField(verbose_name='요약', max_length=160,blank=True,null=True,help_text="포스트를 sns에 공유하거나 검색에서 노출될 포스트에 대한 요약입니다.")
     content = RichTextUploadingField(verbose_name='내용')
+    markdown = models.BooleanField(verbose_name="마크다운",default=False,blank=True,help_text="마크다운 형식으로 글을 작성하려면 체크하세")
     tag = TaggableManager()
     create_date = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
     edit_date = models.DateTimeField(verbose_name='수정일', auto_now=True)
