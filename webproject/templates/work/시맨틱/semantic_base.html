@@ -1,0 +1,357 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+	<!-- 나눔스퀘어 폰트 --><link rel="stylesheet" href="//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css">
+	<!-- 나눔바른고딕 폰트 --><link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
+	<script src="https://cdn.jsdelivr.net/jquery/3.1.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/admin.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="./css/sidebar.min.css">
+	<link rel="stylesheet" type="text/css" href="./css/icon.min.css">
+	<!-- Remove if you don't want to use Chart JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+	<script src="./js/admin.js"></script>
+	<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.js"></script>
+
+	<title>Dashboard Theme | Dashboard</title>
+</head>
+
+<body data-page="dashboard">
+<!-- Responsive sidebar menu -->
+<div class="ui sidebar inverted vertical menu">
+	<a class="item" href="./login.html">
+		<h4 class="ui grey header">John Doe</h4>
+		<p>Sign Out</p>
+	</a>
+	<a class="active gray item" href="./dashboard.html">
+		Dashboard
+	</a>
+	<a class="item" href="./sales.html">
+		Sales
+		<div class="ui label">11</div>
+	</a>
+	<a class="item" href="./products.html">
+		Products
+		<div class="ui label">2</div>
+	</a>
+	<a class="item" href="./customers.html">
+		Customers
+	</a>
+	<a class="item" href="./employees.html">
+		Employees
+	</a>
+</div>
+
+<div class="pusher">
+	<div class="ui grid container">
+		<!-- Non-responsive main left menu -->
+		<div class="ui left fixed vertical inverted menu">
+			<a class="item" href="./login.html">
+				<h4 class="ui grey header">John Doe</h4>
+				<p>Sign Out</p>
+			</a>
+			<a class="active gray item" href="./dashboard.html">
+				Dashboard
+			</a>
+			<a class="item" href="./sales.html">
+				Sales
+				<div class="ui label">11</div>
+			</a>
+			<a class="item" href="./products.html">
+				Products
+				<div class="ui label">2</div>
+			</a>
+			<a class="item" href="./customers.html">
+				Customers
+			</a>
+			<a class="item" href="./employees.html">
+				Employees
+			</a>
+		</div>
+
+		<div class="ui main grid">
+			<!-- 반응형 최상단 메뉴 -->
+			<div class="ui fixed inverted main menu">
+				<div class="ui container">
+					<a class="launch icon item sidebar-toggle">
+						<i class="sidebar icon"></i>
+					</a>
+				</div>
+			</div>
+
+			<div class="ui row">
+				<div class="pagelist column">
+				<div class="ui segments">
+					<div class="ui segment"><h3 class="ui header">최신글</h3></div>
+					<div class="ui segment">
+						<div class="ui divided items">
+							<div class="item">
+								<div class="content">
+									<div class="meta">
+										<a class="ui red ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리</a>
+										<div class="ui small label">
+											<i class="calendar icon"></i>
+											<div class="detail">0일 전</div>
+										</div>
+										<div class="ui small label">
+											<i class="unhide icon"></i>
+											<div class="detail">214</div>
+										</div>
+									</div>
+									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
+									<div class="description">
+										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
+											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
+											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
+											만약 venv를 만든후에 설치를 하신다면 pip install -I Cython -> pip install kivy를
+											맥에 바로 설치하신다면 pip3 install -I Cython -> pip3 install kivy로 설치하면 됩니다.(가상환경으로 하시는걸 권장합니다)
+										</p>
+									</div>
+									<div class="extra">
+										<div class="ui tag mini labels">
+											<a class="ui label" href="#">파이썬</a>
+											<a class="ui label" href="#">테스트</a>
+											<a class="ui label" href="#">성공적</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="content">
+									<div class="meta">
+										<a class="ui red ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리</a>
+
+									</div>
+									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
+									<div class="description">
+										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
+											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
+											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
+											만약 venv를 만든후에 설치를 하신다면 pip install -I Cython -> pip install kivy를
+											맥에 바로 설치하신다면 pip3 install -I Cython -> pip3 install kivy로 설치하면 됩니다.(가상환경으로 하시는걸 권장합니다)
+										</p>
+									</div>
+									<div class="extra">
+										<div class="ui small labels">
+											<div class="ui small label">
+												<i class="calendar icon"></i>
+												<div class="detail">0일 전</div>
+											</div>
+											<div class="ui small label">
+												<i class="unhide icon"></i>
+												<div class="detail">214</div>
+											</div>
+											<a class="ui tag label" href="#">파이썬</a>
+											<a class="ui tag label" href="#">테스트</a>
+											<a class="ui tag label" href="#">성공적</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="content">
+									<div class="meta">
+										<a class="ui red ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리명</a>
+										<div class="ui label">
+											<i class="calendar icon"></i>
+											<div class="detail">0일 전</div>
+										</div>
+										<div class="ui label">
+											<i class="unhide icon"></i>
+											<div class="detail">214</div>
+										</div>
+										<a class="ui tag label" href="#">파이썬</a>
+										<a class="ui tag label" href="#">테스트</a>
+										<a class="ui tag label" href="#">성공적</a>
+									</div>
+									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
+									<div class="description">
+										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
+											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
+											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
+											만약 venv를 만든후에 설치를 하신다면 pip install -I Cython -> pip install kivy를
+											맥에 바로 설치하신다면 pip3 install -I Cython -> pip3 install kivy로 설치하면 됩니다.(가상환경으로 하시는걸 권장합니다)
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				</div>
+			</div>
+			<div class="ui column row">
+				<div class="pagelist column">
+					<div class="ui segments">
+						<div class="ui segment">
+							<h3 class="ui blue header">최신글</h3>
+						</div>
+						<div class="segment">
+							<table class="ui unstackable table">
+								<thead>
+									<tr><th class="three wide">카테고리</th><th class="ten wide">제목</th><th class="three wide">게시일</th></tr>
+								</thead>
+								<tbody>
+									<tr><td class="selectable"><a href="">파이썬</a></td><td class="selectable" title="가나다라마바사아자차카타파하아이"><a href="">가나다라마바사아자차카타파하아이</a></td><td>16-08-09</td></tr>
+									<tr><td class="selectable"><a href="">파이썬</a></td><td class="selectable"><a href="">냉무</a></td><td>2016-08-09</td></tr>
+									<tr><td class="selectable"><a href="">파이썬</a></td><td class="selectable"><a href="">냉무</a></td><td>2016-08-09</td></tr>
+									<tr><td class="selectable"><a href="">파이썬</a></td><td class="selectable"><a href="">냉무</a></td><td>2016-08-09</td></tr>
+									<tr><td class="selectable"><a href="">파이썬</a></td><td class="selectable"><a href="">냉무</a></td><td>2016-08-09</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="pagelist column">
+					<div class="ui segments">
+						<div class="ui segment">
+							<h3 class="ui blue header">인기글</h3>
+						</div>
+						<div class="segment">
+							<table class="ui celled unstackable table">
+								<thead>
+								<tr><th>카테고리</th><th>제목</th><th>게시일</th></tr>
+								</thead>
+								<tbody>
+									<tr><td class="selectable"><a href="">파이썬</a></td><td class="selectable"><a href="">냉무</a></td><td>2016-08-09</td></tr>
+									<tr><td class="selectable"><a href="">파이썬</a></td><td class="selectable"><a href="">냉무</a></td><td>2016-08-09</td></tr>
+									<tr><td class="selectable"><a href="">파이썬</a></td><td class="selectable"><a href="">냉무</a></td><td>2016-08-09</td></tr>
+									<tr><td class="selectable"><a href="">파이썬</a></td><td class="selectable"><a href="">냉무</a></td><td>2016-08-09</td></tr>
+									<tr><td class="selectable"><a href="">파이썬</a></td><td class="selectable"><a href="">냉무</a></td><td>2016-08-09</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="top-table column">
+					<div class="ui segments">
+						<div class="ui segment">
+							<h3 class="ui blue header">Any Header</h3>
+						</div>
+						<div class="ui segment">
+							<table class="ui very basic table">
+								<tbody>
+								<tr>
+									<td>1.</td>
+									<td>Item 1</td>
+									<td>$20</td>
+									<td>30</td>
+								</tr>
+								<tr>
+									<td>2.</td>
+									<td>Item 2</td>
+									<td>$22</td>
+									<td>24</td>
+								</tr>
+								<tr>
+									<td>3.</td>
+									<td>Item 3</td>
+									<td>$15</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>4.</td>
+									<td>Item 4</td>
+									<td>$10</td>
+									<td>18</td>
+								</tr>
+								<tr>
+									<td>5.</td>
+									<td>Item 5</td>
+									<td>$15</td>
+									<td>15</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="doughnut-chart column">
+					<div class="ui segments">
+						<div class="ui segment">
+							<h3 class="ui blue header">Any Header</h3>
+						</div>
+						<div class="ui segment">
+							<canvas id="doughnuts_are_tasty" width="274" height="179"></canvas>
+							<ul id="dashboard_legend"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui three column row">
+				<div class="dashboard-stat column">
+					<div class="ui segments">
+						<div class="ui segment">
+							<h3 class="ui blue header">Any Header</h3>
+						</div>
+						<div class="ui violet inverted dashboard center aligned segment">
+							<div class="ui dashboard statistic">
+								<div class="value">
+									5,550
+								</div>
+								<div class="label">
+									Downloads
+								</div>
+							</div>
+						</div>
+						<div class="ui segment">
+							Footer
+						</div>
+					</div>
+				</div>
+
+				<div class="dashboard-stat column">
+					<div class="ui segments">
+						<div class="ui segment">
+							<h3 class="ui blue header">Any Header</h3>
+						</div>
+						<div class="ui grey inverted dashboard center aligned segment">
+							<div class="ui dashboard statistic">
+								<div class="value">
+									5,550
+								</div>
+								<div class="label">
+									Downloads
+								</div>
+							</div>
+						</div>
+						<div class="ui segment">
+							Footer
+						</div>
+					</div>
+				</div>
+
+				<div class="dashboard-stat column">
+					<div class="ui segments">
+						<div class="ui segment">
+							<h3 class="ui blue header">Any Header</h3>
+						</div>
+						<div class="ui pink inverted dashboard center aligned segment">
+							<div class="ui dashboard statistic">
+								<div class="value">
+									5,550
+								</div>
+								<div class="label">
+									Downloads
+								</div>
+							</div>
+						</div>
+						<div class="ui segment">
+							Footer
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
