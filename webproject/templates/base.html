@@ -9,29 +9,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="신재현">
+    <meta name="author" content="">
+
+    <script src="https://cdn.jsdelivr.net/g/jquery@3.1.0,semantic-ui@2.2.2"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css">
+    <!-- 나눔스퀘어 폰트 --><link rel="stylesheet" href="//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css">
+    <!-- 나눔바른고딕 폰트 --><link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
+
 
     {# 합쳐지고 최소화된 최신 부트스트랩 CSS  #}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     {# 부가적인 부트스트랩 테마  #}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    {# 나눔스퀘어 웹폰트 #}
-    <link rel="stylesheet" href="//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css">
 
-    {# Jquery 스크립 #}트
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     {% block head %}{% endblock head %}
     <title>
         {# 홈페이지 제목 확장 #}
         {% block title %}EVERYPYTHON{% endblock title %}
     </title>
     <style>
-            h1, h2, h3, h4, h5{font-family: 'Nanum Square'; font-weight: bold;}
-        {% comment %} 웹폰트는 당분간 제거
-        @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-        body, table, div, p, li, span {font-family: 'Noto Sans KR', sans-serif;;}
-        {% endcomment %}
-
+        h1, h2, h3, h4, h5{font-family: 'Nanum Square'; }
+        h1, h2{ font-weight: bold; }
+        h3, h4, h5{ font-weight: normal; }
+        p{font-family: 'Nanum Barungothic'; font-weight: normal; font-size: 1em; }
         {# 커스텀 스타일 태그 #}
         {% block style %}{% endblock style %}
     </style>
