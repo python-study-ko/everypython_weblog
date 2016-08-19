@@ -168,6 +168,7 @@ USE_TZ = True
 
 ## 템플릿 파일 설정
 TEMPLATES_DIRS=[os.path.join(BASE_DIR,'templates')]
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 # ckeditor 설정
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'

@@ -8,67 +8,134 @@
 {% endblock pagestyle %}
 
 {% block section %}
-<!-- 점보트론 -->
-    <div class="col-xs-12 col-md-12">
-        <div class="jumbotron">
-            <h1>EveryPython</h1><hr>
-            <p>(Python.productivity + me.creative) x me.crazy(?)<br>= 서비스의 재발견, 세상을 이롭게 하다</p>
-        </div>
-    </div>
-<!-- 최신글 -->
-    <div class="col-xs-12 col-md-6">
-        <div class="panel panel-primary" id="p_shadow">
-            <div class="panel-heading"><h3 class="panel-title headtext"><span class="glyphicon glyphicon-send"></span> 최신글</h3></div>
-            <div class="panel-body">가장 최근에 올라온 글입니다</div>
-            <!-- 글목록 -->
-            <table class="table table-striped table-postlist">
-                <thead>
-                    <th>날짜</th>
-                    <th>제목</th>
-                    <th>카테고리</th>
-                </thead>
-                <tbody>
-                    {% for pk,date,title,category  in newposts %}
-                        <tr>
-                            <td class="text-center">{{ date|date }}</td>
-                            <td class="text-center"><a href="{% url 'blog:PostDetail' pk %}">{{ title }}</a></td>
-                            <td class="text-center">{{ category }}</td>
-                        </tr>
-                    {% empty %}
-                        <p>글이 없습니다</p>
-                    {% endfor %}
-                </tbody>
-            </table>
+    div class="ui row">
+				<div class="one column">
+				<div class="ui segments">
+					<div class="ui segment"><h3 class="ui header">최신글</h3></div>
+					<div class="ui segment">
+						<div class="ui divided items">
+							<div class="item">
+								<div class="content">
+									<div class="meta">
+										<a class="ui blue ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리</a>
+										<div class="ui tiny label">
+											<i class="calendar icon"></i>&nbsp;2015-08-02
+											<div class="detail">0일 전</div>
+										</div>
+										<a class="ui tiny label">
+											<i class="unhide icon"></i>&nbsp;&nbsp;&nbsp;214
+										</a>
+									</div>
+									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
+									<div class="description">
+										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
+											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
+											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
+										</p>
+									</div>
+									<div class="extra">
+										<div class="ui right floated mini teal tag labels">
+											<i class="ui large teal tags icon"></i>
+											<a class="ui label" href="#">파이썬</a>
+											<a class="ui label" href="#">테스트</a>
+											<a class="ui label" href="#">성공적</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="content">
+									<div class="meta">
+										<a class="ui blue ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리</a>
+										<div class="ui tiny label">
+											<i class="calendar icon"></i>&nbsp;2015-08-02
+											<div class="detail">0일 전</div>
+										</div>
+										<a class="ui tiny label">
+											<i class="unhide icon"></i>&nbsp;&nbsp;&nbsp;214
+										</a>
+									</div>
+									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
+									<div class="description">
+										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
+											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
+											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
+										</p>
+									</div>
+									<div class="extra">
+										<div class="ui right floated mini teal tag labels">
+											<i class="ui large teal tags icon"></i>
+											<a class="ui label" href="#">파이썬</a>
+											<a class="ui label" href="#">테스트</a>
+											<a class="ui label" href="#">성공적</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="content">
+									<div class="meta">
+										<a class="ui blue ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리</a>
+										<div class="ui tiny label">
+											<i class="calendar icon"></i>&nbsp;2015-08-02
+											<div class="detail">0일 전</div>
+										</div>
+										<a class="ui tiny label">
+											<i class="unhide icon"></i>&nbsp;&nbsp;&nbsp;214
+										</a>
+									</div>
+									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
+									<div class="description">
+										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
+											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
+											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
+										</p>
+									</div>
+									<div class="extra">
+										<div class="ui right floated mini teal tag labels">
+											<i class="ui large teal tags icon"></i>
+											<a class="ui label" href="#">파이썬</a>
+											<a class="ui label" href="#">테스트</a>
+											<a class="ui label" href="#">성공적</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="content">
+									<div class="meta">
+										<a class="ui blue ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리</a>
+										<div class="ui tiny label">
+											<i class="calendar icon"></i>&nbsp;2015-08-02
+											<div class="detail">0일 전</div>
+										</div>
+										<a class="ui tiny label">
+											<i class="unhide icon"></i>&nbsp;&nbsp;&nbsp;214
+										</a>
+									</div>
+									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
+									<div class="description">
+										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
+											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
+											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
+										</p>
+									</div>
+									<div class="extra">
+										<div class="ui right floated mini teal tag labels">
+											<i class="ui large teal tags icon"></i>
+											<a class="ui label" href="#">파이썬</a>
+											<a class="ui label" href="#">테스트</a>
+											<a class="ui label" href="#">성공적</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-        </div>
-    </div>
-
-<!-- 인기글 -->
-    <div class="col-xs-12 col-md-6">
-        <div class="panel panel-primary" id="p_shadow">
-            <div class="panel-heading"><h3 class="panel-title headtext"><span class="glyphicon glyphicon-thumbs-up"></span> 인기</h3></div>
-            <div class="panel-body">조회수가 가장 많은 글입니다</div>
-            <!-- 글목록 -->
-            <table class="table table-striped table-postlist">
-                <thead>
-                    <th>조회수</th>
-                    <th>제목</th>
-                    <th>카테고리</th>
-                </thead>
-                <tbody>
-                    {% for pk,hits,title,category  in starposts %}
-                        <tr>
-                            <td class="text-center">{{ hits }}</td>
-                            <td class="text-center"><a href="{% url 'blog:PostDetail' pk %}">{{ title }}</a></td>
-                            <td class="text-center">{{ category }}</td>
-                        </tr>
-                    {% empty %}
-                        <p>글이 없습니다</p>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+					</div>
+				</div>
+				</div>
+			</div>
 {% endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}
 {% block bodyscript %}{% endblock %}
