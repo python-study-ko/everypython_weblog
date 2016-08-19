@@ -1,3 +1,7 @@
+/* 커스텀 팔레트 */
+
+
+
 /* MAIN STYLES */
 
 * {
@@ -13,6 +17,10 @@ body {
 	left: 18.75%;
 	position: relative;
 	width: 81.25%;
+}
+
+#mainwidget {
+	height: auto!important;
 }
 
 .ui.main.grid .ui.secondary.pointing.fluid.menu h2 {
@@ -125,8 +133,8 @@ p.signup, p.dashboard {
 	color: #F5F5F5;
 }
 
-.pagelist.column {
-	width: 100% !important;
+.harlf.column {
+	width: 50% !important;
 }
 
 .top-table.column {
@@ -168,7 +176,7 @@ ul.doughnut-legend {
 		display: none;
 	}
 
-	.ui.main.grid .row {
+	 .row {
 		padding-top: 0;
 		padding-bottom: 0;
 	}
@@ -195,9 +203,17 @@ ul.doughnut-legend {
 		text-align: left;
 	}
 
+	/* 메인페이지 칼럼 스타일 */
+	.one.column, .harlf.column{
+		margin-bottom: 30px!important;
+		width: 100% !important;
+		padding-left: 0.5rem!important;
+		padding-right: 0.5rem!important;
+	}
+
 	.ui.grid .ui.three.column.row .dashboard-stat.column,
 	.top-table.column, .doughnut-chart.column, .ui.grid .four.wide.sales.column,
-	.ui.grid .twelve.wide.sales.column, .pagelist.column {
+	.ui.grid .twelve.wide.sales.column{
 		margin-bottom: 30px;
 		width: 100% !important;
 	}
@@ -216,8 +232,8 @@ ul.doughnut-legend {
 
 	.ui.main.grid {
 		left: 0%;
-		margin: 0 auto;
-		padding: 2.75rem 0 0;
+		margin : 40px auto!important;
+		padding: 1rem 0 0!important;
 		position: relative;
 		width: 100%;
 	}
@@ -238,8 +254,9 @@ ul.doughnut-legend {
 	}
 
 	.ui.main.grid {
+		margin-top: 40px!important;
 		left: 0%;
-		padding-top: 2.75rem !important;
+		padding-top: 1rem !important;
 		position: relative;
 		width: 100%;
 	}
@@ -250,7 +267,11 @@ ul.doughnut-legend {
 		display: none;
 	}
 
-	.ui.left.fixed.vertical.inverted.menu {
+	.ui.left.fixed.vertical.inverted.menu.sidebar {
 		display: block;
+	}
+
+	.ui.sidebar{
+		visibility: visible!important;
 	}
 }
