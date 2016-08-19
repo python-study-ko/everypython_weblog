@@ -9,14 +9,16 @@
 	<script src="https://cdn.jsdelivr.net/jquery/3.1.0/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="./css/admin.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css">
-	<link rel="stylesheet" type="text/css" href="./css/sidebar.min.css">
-	<link rel="stylesheet" type="text/css" href="./css/icon.min.css">
 	<!-- Remove if you don't want to use Chart JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 	<script src="./js/admin.js"></script>
 	<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.js"></script>
 
 	<title>Dashboard Theme | Dashboard</title>
+	<style>
+		h1, h2, h3, h4, h5, a.header{font-family: 'Nanum Square' !important; font-weight: bold;}
+		p, a, .label, .labels{font-family: 'Nanum Barungothic' !important; }
+	</style>
 </head>
 
 <body data-page="dashboard">
@@ -92,26 +94,53 @@
 								<div class="content">
 									<div class="meta">
 										<a class="ui red ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리</a>
-										<div class="ui small label">
-											<i class="calendar icon"></i>
+										<div class="ui tiny purple label">
+											<i class="calendar icon"></i>&nbsp;2015-08-02
 											<div class="detail">0일 전</div>
 										</div>
-										<div class="ui small label">
-											<i class="unhide icon"></i>
-											<div class="detail">214</div>
-										</div>
+										<a class="ui tiny violet label">
+											<i class="unhide icon"></i>&nbsp;&nbsp;&nbsp;214
+										</a>
 									</div>
 									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
 									<div class="description">
 										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
 											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
 											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
-											만약 venv를 만든후에 설치를 하신다면 pip install -I Cython -> pip install kivy를
-											맥에 바로 설치하신다면 pip3 install -I Cython -> pip3 install kivy로 설치하면 됩니다.(가상환경으로 하시는걸 권장합니다)
 										</p>
 									</div>
 									<div class="extra">
-										<div class="ui tag mini labels">
+										<div class="ui right floated mini teal tag labels">
+											<i class="ui large teal tags icon"></i>
+											<a class="ui label" href="#">파이썬</a>
+											<a class="ui label" href="#">테스트</a>
+											<a class="ui label" href="#">성공적</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="content">
+									<div class="meta">
+										<a class="ui blue ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리</a>
+										<div class="ui tiny purple label">
+											<i class="calendar icon"></i>&nbsp;2015-08-02
+											<div class="detail">0일 전</div>
+										</div>
+										<a class="ui tiny violet label">
+											<i class="unhide icon"></i>&nbsp;&nbsp;&nbsp;214
+										</a>
+									</div>
+									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
+									<div class="description">
+										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
+											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
+											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
+										</p>
+									</div>
+									<div class="extra">
+										<div class="ui right floated mini teal tag labels">
+											<i class="ui large teal tags icon"></i>
 											<a class="ui label" href="#">파이썬</a>
 											<a class="ui label" href="#">테스트</a>
 											<a class="ui label" href="#">성공적</a>
@@ -123,58 +152,27 @@
 								<div class="content">
 									<div class="meta">
 										<a class="ui red ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리</a>
-
+										<div class="ui tiny purple label">
+											<i class="calendar icon"></i>&nbsp;2015-08-02
+											<div class="detail">0일 전</div>
+										</div>
+										<a class="ui tiny violet label">
+											<i class="unhide icon"></i>&nbsp;&nbsp;&nbsp;214
+										</a>
 									</div>
 									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
 									<div class="description">
 										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
 											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
 											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
-											만약 venv를 만든후에 설치를 하신다면 pip install -I Cython -> pip install kivy를
-											맥에 바로 설치하신다면 pip3 install -I Cython -> pip3 install kivy로 설치하면 됩니다.(가상환경으로 하시는걸 권장합니다)
 										</p>
 									</div>
 									<div class="extra">
-										<div class="ui small labels">
-											<div class="ui small label">
-												<i class="calendar icon"></i>
-												<div class="detail">0일 전</div>
-											</div>
-											<div class="ui small label">
-												<i class="unhide icon"></i>
-												<div class="detail">214</div>
-											</div>
-											<a class="ui tag label" href="#">파이썬</a>
-											<a class="ui tag label" href="#">테스트</a>
-											<a class="ui tag label" href="#">성공적</a>
+										<div class="ui right floated mini teal tag labels">
+											<a class="ui label" href="#">파이썬</a>
+											<a class="ui label" href="#">테스트</a>
+											<a class="ui label" href="#">성공적</a>
 										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="content">
-									<div class="meta">
-										<a class="ui red ribbon label" href="#"><i class="folder icon"></i> &nbsp;카테고리명</a>
-										<div class="ui label">
-											<i class="calendar icon"></i>
-											<div class="detail">0일 전</div>
-										</div>
-										<div class="ui label">
-											<i class="unhide icon"></i>
-											<div class="detail">214</div>
-										</div>
-										<a class="ui tag label" href="#">파이썬</a>
-										<a class="ui tag label" href="#">테스트</a>
-										<a class="ui tag label" href="#">성공적</a>
-									</div>
-									<a class="header" href="#">[모듈] Kivy : 1. Kivy설치 및 GUI구현 원리 </a>
-									<div class="description">
-										<p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
-											brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
-											이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
-											만약 venv를 만든후에 설치를 하신다면 pip install -I Cython -> pip install kivy를
-											맥에 바로 설치하신다면 pip3 install -I Cython -> pip3 install kivy로 설치하면 됩니다.(가상환경으로 하시는걸 권장합니다)
-										</p>
 									</div>
 								</div>
 							</div>
