@@ -26,10 +26,10 @@ class Index(View):
     def get(self, request, data=None):
         # index 페이지에 넘겨줄 컨텐츠 context
         # 최신글 목록 추출
-        newposts = Post.published.publish().values_list('pk','create_date','title','category__name').order_by('-create_date')[:5]
+        newposts = Post.published.publish().values_list('pk','create_date','title','category__name').order_by('-create_date')[:2]
 
         # 인기글 목록 추출
-        starposts = HitCount.objects.all().filter(post__publish=True).values_list('post__pk', 'hits', 'post__title', 'post__category__name')[:5]
+        starposts = HitCount.objects.all().filter(post__publish=True).values_list('post__pk', 'hits', 'post__title', 'post__category__name')[:3]
 
         # 사이드바에 필요한 context를 합쳐줌
         context = {'newposts':newposts,'starposts':starposts}
@@ -54,8 +54,8 @@ def CategoryList(request,pk):
     context.update(sidebar_context())
     return render(request,'blog/category.html',context)
 
-def TagList(request,pk):
-    tag = Tag.objects.get(id=pk)
+def TagList(request,name):
+    tag = Tag.objects.get(name=name)
     # 태그에 속한 모든 포스트를 찾는다
     posts = Post.published.publish().filter(tag__name__in=[tag]).order_by('-id').values_list('pk', 'create_date', 'title', 'posthits__hits')
 
@@ -70,7 +70,7 @@ class PostDetail(HitCountDetailView):
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
         # 포스트 태그 리스트를 생성
-        tags = Post.objects.get(pk=self.kwargs.get('pk')).tag.get_queryset().values_list('id','name')
+        tags = Post.objects.get(pk=self.kwargs.get('pk')).tag.get_queryset().annotate(Count('post')).values_list('id','name','post__count')
         context['posttag'] = tags
         context['shortname'] = getattr(settings,'SHORTNAME')
         # 사이드바에 필요한 context를 합쳐줌

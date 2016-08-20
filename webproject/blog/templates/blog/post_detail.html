@@ -39,9 +39,11 @@
                             <span class="glyphicon glyphicon-calendar" data-toggle="tooltip" data-placement="bottom" title="작성일"></span>&nbsp;{{ object.create_date|date }}&nbsp;&nbsp;&nbsp;
                             <span class="glyphicon glyphicon-eye-open" data-toggle="tooltip" data-placement="bottom" title="조회수"></span>&nbsp;{{ object.hit_count.hits }}&nbsp;&nbsp;&nbsp;
                             <span class="glyphicon glyphicon-tag" data-toggle="tooltip" data-placement="bottom" title="태그"></span>&nbsp;
-                            {% for id,name in posttag %}
-                                <a href="{% url 'blog:Tag' id %}"><span class="label label-info label-large" id="tag">{{ name }}</span></a>
+                            <div class="ui small teal tag labels">
+                            {% for t_id,t_name,t_count in posttag %}
+                                {% include 'blog/module/label_tag.html' %}
                             {% endfor %}
+                            </div>
                         </p>
                         <!-- 페북 공유 버튼 -->
                         <p><div class="fb-share-button" data-href="{{request.build_absolute_uri}}" data-layout="button_count" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div></p>
