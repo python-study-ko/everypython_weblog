@@ -235,11 +235,12 @@ class Post(models.Model,HitCountMixin):
 
     def save(self, *args, **kwargs):
         if PostTags.objects.filter(post=self).exists():
-            PostTags.objects.get(post=self).delete()
+            PostTags.objects.get(post=self).delete()            
         super(Post,self).save(*args, **kwargs)
         # 포스트 태그 레코드 추가
-        p = PostTags(post=self, tags=str(Post.tag.names()))
-        p.save()
+        # 값이 제대로 반영 안될시 아래 주석 제거하기
+        # self.refresh_from_db()
+        PostTags(post=self, tags=str(self.tag.names())).save()
 
     def delete(self, *args, **kwargs):
         # 포스트 태그 테이블의 관련 레코드를 삭제
@@ -259,6 +260,5 @@ class PostTags(models.Model):
     def __str__(self):
         """ 문자열로 저장된 태그 목록을 리스트로 반환해 준"""
         return self.tags
-
 
 
