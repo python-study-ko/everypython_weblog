@@ -16,7 +16,7 @@ def sidebar_context():
     context.update(sidebar_context())이걸 통해 각페이지 context에 카테고리나 태그정보가 담긴 context를 함께 넘겨준다
     :return:
     """
-    tags = Tag.objects.all().filter(post__publish=True).annotate(Count('post')).values_list('id','name','post__count')
+    tags = Tag.objects.all().filter(post__publish=True).annotate(Count('post')).values_list('name','post__count')
     categorytree = Category.tree.navi_bar()
     context_dic={'tags':tags,'categorytree':categorytree}
     return context_dic

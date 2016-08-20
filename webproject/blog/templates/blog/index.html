@@ -90,7 +90,7 @@
                 </div>
                 <div class="ui segment" id="mainwidget">
                     <div class="ui small teal tag labels">
-                        {% for t_id,t_name,t_count in tags %}
+                        {% for t_name,t_count in tags %}
                             {% include 'blog/module/label_tag.html' %}
                             {% empty %}
                                 <p>태그가 없습니다!</p>
