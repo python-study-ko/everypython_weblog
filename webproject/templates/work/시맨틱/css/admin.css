@@ -269,9 +269,11 @@ ul.doughnut-legend {
 
 	.ui.left.fixed.vertical.inverted.menu.sidebar {
 		display: block;
-	}
-
-	.ui.sidebar{
+		overflow-y:scroll;
 		visibility: visible!important;
 	}
+	/*
+	.ui.sidebar{
+		visibility: visible!important;
+	}*/
 }

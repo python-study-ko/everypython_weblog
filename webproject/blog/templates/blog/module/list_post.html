@@ -1,0 +1,29 @@
+<div class="item">
+    <div class="content">
+        <div class="meta">
+            <a class="ui blue ribbon label" href="#"><i class="folder icon"></i> &nbsp;{{ category }}</a>
+            <div class="ui tiny label">
+                <i class="calendar icon"></i>&nbsp;2015-08-02
+                <div class="detail">0일 전</div>
+            </div>
+            <a class="ui tiny label">
+                <i class="unhide icon"></i>&nbsp;&nbsp;&nbsp;{{ hits }}
+            </a>
+        </div>
+        <a class="header" href="{% url 'blog:PostDetail' pk %}">{{ title }}</a>
+        <div class="description">
+            <p>먼저 kivy에 필요한것들을 brew로 설치해줍니다.
+                brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer
+                이후에 pip를 통하여 Cython과 kivy를 설치해주시면 kivy.app없이도 정상적으로 사용 할 수 있습니다.
+            </p>
+        </div>
+        <div class="extra">
+            <div class="ui right floated mini teal tag labels">
+                <i class="ui large teal tags icon"></i>
+                <a class="ui label" href="#">파이썬</a>
+                <a class="ui label" href="#">테스트</a>
+                <a class="ui label" href="#">성공적</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load staticfiles %}
+
 <html lang="ko">
 {% comment %}
     everypython 사이트의 메인 템플릿
@@ -14,7 +16,8 @@
     <!-- 나눔바른고딕 폰트 --><link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
 
     <script src="https://cdn.jsdelivr.net/jquery/3.1.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.js"></script>
+    <script src="{% static 'js/admin.js' %}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css">
     <!-- Remove if you don't want to use Chart JS -->
     {% comment %} 차트 사용시 주석 제거
@@ -33,7 +36,6 @@
         /* 커스텀 스타일시트 */
         {% block style %}{% endblock style %}
     </style>
-
     {# head태그에 달아야하는 스크립트 #}
     {% block headscript %}{% endblock %}
     </head>

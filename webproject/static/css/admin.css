@@ -18,6 +18,9 @@ body {
 	position: relative;
 	width: 81.25%;
 }
+#mainsidebar {
+	overflow-y:auto!important;
+}
 
 #mainwidget {
 	height: auto!important;
@@ -271,7 +274,4 @@ ul.doughnut-legend {
 		display: block;
 	}
 
-	.ui.sidebar{
-		visibility: visible!important;
-	}
 }
