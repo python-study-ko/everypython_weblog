@@ -2,8 +2,9 @@ from django.shortcuts import render,get_object_or_404
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.views.generic import View
-from blog.models import Category, Post
+from .models import Category, Post
 from django.conf import settings
+from django.db.models import Count
 
 from hitcount.models import HitCount
 from taggit.models import Tag
@@ -15,7 +16,7 @@ def sidebar_context():
     context.update(sidebar_context())이걸 통해 각페이지 context에 카테고리나 태그정보가 담긴 context를 함께 넘겨준다
     :return:
     """
-    tags = Tag.objects.all().filter(post__publish=True).values_list('id','name')
+    tags = Tag.objects.all().filter(post__publish=True).annotate(Count('post')).values_list('id','name','post__count')
     categorytree = Category.tree.navi_bar()
     context_dic={'tags':tags,'categorytree':categorytree}
     return context_dic
