@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
+from taggit.models import Tag
 from hitcount.models import HitCountMixin, HitCount
 from django.db.models.query import QuerySet
 from django.db.models import Q, Count, Sum, Case, When, IntegerField
@@ -189,6 +190,16 @@ class PublishMixin(object):
         """미발행 포스트(초안) 목록"""
         return self.filter(publish=False)
 
+    def post_info(self,post_queryset):
+        """ 포스트 쿼리셋으로 포스트 정보와 태그를 추출하고 섞어 하나의 포스트정보로 취합해준다"""
+        basic_info = post_queryset.values_list()
+        tags = Tag.objects.filter(post__in=post_queryset).values_list('post_id','name')
+        tag_index,tag_list = [],{}
+        for p_id,t_name in tags:
+            if p_id not in tag_index:
+                tag_index.append()
+
+
 class PublishQuerySets(QuerySet, PublishMixin):
     pass
 
@@ -222,8 +233,32 @@ class Post(models.Model,HitCountMixin):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        if PostTags.objects.filter(post=self).exists():
+            PostTags.objects.get(post=self).delete()
+        super(Post,self).save(*args, **kwargs)
+        # 포스트 태그 레코드 추가
+        p = PostTags(post=self, tags=str(Post.tag.names()))
+        p.save()
+
+    def delete(self, *args, **kwargs):
+        # 포스트 태그 테이블의 관련 레코드를 삭제
+        PostTags.objects.get(post=self).delete()
+        super(Post,self).delete(*args, **kwargs)
 
 
+
+class PostTags(models.Model):
+    """
+    포스트 태그목록 인덱싱용 모델 : 포스트 수정시 자동으로 해당 포스트의 태그목록을 갱신한다.
+    외부에서 현재 모델의 태그를 불러다 쓸경우 eval()로 문자열을 리스트로 변환해줘야 한다
+    """
+    post = models.OneToOneField(Post)
+    tags = models.CharField(max_length=150)
+
+    def __str__(self):
+        """ 문자열로 저장된 태그 목록을 리스트로 반환해 준"""
+        return self.tags
 
 
 

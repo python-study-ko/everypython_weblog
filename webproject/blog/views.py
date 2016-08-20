@@ -25,10 +25,13 @@ def sidebar_context():
 class Index(View):
     def get(self, request, data=None):
         # index 페이지에 넘겨줄 컨텐츠 context
+        publish = Post.published.publish()
         # 최신글 목록 추출
+        q_newposts = publish.order_by('-create_date')[:2]
         newposts = Post.published.publish().values_list('pk','create_date','title','category__name').order_by('-create_date')[:2]
 
         # 인기글 목록 추출
+        q_starposts = publish.order_by('-posthits__hits')[:3]
         starposts = HitCount.objects.all().filter(post__publish=True).values_list('post__pk', 'hits', 'post__title', 'post__category__name')[:3]
 
         # 사이드바에 필요한 context를 합쳐줌
