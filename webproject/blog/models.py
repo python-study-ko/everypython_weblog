@@ -190,8 +190,9 @@ class PublishMixin(object):
         """미발행 포스트(초안) 목록"""
         return self.filter(publish=False)
 
-    def post_info(self,post_queryset):
+    def posts_info(self,post_queryset):
         """ 포스트 쿼리셋으로 포스트 정보와 태그를 추출하고 섞어 하나의 포스트정보로 취합해준다"""
+        query = post_queryset.prefetch_related('tag')
         basic_info = post_queryset.values_list()
         tags = Tag.objects.filter(post__in=post_queryset).values_list('post_id','name')
         tag_index,tag_list = [],{}
