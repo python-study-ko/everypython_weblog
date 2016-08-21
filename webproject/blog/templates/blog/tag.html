@@ -1,33 +1,10 @@
 {% extends 'base_blog.html' %}
-{% load macros %}
-{% loadmacros 'blog/macro/PostTable.html' %}
 
 {# head title tag #}
 {% block title %}EVERYPYTHON{% endblock title %}
 
 {# style tag #}
-{% block pagestyle %}
-#th1 {
-    margin: fix;
-    width: 50px;
-    text-align: center;
-}
-#th2{
-    margin: fix;
-    width: 80px;
-    text-align: center;
-}
-#th3 {
-    margin: auto;
-    width: 300px;
-    text-align: center;
-}
-#th4 {
-    margin: fix;
-    width: 50px;
-    text-align: center;
-}
-{% endblock pagestyle %}
+{% block pagestyle %}{% endblock pagestyle %}
 
 {% block section %}
     {# 카테고리 글 목록 #}
