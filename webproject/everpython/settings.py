@@ -65,8 +65,6 @@ INSTALLED_APPS = [
     'hitcount',
     # 디버깅 툴바
     'debug_toolbar',
-    # django macro
-    'macros',
     # werkzeug 디버거를 위한 추가
     'django_extensions',
 ]
