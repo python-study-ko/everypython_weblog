@@ -52,14 +52,13 @@ def CategoryList(request,name):
     c = get_object_or_404(Category,name=name)
     categorys = Category.tree.under_list(c)
     if c.level == 3:
-        post_list = Post.published.publish().filter(category=c).order_by('-id').values_list('pk', 'create_date',
-                                                                                            'title', 'posthits__hits')
+        post_queryset = Post.published.publish().filter(category=c).order_by('-id')
     else:
         categorys = Category.tree.under_list(c)
-        post_list = Post.published.publish().filter(category__in=categorys).order_by('-id').values_list('pk', 'create_date', 'title', 'posthits__hits')
-
+        post_queryset = Post.published.publish().filter(category__in=categorys).order_by('-id')
+    posts = Post.published.posts_info(post_queryset)
     # 포스트 목록
-    context = {"posts": post_list,"name":c.name}
+    context = {"posts": posts,"name":c.name}
     # 사이드바에 필요한 context를 합쳐줌
     context.update(sidebar_context())
     return render(request,'blog/category.html',context)
@@ -67,8 +66,8 @@ def CategoryList(request,name):
 def TagList(request,name):
     tag = Tag.objects.get(name=name)
     # 태그에 속한 모든 포스트를 찾는다
-    posts = Post.published.publish().filter(tag__name__in=[tag]).order_by('-id').values_list('pk', 'create_date', 'title', 'posthits__hits')
-
+    post_queryset = Post.published.publish().filter(tag__name__in=[tag]).order_by('-id')
+    posts = Post.published.posts_info(post_queryset)
     context = {"posts": posts,"name":tag.name}
     # 사이드바에 필요한 context를 합쳐줌
     context.update(sidebar_context())
