@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Category, Post, OrderCategory, PostTags
+from .models import Category, Post, OrderCategory
 from django.utils.html import format_html
 
 def Tag_list(obj):
@@ -49,5 +49,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(OrderCategory)
-admin.site.register(PostTags)
 admin.site.register(Post,PostAdmin)

@@ -233,28 +233,5 @@ class Post(models.Model,HitCountMixin):
     def __str__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        super(Post,self).save(*args, **kwargs)
-        # posttags 갱신
-        PostTags.objects.update_or_create(post=self,defaults={'post':self,'tags':str(self.tag.names())})
-
-    def delete(self, *args, **kwargs):
-        # 포스트 태그 테이블의 관련 레코드를 삭제
-        PostTags.objects.get(post=self).delete()
-        super(Post,self).delete(*args, **kwargs)
-
-
-
-class PostTags(models.Model):
-    """
-    포스트 태그목록 인덱싱용 모델 : 포스트 수정시 자동으로 해당 포스트의 태그목록을 갱신한다.
-    외부에서 현재 모델의 태그를 불러다 쓸경우 eval()로 문자열을 리스트로 변환해줘야 한다
-    """
-    post = models.OneToOneField(Post)
-    tags = models.CharField(max_length=150)
-
-    def __str__(self):
-        """ 문자열로 저장된 태그 목록을 리스트로 반환해 준"""
-        return self.tags
 
 

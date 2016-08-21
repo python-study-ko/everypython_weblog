@@ -33,9 +33,15 @@ class Index(View):
         # 인기글 목록 추출
         q_starposts = publish.order_by('-posthits__hits')[:3]
         starposts = HitCount.objects.all().filter(post__publish=True).values_list('post__pk', 'hits', 'post__title', 'post__category__name')[:3]
+        """
+        # prefetch_related 쿼리 테스트
+        test_posts = list(Post.objects.prefetch_related('tag').filter(publish=True).order_by('create_date')[:4])
+        # post_info = test_posts.values_list('pk','title')
+        test_list = [(post.id,[t.name for t in post.tag.all()]) for post in test_posts]
+        """
 
         # 사이드바에 필요한 context를 합쳐줌
-        context = {'newposts':newposts,'starposts':starposts}
+        context = {'newposts':newposts,'starposts':starposts,}
         context.update(sidebar_context())
         data = render_to_string("blog/index.html", context, request=request)
         return HttpResponse(data)
