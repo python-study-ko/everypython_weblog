@@ -28,28 +28,28 @@ class Index(View):
         publish = Post.published.publish()
         # 최신글 목록 추출
         q_newposts = publish.order_by('-create_date')[:2]
-        newposts = Post.published.publish().values_list('pk','create_date','title','category__name').order_by('-create_date')[:2]
+        newposts = Post.published.posts_info(q_newposts)
 
         # 인기글 목록 추출
         q_starposts = publish.order_by('-posthits__hits')[:3]
-        starposts = HitCount.objects.all().filter(post__publish=True).values_list('post__pk', 'hits', 'post__title', 'post__category__name')[:3]
-
+        starposts = Post.published.posts_info(q_newposts)
+        """ 테스트 코드
         # prefetch_related 쿼리 테스트
         posts = Post.objects.filter(publish=True).order_by('create_date')[:4]
         test_posts = list(posts.prefetch_related('tag'))
         # post_info = test_posts.values_list('pk','title')
         test_list = [(post.id,[t.name for t in post.tag.all()]) for post in test_posts]
-
+        """
 
         # 사이드바에 필요한 context를 합쳐줌
-        context = {'newposts':newposts,'starposts':starposts,'test':test_list}
+        context = {'newposts':newposts,'starposts':starposts}
         context.update(sidebar_context())
         data = render_to_string("blog/index.html", context, request=request)
         return HttpResponse(data)
 
 
-def CategoryList(request,pk):
-    c = get_object_or_404(Category,pk=pk)
+def CategoryList(request,name):
+    c = get_object_or_404(Category,name=name)
     categorys = Category.tree.under_list(c)
     if c.level == 3:
         post_list = Post.published.publish().filter(category=c).order_by('-id').values_list('pk', 'create_date',

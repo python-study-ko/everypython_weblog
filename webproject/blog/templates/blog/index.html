@@ -15,7 +15,7 @@
                 <div class="ui segment"><h3 class="ui header">최신글</h3></div>
                 <div class="ui segment">
                     <div class="ui divided items">
-                        {% for pk,hits,title,category  in newposts %}
+                        {% for pk,category,created_date,title,description,tags in newposts %}
                             {% include 'blog/module/list_post.html' %}
                         {% empty %}
                             <p>글이 없습니다</p>
@@ -30,10 +30,10 @@
     <div class="ui row">
         <div class="one column">
             <div class="ui segments">
-                <div class="ui segment"><h3 class="ui header">최신글</h3></div>
+                <div class="ui segment"><h3 class="ui header">인기글</h3></div>
                 <div class="ui segment">
                     <div class="ui divided items">
-                        {% for pk,hits,title,category  in starposts %}
+                        {% for pk,category,created_date,title,description,tags in starposts %}
                             {% include 'blog/module/list_post.html' %}
                         {% empty %}
                             <p>글이 없습니다</p>
@@ -89,7 +89,6 @@
                     <h3 class="ui blue header"><i class="ui large teal tags icon"></i> 태그 모음</h3>
                 </div>
                 <div class="ui segment" id="mainwidget">
-                {{ test }}
                     <div class="ui small teal tag labels">
                         {% for t_name,t_count in tags %}
                             {% include 'blog/module/label_tag.html' %}

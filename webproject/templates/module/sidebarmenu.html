@@ -7,33 +7,33 @@
 {% for group in categorytree %}
     {# 그룹에서 가장 앞의 카테고리를 1차 카테고리로 분류 #}
     {% with c1=group.0 %}
-        {% with c_level=c1.0 c_id=c1.1 c_name=c1.2 c_countpost=c1.3 %}
+        {% with c_level=c1.0 c_name=c1.1 c_countpost=c1.2 %}
             {% if group|length == 1 %}
-                <a class="item c1" href={% url 'blog:Category' c_id %}>
+                <a class="item c1" href={% url 'blog:Category' c_name %}>
                     <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
                     <i class="folder icon"></i>{{ c_name }}
                 </a>
             {% else %}
                 {% with under_c=group|slice:'1:' %}
                     {# 1차 카테고리 #}
-                    <a class="item c1" href="{% url 'blog:Category' c_id %}">
+                    <a class="item c1" href="{% url 'blog:Category' c_name %}">
                         <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
                         <i class="folder icon"></i>{{ c_name }}
                     </a>
                     <div class="undercategory item">
                         <div class="undercategory items">
-                            {% for c_level,c_id,c_name,c_countpost in under_c %}
+                            {% for c_level,c_name,c_countpost in under_c %}
                                 {# 2차 카테고리 #}
                                 {% if c_level == 2 %}
-                                    <a class="item c2" href="{% url 'blog:Category' c_id %}">
+                                    <a class="item c2" href="{% url 'blog:Category' c_name %}">
                                         <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
-                                        <i class="folder icon"></i>{{ c_name|truncatechars:7 }}
+                                        <i class="folder icon"></i>{{ c_name|truncatechars:13 }}
                                     </a>
                                     {# 3차 카테고리 #}
                                 {% elif c_level == 3 %}
-                                    <a class="item c3" href="{% url 'blog:Category' c_id %}">
+                                    <a class="item c3" href="{% url 'blog:Category' c_name %}">
                                         <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
-                                        <i class="folder icon"></i>{{ c_name|truncatechars:5 }}
+                                        <i class="folder icon"></i>{{ c_name|truncatechars:13 }}
                                     </a>
                                 {% endif %}
                             {% endfor %}
