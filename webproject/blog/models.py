@@ -234,13 +234,9 @@ class Post(models.Model,HitCountMixin):
         return self.title
 
     def save(self, *args, **kwargs):
-        if PostTags.objects.filter(post=self).exists():
-            PostTags.objects.get(post=self).delete()            
         super(Post,self).save(*args, **kwargs)
-        # 포스트 태그 레코드 추가
-        # 값이 제대로 반영 안될시 아래 주석 제거하기
-        # self.refresh_from_db()
-        PostTags(post=self, tags=str(self.tag.names())).save()
+        # posttags 갱신
+        PostTags.objects.update_or_create(post=self,defaults={'post':self,'tags':str(self.tag.names())})
 
     def delete(self, *args, **kwargs):
         # 포스트 태그 테이블의 관련 레코드를 삭제
