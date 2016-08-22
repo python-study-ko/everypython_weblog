@@ -12,15 +12,15 @@ from taggit.models import Tag
 from hitcount.views import HitCountDetailView
 
 
-def sidebar_context():
+def base_context():
     """
-    사이드바 위젯에 들어갈 context을 넘겨주는 함수.
-    context.update(sidebar_context())  통해 각페이지 context에 카테고리 정보를 넘겨준다
+    블로그에 기본적으로 들어갈 context을 넘겨주는 함수. (사이드바,구글 태그 매니저)
+    context.update(base_context())  통해 각페이지 context에 카테고리 정보를 넘겨준다
     :return:
     """
-
+    gtm = getattr(settings,'GTM_STATE')
     categorytree = Category.tree.navi_bar()
-    context_dic = {'categorytree': categorytree}
+    context_dic = {'categorytree': categorytree, 'gtm': gtm}
     return context_dic
 
 def makepage(request,post_list,viewnum=8):
@@ -67,7 +67,7 @@ class Index(View):
 
         # 사이드바에 필요한 context를 합쳐줌
         context = {'tags': tags, 'newposts': newposts, 'starposts': starposts}
-        context.update(sidebar_context())
+        context.update(base_context())
         data = render_to_string("blog/index.html", context, request=request)
         return HttpResponse(data)
 
@@ -87,7 +87,7 @@ def CategoryList(request, name):
 
     context = {"posts": posts, "name": c.name}
     # 사이드바에 필요한 context를 합쳐줌
-    context.update(sidebar_context())
+    context.update(base_context())
     return render(request, 'blog/category.html', context)
 
 
@@ -102,7 +102,7 @@ def TagList(request, name):
 
     context = {"posts": posts, "name": tag.name}
     # 사이드바에 필요한 context를 합쳐줌
-    context.update(sidebar_context())
+    context.update(base_context())
     return render(request, 'blog/tag.html', context)
 
 
@@ -114,9 +114,10 @@ class PostDetail(HitCountDetailView):
         context = super(PostDetail, self).get_context_data(**kwargs)
 
         context['shortname'] = getattr(settings, 'SHORTNAME')
+        context['og'] = getattr(settings,'OG_TAG')
         if getattr(settings,'AD_STATE'):
             context['ad'] = getattr(settings,'AD_STATE')
 
         # 사이드바에 필요한 context를 합쳐줌
-        context.update(sidebar_context())
+        context.update(base_context())
         return context
