@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load staticfiles %}
+
 <html lang="ko">
 {% comment %}
     everypython 사이트의 메인 템플릿
@@ -6,36 +8,34 @@
 {% endcomment %}
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <meta name="description" content="">
-    <meta name="author" content="신재현">
+    <meta name="author" content="">
 
-    {# 합쳐지고 최소화된 최신 부트스트랩 CSS  #}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    {# 부가적인 부트스트랩 테마  #}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    {# 나눔스퀘어 웹폰트 #}
-    <link rel="stylesheet" href="//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css">
+    <!-- 나눔스퀘어 폰트 --><link rel="stylesheet" href="//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css">
+    <!-- 나눔바른고딕 폰트 --><link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
 
-    {# Jquery 스크립 #}트
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.js"></script>
+    <script src="{% static 'js/admin.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css">
+    <!-- Remove if you don't want to use Chart JS -->
+    {% comment %} 차트 사용시 주석 제거
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    {% endcomment %}
+
     {% block head %}{% endblock head %}
     <title>
         {# 홈페이지 제목 확장 #}
         {% block title %}EVERYPYTHON{% endblock title %}
     </title>
     <style>
-            h1, h2, h3, h4, h5{font-family: 'Nanum Square'; font-weight: bold;}
-        {% comment %} 웹폰트는 당분간 제거
-        @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-        body, table, div, p, li, span {font-family: 'Noto Sans KR', sans-serif;;}
-        {% endcomment %}
+        h1, h2, h3, h4, h5, a.header{font-family: 'Nanum Square' !important; font-weight: bold;}
+        p, a, .label, .labels, .detail {font-family: 'Nanum Barungothic' !important; }
 
-        {# 커스텀 스타일 태그 #}
+        /* 커스텀 스타일시트 */
         {% block style %}{% endblock style %}
     </style>
-
     {# head태그에 달아야하는 스크립트 #}
     {% block headscript %}{% endblock %}
     </head>
@@ -44,10 +44,6 @@
     {% endblock body %}
 
     {# 스크립트 #}
-    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="http://bootstrapk.com/assets/js/ie10-viewport-bug-workaround.js"></script>
     {# 페이지 맨 아래에서 호출할 스크립트 #}
     {% block bodyscript %}{% endblock %}
 </body>

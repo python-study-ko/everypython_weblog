@@ -1,50 +1,30 @@
 {% extends 'base_blog.html' %}
-{% load macros %}
-{% loadmacros 'blog/macro/PostTable.html' %}
 
 {# head title tag #}
 {% block title %}EVERYPYTHON{% endblock title %}
 
 {# style tag #}
-{% block pagestyle %}
-#th1 {
-    margin: fix;
-    width: 50px;
-    text-align: center;
-}
-#th2{
-    margin: fix;
-    width: 80px;
-    text-align: center;
-}
-#th3 {
-    margin: auto;
-    width: 300px;
-    text-align: center;
-}
-#th4 {
-    margin: fix;
-    width: 50px;
-    text-align: center;
-}
-{% endblock pagestyle %}
+{% block pagestyle %}{% endblock pagestyle %}
 
 {% block section %}
-    <div class="col-xs-12 col-md-12">
-        <div class="panel panel-primary" id="p_shadow">
-            <div class="panel-heading"><h3 class="panel-title headtext"><span class="glyphicon glyphicon-folder-open"></span> &nbsp; {{ name }}</h3></div>
-            {% if posts %}
-            <div class="panel-body">{{ name }} 카테고리 및 하위 카테고리에 속한 글 목록입니다.</div>
-            <!-- 글목록 -->
-            <table class="table table-striped table-postlist">
-                {% use_macro table_head '글번호' '작성일' '제목' col4='조회수' th1='th1' th2='th2' th3='th3' th4='th4'%}
-                {% use_macro table_body_post posts %}
-            </table>
-            {% else %}
-            <div class="panel-body">{{ name }} 카테고리 및 하위 카테고리에 속한 글이 없습니다.</div>
-            {% endif %}
+    {# 카테고리 글 목록 #}
+    <div class="ui row">
+        <div class="one column">
+            <div class="ui center segments">
+                <div class="ui segment"><h3 class="ui header">{{ name }} 및 하위카테고리 글 목</h3></div>
+                <div class="ui segment">
+                    <div class="ui divided items">
+                        {% for pk,category,created_date,title,description,tags in posts %}
+                            {% include 'blog/module/list_post.html' %}
+                        {% empty %}
+                            <p>{{ name }} 카테고리 및 하위 카테고리에 속한 글이 없습니다.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    {% include 'blog/module/pagination_posts.html' %}
 {% endblock section %}
 {# 페이지 맨 아래에서 호출할 스크립트 #}
 {% block bodyscript %}{% endblock %}

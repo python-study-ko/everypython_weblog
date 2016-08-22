@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Category, Post, OrderCategory
+from .models import Category, Post, OrderCategory
 from django.utils.html import format_html
 
 def Tag_list(obj):

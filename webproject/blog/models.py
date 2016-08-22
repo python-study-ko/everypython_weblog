@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
+from taggit.models import Tag
 from hitcount.models import HitCountMixin, HitCount
 from django.db.models.query import QuerySet
 from django.db.models import Q, Count, Sum, Case, When, IntegerField
@@ -50,7 +51,7 @@ class CategoryMixin(object):
         # 발행된 포스트만 계수하기 위한 ORM : 발행=1, 미발행=0으로 하여 총 합을 구한다.
         postcount=Sum(Case(When(post__publish=True, then=1), default=0, output_field=IntegerField()))
         #  전체 카테고리의 정보를 튜플로 추출한다.
-        c_info = c_list.annotate(count_posts=postcount).values_list('level', 'id', 'name', 'count_posts')
+        c_info = c_list.annotate(count_posts=postcount).values_list('level', 'name', 'count_posts')
 
         # 카테고리 정보를 뷰와 템플릿에서 처리하기 쉽도록 구조를 변경한다.
         category_tree = []
@@ -189,6 +190,16 @@ class PublishMixin(object):
         """미발행 포스트(초안) 목록"""
         return self.filter(publish=False)
 
+    def posts_info(self,post_queryset):
+        """
+        포스트 목록 쿼리셋을 받아 포스트목록에 보여줄 정보를 취합하여 list로 넘겨준다
+        list에 담겨지는 포스 정보의 구조 : (pk,category,created_date,hitcounts,title,description(없을시엔 contnent의 100자까지로 대체),tags)
+        """
+        posts = list(post_queryset.select_related('category').prefetch_related('tag'))
+        info_list = [(p.pk, p.category.name, p.create_date, p.title, p.description if p.description else p.content[:100] , [t.name for t in p.tag.all()]) for p in posts]
+        return info_list
+
+
 class PublishQuerySets(QuerySet, PublishMixin):
     pass
 
@@ -221,9 +232,6 @@ class Post(models.Model,HitCountMixin):
 
     def __str__(self):
         return self.title
-
-
-
 
 
 
