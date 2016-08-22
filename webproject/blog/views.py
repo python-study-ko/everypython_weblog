@@ -18,9 +18,9 @@ def sidebar_context():
     context.update(sidebar_context())이걸 통해 각페이지 context에 카테고리나 태그정보가 담긴 context를 함께 넘겨준다
     :return:
     """
-    tags = Tag.objects.all().filter(post__publish=True).annotate(Count('post')).values_list('name', 'post__count')
+
     categorytree = Category.tree.navi_bar()
-    context_dic = {'tags': tags, 'categorytree': categorytree}
+    context_dic = {'categorytree': categorytree}
     return context_dic
 
 def makepage(request,post_list,viewnum=8):
@@ -48,6 +48,7 @@ def makepage(request,post_list,viewnum=8):
 class Index(View):
     def get(self, request, data=None):
         # index 페이지에 넘겨줄 컨텐츠 context
+        tags = Tag.objects.all().filter(post__publish=True).annotate(Count('post')).values_list('name', 'post__count')
         publish = Post.published.publish()
         # 최신글 목록 추출
         q_newposts = publish.order_by('-create_date')[:2]
@@ -65,7 +66,7 @@ class Index(View):
         """
 
         # 사이드바에 필요한 context를 합쳐줌
-        context = {'newposts': newposts, 'starposts': starposts}
+        context = {'tags': tags, 'newposts': newposts, 'starposts': starposts}
         context.update(sidebar_context())
         data = render_to_string("blog/index.html", context, request=request)
         return HttpResponse(data)
@@ -111,11 +112,7 @@ class PostDetail(HitCountDetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
-        # 포스트 태그 리스트를 생성
-        tags = Post.objects.get(pk=self.kwargs.get('pk')).tag.get_queryset().annotate(Count('post')).values_list('id',
-                                                                                                                 'name',
-                                                                                                                 'post__count')
-        context['posttag'] = tags
+
         context['shortname'] = getattr(settings, 'SHORTNAME')
         # 사이드바에 필요한 context를 합쳐줌
         context.update(sidebar_context())
