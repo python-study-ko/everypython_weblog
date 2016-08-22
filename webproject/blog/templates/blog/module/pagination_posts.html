@@ -1,0 +1,25 @@
+{% if posts %}
+    <div class="centered row">
+        <div class="one colum">
+            <div class="ui center buttons">
+                {% if posts.has_previous %}
+                    <a class="ui icon button" href="?page={{ posts.previous_page_number }}">
+                        <i class="left chevron icon"></i>
+                    </a>
+                {% endif %}
+                {% for pg in posts.paginator.page_range %}
+                    {% if posts.number == pg %}
+                        <a class="ui active button" href="?page={{ pg }}">{{ pg }}</a>
+                    {% else %}
+                        <a class="ui button" href="?page={{ pg }}">{{ pg }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if posts.has_next %}
+                    <a class="ui icon button" href="?page={{ posts.next_page_number }}">
+                        <i class="right chevron icon"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
