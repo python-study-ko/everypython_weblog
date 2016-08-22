@@ -42,3 +42,18 @@ BUCKET: xxxxxxxxxxxxxxxxxxxxx
 [disqus]
 # disqus 가입시 할당받는 shortname을 입력하세요.
 SHORTNAME: xxxxxx
+
+[googleAD]
+# 구글 광고 설정입니다.
+# 광고는 블로그 상세 페이지 상,하단과 모바일페이지 수준 광고가 지원됩니다. 원하시는 광고만 선택하시면 됩니다.
+# 아래는 실제 블로그 상세 페이지에 들어가는 스크립트의 설정 부분입니다. 클라이언트 코드와 슬롯 코드만 입력하시면 됩니다.
+# <ins class="adsbygoogle"
+#     style="display:block"
+#     data-ad-client="<클라이언트 코드>"
+#     data-ad-slot="<슬롯 코드>"
+#     data-ad-format="auto">
+# </ins>
+AD_POSTTOP: True
+AD_PAGE: True
+AD_CLIENT: xxxxxxxxxxxxxxxxxxxxx
+AD_SLOT: xxxxxxxxxxxxx

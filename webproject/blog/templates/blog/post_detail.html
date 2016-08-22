@@ -20,62 +20,103 @@
 {% endblock pagestyle %}
 
 {% block headscript %}
+    {% if ad.page or ad.top or ad.down %}
+        {# 구글 에드센스용 스크립트 #}
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    {% endif %}
+    {% if ad.page %}
+        {# 구글 에드센스 모바일 페이지 광고 스크립트 #}
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "{{ ad.client }}",
+                enable_page_level_ads: true
+            });
+        </script>
+    {% endif %}
     <script src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}
 
 {% block section %}
     <div class="ui row">
-    <div class="one column">
-        <article class="ui raised segments">
-            {# 제목 영역 #}
-            <div class="ui top attached segment">
-                <div class="item">
-                    <div class="content">
-                        <div class="meta">
-                            <a class="ui blue ribbon label" href="{% url 'blog:Category' object.category %}"><i
-                                    class="folder icon"></i> &nbsp;{{ object.category }}</a>
+        <div class="one column">
+            <article class="ui raised segments">
+                {# 제목 영역 #}
+                <div class="ui top attached segment">
+                    <div class="item">
+                        <div class="content">
+                            <div class="meta">
+                                <a class="ui blue ribbon label" href="{% url 'blog:Category' object.category %}"><i
+                                        class="folder icon"></i> &nbsp;{{ object.category }}</a>
 
-                            <div class="ui tiny label">
-                                <i class="calendar icon"></i>&nbsp;{{ object.created_date|date:"Y M d" }}
-                                <div class="detail">{{ object.created_date|timesince }} 전</div>
-                            </div>
-                            <div class="ui tiny label">
-                                <i class="unhide icon"></i>&nbsp;
-                                <div class="detail">{% get_hit_count for object %}</div>
-                            </div>
-                            <div class="fb-share-button"
-                                 data-href="{{ request.build_absolute_uri }}"
-                                 data-layout="button_count" data-size="small" data-mobile-iframe="false"><a
-                                    class="fb-xfbml-parse-ignore" target="_blank"
-                                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a>
-                            </div>
+                                <div class="ui tiny label">
+                                    <i class="calendar icon"></i>&nbsp;{{ object.created_date|date:"Y M d" }}
+                                    <div class="detail">{{ object.created_date|timesince }} 전</div>
+                                </div>
+                                <div class="ui tiny label">
+                                    <i class="unhide icon"></i>&nbsp;
+                                    <div class="detail">{% get_hit_count for object %}</div>
+                                </div>
+                                <div class="fb-share-button"
+                                     data-href="{{ request.build_absolute_uri }}"
+                                     data-layout="button_count" data-size="small" data-mobile-iframe="false"><a
+                                        class="fb-xfbml-parse-ignore" target="_blank"
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a>
+                                </div>
 
-                        </div>
-                        <div class="ui header"><h2>{{ object.title }}</h2></div>
+                            </div>
+                            <div class="ui header"><h2>{{ object.title }}</h2></div>
 
-                        <div class="extra">
-                            <div class="ui mini teal tag labels">
-                                <i class="ui large teal tags icon"></i>
-                                {% for tag in object.tag.all %}
-                                    <a class="ui label" href="{% url 'blog:Tag' tag %}">{{ tag }}</a>
-                                {% endfor %}
+                            <div class="extra">
+                                <div class="ui mini teal tag labels">
+                                    <i class="ui large teal tags icon"></i>
+                                    {% for tag in object.tag.all %}
+                                        <a class="ui label" href="{% url 'blog:Tag' tag %}">{{ tag }}</a>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            {# 본문 영역 #}
-            <div class="ui attached segment">
-                {{ object.content }}
-            </div>
-            {# 댓글 영역 #}
-            <div class="ui bottom attached segment">
-                <div id="disqus_thread"></div>
-            </div>
 
-        </article>
-    </div>
+                {# 본문 영역 #}
+                <div class="ui attached segment">
+                    {# 본문 상단 광고 영역 #}
+                {% if ad.top %}
+                    <div class="ui centered leaderboard ad">
+                    <!-- 블로그 반응형 광고 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="{{ ad.client }}"
+                         data-ad-slot="{{ ad.slot }}"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    </div>
+                {% endif %}
+                    {{ object.content }}
+                </div>
+                {% comment %} 추후 하단 광고 추가시 활용
+                {# 본문 하단 광고 #}
+                {% if ad.down %}
+                    <!-- 블로그 반응형 광고 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="{{ ad.client }}"
+                         data-ad-slot="{{ ad.slot }}"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                {% endif %}
+                {% endcomment %}
+                {# 댓글 영역 #}
+                <div class="ui bottom attached segment">
+                    <div id="disqus_thread"></div>
+                </div>
+            </article>
+        </div>
     </div>
     </div>
     <script>

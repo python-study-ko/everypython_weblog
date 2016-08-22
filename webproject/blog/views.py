@@ -15,7 +15,7 @@ from hitcount.views import HitCountDetailView
 def sidebar_context():
     """
     사이드바 위젯에 들어갈 context을 넘겨주는 함수.
-    context.update(sidebar_context())이걸 통해 각페이지 context에 카테고리나 태그정보가 담긴 context를 함께 넘겨준다
+    context.update(sidebar_context())  통해 각페이지 context에 카테고리 정보를 넘겨준다
     :return:
     """
 
@@ -114,6 +114,9 @@ class PostDetail(HitCountDetailView):
         context = super(PostDetail, self).get_context_data(**kwargs)
 
         context['shortname'] = getattr(settings, 'SHORTNAME')
+        if getattr(settings,'AD_STATE'):
+            context['ad'] = getattr(settings,'AD_STATE')
+
         # 사이드바에 필요한 context를 합쳐줌
         context.update(sidebar_context())
         return context

@@ -199,8 +199,26 @@ AWS_SECRET_ACCESS_KEY = config.get('s3','SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config.get('s3','BUCKET')
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
 
-# 디스커스 설
+# 디스커스 설정
 SHORTNAME = config.get('disqus','SHORTNAME')
+
+# 구글 애드센스 설정
+# 광고 게시 여부
+try:
+    AD_PAGE = True if config.get('googleAD','AD_PAGE') == 'True' else False
+    AD_POSTTOP = True if config.get('googleAD', 'AD_POSTTOP') == 'True' else False
+except:
+    AD_PAGE,AD_POSTTOP = False , False
+
+
+# 광고 스크립트 설정 정보
+AD_CLIENT_ID = config.get('googleAD','AD_CLIENT')
+AD_SLOT_ID =config.get('googleAD','AD_SLOT')
+# 템플릿에서 처리할 광고 정보 취합
+try:
+    AD_STATE = {'page': AD_PAGE , 'top': AD_POSTTOP, 'client': AD_CLIENT_ID, 'slot': AD_SLOT_ID}
+except:
+    AD_STATE = False
 
 # CKEditor 설정
 CKEDITOR_BROWSE_SHOW_DIRS = True
