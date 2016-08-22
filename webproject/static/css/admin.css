@@ -1,277 +1,277 @@
 /* 커스텀 팔레트 */
 
-
-
 /* MAIN STYLES */
 
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-	background-color: #F5F5F5 !important;
+    background-color: #F5F5F5 !important;
 }
 
 .ui.main.grid {
-	left: 18.75%;
-	position: relative;
-	width: 81.25%;
+    left: 18.75%;
+    position: relative;
+    width: 81.25%;
 }
+
 #mainsidebar {
-	overflow-y:auto!important;
+    overflow-y: auto !important;
 }
 
 #mainwidget {
-	height: auto!important;
+    height: auto !important;
 }
 
 .ui.main.grid .ui.secondary.pointing.fluid.menu h2 {
-	margin: calc(2rem - .14285em) 0 1rem;
+    margin: calc(2rem - .14285em) 0 1rem;
 }
 
 .ui.fixed.inverted.main.menu {
-	display: none;
+    display: none;
 }
 
 .ui.left.fixed.vertical.inverted.menu {
-	padding-left: 0;
-	padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .ui.left.fixed.vertical.inverted.menu a.item:first-child {
-	padding-bottom: 30px;
-	padding-top: 60px;
+    padding-bottom: 30px;
+    padding-top: 60px;
 }
 
 .ui.sidebar.inverted.vertical.menu a.item:first-child {
-	padding-bottom: 15px;
-	padding-top: 30px;
+    padding-bottom: 15px;
+    padding-top: 30px;
 }
 
 /* LOGIN STYLES */
 
 [data-page="login"] .ui.container {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	justify-content: center;
-	margin: 0 auto;
-	width: 465px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    margin: 0 auto;
+    width: 465px;
 }
 
 .dashboard.brand.icon {
-	width: 100%;
-	margin-bottom: 36px;
+    width: 100%;
+    margin-bottom: 36px;
 }
 
 [data-page="login"] .ui.container .ui.segment {
-	padding: 35px;
+    padding: 35px;
 }
 
 p.signup {
-	padding-top: 25px;
+    padding-top: 25px;
 }
 
 p.dashboard {
-	font-size: 12px;
-	padding-top: 10px;
-	text-transform: uppercase;
+    font-size: 12px;
+    padding-top: 10px;
+    text-transform: uppercase;
 }
 
 p.signup, p.dashboard {
-	color: #999999;
-	text-align: center;
+    color: #999999;
+    text-align: center;
 }
 
 /* PRODUCTS STYLES */
 .ui.striped.table {
-	padding-left: 0;
-	padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .ui.main.grid .products.column, .ui.main.grid .products.column .basic.segment {
-	padding: 1rem 0;
+    padding: 1rem 0;
 }
 
 .ui.divided.product.items {
-	width: 100%;
+    width: 100%;
 }
 
 .ui.divided.product.items img {
-	height: 187px;
-	width: 150px;
+    height: 187px;
+    width: 150px;
 }
 
 /* CUSTOMER STYLES */
 
 .customer.statistics {
-	width: 100%;
+    width: 100%;
 }
 
 .feedback.segments {
-	width: 100%;
+    width: 100%;
 }
 
 /* EMPLOYEES STYLES */
 
 .ui.mobile.cards {
-	display: none;
+    display: none;
 }
 
 /* DASHBOARD STYLES */
 
 .ui.dashboard.segment {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	min-height: 171px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 171px;
 }
 
 .ui.dashboard.statistic .value {
-	color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 .ui.dashboard.statistic .label {
-	color: #F5F5F5;
+    color: #F5F5F5;
 }
 
 .harlf.column {
-	width: 50% !important;
+    width: 50% !important;
 }
 
 .top-table.column {
-	width: 33.33333333% !important;
+    width: 33.33333333% !important;
 }
 
 .top-table.column .ui.segment:last-child, .doughnut-chart.column .ui.segment:last-child {
-	height: 219px;
+    height: 219px;
 }
 
 .doughnut-chart.column {
-	width: 66.66666666% !important;
+    width: 66.66666666% !important;
 }
 
 ul#dashboard_legend {
-	display: inline-block;
-	vertical-align: top;
+    display: inline-block;
+    vertical-align: top;
 }
 
 ul.doughnut-legend {
-	list-style-type: none;
+    list-style-type: none;
 }
 
 .doughnut-legend li span {
-	border-radius: 50%;
-	display: inline-block;
-	margin-right: 8px;
-	height: 12px;
-	width: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    height: 12px;
+    width: 12px;
 }
 
 /* SMARTPHONE */
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-	.ui.mobile.cards {
-		display: flex;
-	}
+    .ui.mobile.cards {
+        display: flex;
+    }
 
-	.ui.special.three.cards {
-		display: none;
-	}
+    .ui.special.three.cards {
+        display: none;
+    }
 
-	 .row {
-		padding-top: 0;
-		padding-bottom: 0;
-	}
+    .row {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 
-	.top-table.column .ui.segment:last-child, .doughnut-chart.column .ui.segment:last-child {
-		height: auto;
-	}
+    .top-table.column .ui.segment:last-child, .doughnut-chart.column .ui.segment:last-child {
+        height: auto;
+    }
 
-	.ui.special.three.cards .card .content a.header,
-	.ui.special.three.cards .card .content div.header {
-		font-size: 1em;
-	}
+    .ui.special.three.cards .card .content a.header,
+    .ui.special.three.cards .card .content div.header {
+        font-size: 1em;
+    }
 
-	.ui.four.customer.statistics .statistic .value {
-		font-size: 1.5em;
-	}
+    .ui.four.customer.statistics .statistic .value {
+        font-size: 1.5em;
+    }
 
-	.ui.grid .nine.wide.products.column, .ui.grid .seven.wide.products.column {
-		padding: 0;
-		width: 100% !important;
-	}
+    .ui.grid .nine.wide.products.column, .ui.grid .seven.wide.products.column {
+        padding: 0;
+        width: 100% !important;
+    }
 
-	.ui.grid .seven.wide.products.column .ui.basic.right.aligned.segment {
-		text-align: left;
-	}
+    .ui.grid .seven.wide.products.column .ui.basic.right.aligned.segment {
+        text-align: left;
+    }
 
-	/* 메인페이지 칼럼 스타일 */
-	.one.column, .harlf.column{
-		margin-bottom: 30px!important;
-		width: 100% !important;
-		padding-left: 0.5rem!important;
-		padding-right: 0.5rem!important;
-	}
+    /* 메인페이지 칼럼 스타일 */
+    .one.column, .harlf.column {
+        margin-bottom: 30px !important;
+        width: 100% !important;
+        padding-left: 0.1rem !important;
+        padding-right: 0.1rem !important;
+    }
 
-	.ui.grid .ui.three.column.row .dashboard-stat.column,
-	.top-table.column, .doughnut-chart.column, .ui.grid .four.wide.sales.column,
-	.ui.grid .twelve.wide.sales.column{
-		margin-bottom: 30px;
-		width: 100% !important;
-	}
+    .ui.grid .ui.three.column.row .dashboard-stat.column,
+    .top-table.column, .doughnut-chart.column, .ui.grid .four.wide.sales.column,
+    .ui.grid .twelve.wide.sales.column {
+        margin-bottom: 30px;
+        width: 100% !important;
+    }
 
-	.ui.header.datetime {
-		margin: 3rem 0 1rem;
-	}
+    .ui.header.datetime {
+        margin: 3rem 0 1rem;
+    }
 
-	.ui.left.fixed.vertical.inverted.menu {
-		display: none;
-	}
+    .ui.left.fixed.vertical.inverted.menu {
+        display: none;
+    }
 
-	.ui.fixed.inverted.main.menu {
-		display: block;
-	}
+    .ui.fixed.inverted.main.menu {
+        display: block;
+    }
 
-	.ui.main.grid {
-		left: 0%;
-		margin : 40px auto!important;
-		padding: 1rem 0 0!important;
-		position: relative;
-		width: 100%;
-	}
+    .ui.main.grid {
+        left: 0%;
+        margin: 10px auto !important;
+        position: relative;
+        width: 100%;
+        padding-left: 3px !important;
+        padding-right: 1px !important;
+    }
 }
 
 /* TABLET */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-	.ui.header.datetime {
-		margin: 3rem 0 1rem;
-	}
+    .ui.header.datetime {
+        margin: 3rem 0 1rem;
+    }
 
-	.ui.left.fixed.vertical.inverted.menu {
-		display: none;
-	}
+    .ui.left.fixed.vertical.inverted.menu {
+        display: none;
+    }
 
-	.ui.fixed.inverted.main.menu {
-		display: block;
-	}
+    .ui.fixed.inverted.main.menu {
+        display: block;
+    }
 
-	.ui.main.grid {
-		margin-top: 40px!important;
-		left: 0%;
-		padding-top: 1rem !important;
-		position: relative;
-		width: 100%;
-	}
+    .ui.main.grid {
+        margin-top: 15px !important;
+        left: 0%;
+        padding-top: 1rem !important;
+        position: relative;
+        width: 100%;
+    }
 }
 
 @media only screen and (min-width: 992px) {
-	.ui.fixed.inverted.main.menu {
-		display: none;
-	}
+    .ui.fixed.inverted.main.menu {
+        display: none;
+    }
 
-	.ui.left.fixed.vertical.inverted.menu.sidebar {
-		display: block;
-	}
+    .ui.left.fixed.vertical.inverted.menu.sidebar {
+        display: block;
+    }
 
 }
