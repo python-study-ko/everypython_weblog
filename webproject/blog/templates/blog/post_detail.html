@@ -1,5 +1,6 @@
 {% extends 'base_blog.html' %}
 {% load static %}
+{% load hitcount_tags %}
 
 {% block meta %}{% endblock meta %}
 {% block link %}
@@ -24,24 +25,59 @@
 {% endblock %}
 
 {% block section %}
-    <article>
-        <div class="ui row">
-            <div class="one column">
-                <div class="ui segments">
-                    {# 제목 영역 #}
-                    <div class="ui segment"></div>
-                    {# 본문 영역 #}
-                    <div class="ui segment"></div>
-                    {# 댓글 영역 #}
-                    <div class="ui segment">
-                        <div id="disqus_thread"></div>
-                    </div>
+    <div class="ui row">
+    <div class="one column">
+        <article class="ui raised segments">
+            {# 제목 영역 #}
+            <div class="ui top attached segment">
+                <div class="item">
+                    <div class="content">
+                        <div class="meta">
+                            <a class="ui blue ribbon label" href="{% url 'blog:Category' object.category %}"><i
+                                    class="folder icon"></i> &nbsp;{{ object.category }}</a>
 
+                            <div class="ui tiny label">
+                                <i class="calendar icon"></i>&nbsp;{{ object.created_date|date:"Y M d" }}
+                                <div class="detail">{{ object.created_date|timesince }} 전</div>
+                            </div>
+                            <div class="ui tiny label">
+                                <i class="unhide icon"></i>&nbsp;
+                                <div class="detail">{% get_hit_count for object %}</div>
+                            </div>
+                            <div class="fb-share-button"
+                                 data-href="{{ request.build_absolute_uri }}"
+                                 data-layout="button_count" data-size="small" data-mobile-iframe="false"><a
+                                    class="fb-xfbml-parse-ignore" target="_blank"
+                                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a>
+                            </div>
+
+                        </div>
+                        <div class="ui header"><h2>{{ object.title }}</h2></div>
+
+                        <div class="extra">
+                            <div class="ui mini teal tag labels">
+                                <i class="ui large teal tags icon"></i>
+                                {% for tag in object.tag.all %}
+                                    <a class="ui label" href="{% url 'blog:Tag' tag %}">{{ tag }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
-    </article>
+            {# 본문 영역 #}
+            <div class="ui attached segment">
+                {{ object.content }}
+            </div>
+            {# 댓글 영역 #}
+            <div class="ui bottom attached segment">
+                <div id="disqus_thread"></div>
+            </div>
+
+        </article>
+    </div>
+    </div>
+    </div>
     <script>
         var disqus_config = function () {
             this.page.url = '{{request.build_absolute_uri}}';  // Replace PAGE_URL with your page's canonical URL variable
