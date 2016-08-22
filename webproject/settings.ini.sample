@@ -1,0 +1,83 @@
+# everypython weblog 셋팅파일 입니다.
+# 필요한 설정만 변경하시면 됩니다
+[deploy]
+# 시크릿키는 http://www.miniwebtool.com/django-secret-key-generator/ 여기서 발급받아 채우셔도 됩니다.
+SECRET_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+DEBUG: True
+ALLOWED_HOSTS: *
+# whitenoise 설정 : 정적 파일을 CDN으로 배포시 False, CDN이 없다면 True
+WHITENOISE: True
+
+[language]
+LANGUAGE_CODE: ko
+TIME_ZONE: Asia/Seoul
+
+
+[db]
+# DB 엔진 종류
+# sqlite > django.db.backends.sqlite3
+# mysql > django.db.backends.mysql
+# pgsql > django.db.backends.postgresql_psycopg2
+
+ENGINE: django.db.backends.mysql
+NAME: <테이블 이름>
+USER: <계정>
+PASSWORD: <비밀번호>
+HOST: <서버 주소>
+POST: <포트:3306>
+
+[jet] # jet 관리자 설정
+# 사이드 메뉴 고정(True), 애니메이션(False)
+SIDE_MENU: True
+
+[s3]
+# s3리전 - 서울은 s3-ap-northeast-2.amazonaws.com
+S3_HOST: s3-ap-northeast-2.amazonaws.com
+# s3 접근 키 정보
+ACCESS_KEY_ID: xxxxxxxxxxxxxxxxxx
+SECRET_ACCESS_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# s3 버킷이름
+BUCKET: xxxxxxxxxxxxxxxxxxxxx
+
+[disqus]
+# disqus 가입시 할당받는 shortname을 입력하세요.
+SHORTNAME: xxxxxx
+
+[googleAD]
+# 구글 광고 설정입니다.
+# 광고는 블로그 상세 페이지 상,하단과 모바일페이지 수준 광고가 지원됩니다. 원하시는 광고만 선택하시면 됩니다.
+# 아래는 실제 블로그 상세 페이지에 들어가는 스크립트의 설정 부분입니다. 클라이언트 코드와 슬롯 코드만 입력하시면 됩니다.
+# <ins class="adsbygoogle"
+#     style="display:block"
+#     data-ad-client="<클라이언트 코드>"
+#     data-ad-slot="<슬롯 코드>"
+#     data-ad-format="auto">
+# </ins>
+AD_POSTTOP: True
+AD_PAGE: True
+AD_CLIENT: xxxxxxxxxxxxxxxxxxxxx
+AD_SLOT: xxxxxxxxxxxxx
+
+[gtm]
+# 구글 태그 매니 설정입니다.
+# 구글 웹로그나 다른 분석 서비스를 이용할때 사용하시면 됩니다.
+# 구글 태그매니저 에서 계정을 생성후 GTM_ID를 아래에 추가하시면 자동으로 블로그 전체 페이지에 태그가 삽입됩니다.
+# 이후 구글 태그 매니저에서 웹로그나 다른 서비스 태그를 연동 하시면 됩니다.
+# 구글 태그 매니저 : https://www.google.com/analytics/tag-manager/
+# 연동방식 안내 영상 : https://youtu.be/frTFZNQlrKA
+
+# 구글 태그 매니저 사용여부(True/False)
+GTM: False
+# 구글 태그 매니저 아이디 (ex. GTM-xxxxxxx)
+GTM_ID: GTM-xxxxx
+
+[og]
+# 페이스북 OG TAG 지원을 위한 설정
+# 각 설정명은 og:xxx 에 들어갈 설정값입니다. 되도록 모두 채우시는것을 추천합니다.
+# 이미지는 페이스북 공유시에 보여지는 것으로 페이스북 공유 이미지 규격에 맞는 이미지 주소를 넣으시는것을 추천해드립니다.
+NAME: xxxx
+IMG_URL: xxxxxxxxxxxx
+IMG_TYPE: xxxx
+IMG_WIDTH: xxxx
+IMG_HEIGHT: xxxx
+LOCAL: xxxx

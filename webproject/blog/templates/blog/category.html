@@ -1,0 +1,30 @@
+{% extends 'base_blog.html' %}
+
+{# head title tag #}
+{% block title %}EVERYPYTHON{% endblock title %}
+
+{# style tag #}
+{% block pagestyle %}{% endblock pagestyle %}
+
+{% block section %}
+    {# 카테고리 글 목록 #}
+    <div class="ui row">
+        <div class="one column">
+            <div class="ui center segments">
+                <div class="ui segment"><h3 class="ui header">{{ name }} 및 하위카테고리 글 목</h3></div>
+                <div class="ui segment">
+                    <div class="ui divided items">
+                        {% for pk,category,created_date,title,description,tags in posts %}
+                            {% include 'blog/module/list_post.html' %}
+                        {% empty %}
+                            <p>{{ name }} 카테고리 및 하위 카테고리에 속한 글이 없습니다.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'blog/module/pagination_posts.html' %}
+{% endblock section %}
+{# 페이지 맨 아래에서 호출할 스크립트 #}
+{% block bodyscript %}{% endblock %}

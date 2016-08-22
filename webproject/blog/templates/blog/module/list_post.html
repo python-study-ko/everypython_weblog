@@ -1,0 +1,29 @@
+<div class="item">
+    <div class="content">
+        <div class="meta">
+            <a class="ui blue ribbon label" href="{% url 'blog:Category' category %}"><i class="folder icon"></i> &nbsp;{{ category }}</a>
+            <div class="ui tiny label">
+                <i class="calendar icon"></i>&nbsp;{{ created_date|date:"Y M d" }}
+                <div class="detail">{{ created_date|timesince }} 전</div>
+            </div>
+            {% comment %} 추후 댓글수를 보여주는게 구현되면 수정하자.
+            <a class="ui tiny label">
+                <i class="comments icon"></i>&nbsp;&nbsp;&nbsp;{{ hits }}
+            </a>
+            {% endcomment %}
+
+        </div>
+        <a class="header" href="{% url 'blog:PostDetail' pk %}">{{ title }}</a>
+        <div class="description">
+            <p>{{ description|striptags }}</p>
+        </div>
+        <div class="extra">
+            <div class="ui right floated mini teal tag labels">
+                <i class="ui large teal tags icon"></i>
+                {% for tag in tags %}
+                <a class="ui label" href="{% url 'blog:Tag' tag %}">{{ tag }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

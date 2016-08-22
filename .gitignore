@@ -79,11 +79,22 @@ celerybeat-schedule
 .env
 
 # virtualenv
+.venv/
 venv/
 ENV/
 
 # Spyder project settings
 .spyderproject
+.idea/
 
 # Rope project settings
 .ropeproject
+
+settings.ini
+collect_static/
+migrations/
+.idea/ 제거할 예정
+.venv/ 제거할 예정
+webproject/blog/migrations/ 제거할 예정
+webproject/collect_static/ 제거할 예정
+webproject/settings.ini 제거할 예정

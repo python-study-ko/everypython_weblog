@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{# ---head 시작----------------- #}
+
+{# head tag - link,meta등등 #}
+{% block head %}
+    {% block meta %}{% endblock %}
+    {% block link %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+{% endblock head %}
+
+{# head title tag #}
+{% block title %}EVERYPYTHON{% endblock title %}
+
+{# style tag #}
+{% block style %}
+    /* 카테고리 메뉴 */
+    .undercategory.item{padding: inherit!important;}
+    .undercategory.items::before{background:rgba(255,255,255,.08)!important; }
+    .undercategory.items > .item{padding-top: 0.928571em!important;padding-bottom: 0.928571em!important;}
+    .undercategory.items > .item:before{background: none!important;}
+    .c2{padding-left: 30px!important;}
+    .c3{padding-left: 50px!important;}
+
+    {# 개별 페이지 css - 각 페이지에선 아래 블록을 확장하여 css추가하면 #}
+    {% block pagestyle %}{% endblock %}
+
+{% endblock style %}
+
+{# head태그에 달아야하는 스크립트 #}
+{% block headscript %}{% endblock %}
+
+{# ---head 끝------------------- #}
+
+
+{# ---body 시작------------------ #}
+{# 이 템플릿은 전체 레이아웃과 공통 컴포넌트 요소만 정의 #}
+{% block body %}
+    {% if gtm.state and gtm.id %}{# 구글 태그 매니저 #}
+    <!-- Google Tag Manager -->
+    <noscript>
+        <iframe src="//www.googletagmanager.com/ns.html?id={{ gtm.id }}"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <script>(function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start': new Date().getTime(), event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+                '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', '{{ gtm.id }}');</script>
+    <!-- End Google Tag Manager -->
+    {% endif %}
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.7";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- 반응형 사이드 메뉴 -->
+    <div class="ui sidebar inverted vertical menu">
+        {% include 'module/sidebarmenu.html' %}
+    </div>
+
+    <div class="pusher">
+        <div class="ui left fixed vertical inverted menu" id="mainsidebar">
+            {% include 'module/sidebarmenu.html' %}
+        </div>
+        <div class="ui grid container">
+            <div class="ui main grid">
+                <!-- 반응형 최상단 메뉴 -->
+                <div class="ui fixed inverted main menu">
+                    <div class="ui container">
+                        <a class="launch icon item sidebar-toggle">
+                            <i class="sidebar icon"></i>
+                        </a>
+                    </div>
+                </div>
+                {% block section %}
+                {% endblock section %}
+            </div>
+        </div>
+    </div>
+
+    <script>{# 데스크탑일경우 무조건 사이드바가 보이게 하는 코드 #}
+    $(window).resize(function () {
+        // 화면 변경시 작동될 코드
+        if ($(window).width() > 991) {
+            $("#mainsidebar").show();
+        }
+    }).resize();
+    </script>
+{% endblock body %}
+
+{# 페이지 맨 아래에서 호출할 스크립트 #}
+{% block bodyscript %}{% endblock %}
+{# ---body 끝-------------------- #}
