@@ -1,4 +1,4 @@
-{% if posts %}
+{% if posts and posts.paginator.page_range|length != 1 %}
     <div class="centered row">
         <div class="one colum">
             <div class="ui center buttons">
