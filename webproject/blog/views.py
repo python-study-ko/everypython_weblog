@@ -57,13 +57,7 @@ class Index(View):
         # 인기글 목록 추출
         q_starposts = publish.order_by('-posthits__hits')[:3]
         starposts = Post.published.posts_info(q_newposts)
-        """ 테스트 코드
-        # prefetch_related 쿼리 테스트
-        posts = Post.objects.filter(publish=True).order_by('create_date')[:4]
-        test_posts = list(posts.prefetch_related('tag'))
-        # post_info = test_posts.values_list('pk','title')
-        test_list = [(post.id,[t.name for t in post.tag.all()]) for post in test_posts]
-        """
+
 
         # 사이드바에 필요한 context를 합쳐줌
         context = {'tags': tags, 'newposts': newposts, 'starposts': starposts}
