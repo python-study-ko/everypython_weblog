@@ -54,6 +54,7 @@ SHORTNAME: xxxxxx
 #     data-ad-format="auto">
 # </ins>
 AD_POSTTOP: True
+AD_POSTDOWN: True
 AD_PAGE: True
 AD_CLIENT: xxxxxxxxxxxxxxxxxxxxx
 AD_SLOT: xxxxxxxxxxxxx
