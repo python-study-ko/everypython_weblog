@@ -204,7 +204,7 @@ SHORTNAME = config.get('disqus', 'SHORTNAME')
 # 광고 게시 여부
 try:
     AD_PAGE = True if config.get('googleAD', 'AD_PAGE') == 'True' else False
-    AD_POSTTOP = True if config.get('googleAD', 'AD_POSTTOP') == 'True' else False
+    AD_POSTDOWN = True if config.get('googleAD', 'AD_POSTDOWN') == 'True' else False
 except:
     AD_PAGE, AD_POSTTOP = False, False
 
