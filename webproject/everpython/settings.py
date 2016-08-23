@@ -216,7 +216,7 @@ except:
     AD_CLIENT_ID,AD_SLOT_ID = False,False
 # 템플릿에서 처리할 광고 정보 취합
 try:
-    AD_STATE = {'page': AD_PAGE, 'top': AD_POSTTOP, 'client': AD_CLIENT_ID, 'slot': AD_SLOT_ID}
+    AD_STATE = {'page': AD_PAGE, 'down': AD_POSTDOWN, 'client': AD_CLIENT_ID, 'slot': AD_SLOT_ID}
 except:
     AD_STATE = False
 
