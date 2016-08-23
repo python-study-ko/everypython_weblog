@@ -9,7 +9,7 @@
     {% with c1=group.0 %}
         {% with c_level=c1.0 c_name=c1.1 c_countpost=c1.2 %}
             {% if group|length == 1 %}
-                <a class="item c1" href={% url 'blog:Category' c_name %}>
+                <a class="item c1" href="{% url 'blog:Category' c_name %}">
                     <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
                     <i class="folder icon"></i>{{ c_name }}
                 </a>
