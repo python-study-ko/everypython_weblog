@@ -192,11 +192,10 @@ AWS_SECRET_ACCESS_KEY = config.get('s3', 'SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config.get('s3', 'BUCKET')
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
 
-# 화이트노이즈 비활성화시 자동으로 s3를 collect-static 파일로 사용한다
+# 화이트노이즈 비활성화시 자동으로 s3로 정적파일을 서빙함
 if config.get('deploy', 'WHITENOISE') == 'False':
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    STATIC_ROOT = 'static'
-    STATIC_URL = 'http://{0}.{1}/static/'.format(AWS_STORAGE_BUCKET_NAME,AWS_S3_HOST)
+    STATIC_URL = 'http://{0}.{1}/'.format(AWS_STORAGE_BUCKET_NAME,AWS_S3_HOST)
 
 # 디스커스 설정
 SHORTNAME = config.get('disqus', 'SHORTNAME')
