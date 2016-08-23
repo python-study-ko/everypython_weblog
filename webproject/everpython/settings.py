@@ -185,12 +185,17 @@ JET_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 INTERNAL_IPS = ['127.0.0.1', '::1']
 
 # s3 설정
-AWS_S3_HOST = config.get('s3', 'S3_HOST')  # 서울 리전
+AWS_S3_HOST = config.get('s3', 'S3_HOST')
 AWS_QUERYSTRING_AUTH = False
 AWS_ACCESS_KEY_ID = config.get('s3', 'ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config.get('s3', 'SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config.get('s3', 'BUCKET')
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+
+# 화이트노이즈 비활성화시 자동으로 s3로 정적파일을 서빙함
+if config.get('deploy', 'WHITENOISE') == 'False':
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATIC_URL = 'http://{0}.{1}/'.format(AWS_STORAGE_BUCKET_NAME,AWS_S3_HOST)
 
 # 디스커스 설정
 SHORTNAME = config.get('disqus', 'SHORTNAME')
@@ -211,7 +216,7 @@ except:
     AD_CLIENT_ID,AD_SLOT_ID = False,False
 # 템플릿에서 처리할 광고 정보 취합
 try:
-    AD_STATE = {'page': AD_PAGE, 'top': AD_POSTTOP, 'client': AD_CLIENT_ID, 'slot': AD_SLOT_ID}
+    AD_STATE = {'page': AD_PAGE, 'down': AD_POSTDOWN, 'client': AD_CLIENT_ID, 'slot': AD_SLOT_ID}
 except:
     AD_STATE = False
 
