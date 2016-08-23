@@ -4,46 +4,50 @@
 <a class="active gray item" href="{% url 'blog:index' %}">대문<i class="home icon"></i></a>
 {# 기능 구현 완료시 주석해제 하기 <a class="item">전체글<i class="folder icon"></i></a> #}
 <a class="item">카테고리<i class="folder icon"></i></a>
-{% for group in categorytree %}
-    {# 그룹에서 가장 앞의 카테고리를 1차 카테고리로 분류 #}
-    {% with c1=group.0 %}
-        {% with c_level=c1.0 c_name=c1.1 c_countpost=c1.2 %}
-            {% if group|length == 1 %}
-                <a class="item c1" href="{% url 'blog:Category' c_name %}">
-                    <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
-                    <i class="folder icon"></i>{{ c_name }}
-                </a>
-            {% else %}
-                {% with under_c=group|slice:'1:' %}
-                    {# 1차 카테고리 #}
+{% if categorytree %}
+    {% for group in categorytree %}
+        {# 그룹에서 가장 앞의 카테고리를 1차 카테고리로 분류 #}
+        {% with c1=group.0 %}
+            {% with c_level=c1.0 c_name=c1.1 c_countpost=c1.2 %}
+                {% if group|length == 1 %}
                     <a class="item c1" href="{% url 'blog:Category' c_name %}">
                         <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
                         <i class="folder icon"></i>{{ c_name }}
                     </a>
-                    <div class="undercategory item">
-                        <div class="undercategory items">
-                            {% for c_level,c_name,c_countpost in under_c %}
-                                {# 2차 카테고리 #}
-                                {% if c_level == 2 %}
-                                    <a class="item c2" href="{% url 'blog:Category' c_name %}">
-                                        <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
-                                        <i class="folder icon"></i>{{ c_name|truncatechars:13 }}
-                                    </a>
-                                    {# 3차 카테고리 #}
-                                {% elif c_level == 3 %}
-                                    <a class="item c3" href="{% url 'blog:Category' c_name %}">
-                                        <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
-                                        <i class="folder icon"></i>{{ c_name|truncatechars:13 }}
-                                    </a>
-                                {% endif %}
-                            {% endfor %}
+                {% else %}
+                    {% with under_c=group|slice:'1:' %}
+                        {# 1차 카테고리 #}
+                        <a class="item c1" href="{% url 'blog:Category' c_name %}">
+                            <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
+                            <i class="folder icon"></i>{{ c_name }}
+                        </a>
+                        <div class="undercategory item">
+                            <div class="undercategory items">
+                                {% for c_level,c_name,c_countpost in under_c %}
+                                    {# 2차 카테고리 #}
+                                    {% if c_level == 2 %}
+                                        <a class="item c2" href="{% url 'blog:Category' c_name %}">
+                                            <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
+                                            <i class="folder icon"></i>{{ c_name|truncatechars:13 }}
+                                        </a>
+                                        {# 3차 카테고리 #}
+                                    {% elif c_level == 3 %}
+                                        <a class="item c3" href="{% url 'blog:Category' c_name %}">
+                                            <div class="ui tiny label">{{ c_countpost|default_if_none:0 }}</div>
+                                            <i class="folder icon"></i>{{ c_name|truncatechars:13 }}
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                {% endwith %}
-            {% endif %}
+                    {% endwith %}
+                {% endif %}
+            {% endwith %}
         {% endwith %}
-    {% endwith %}
-{% endfor %}
+    {% endfor %}
+{% else %}
+    <a class="item">카테고리가 없습니다</a>
+{% endif %}
 <a class="item" href="/admin/">
     관리자
 </a>
