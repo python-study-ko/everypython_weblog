@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -186,6 +185,8 @@ INTERNAL_IPS = ['127.0.0.1', '::1']
 
 # s3 설정
 AWS_S3_HOST = config.get('s3', 'S3_HOST')
+
+
 AWS_QUERYSTRING_AUTH = False
 AWS_ACCESS_KEY_ID = config.get('s3', 'ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config.get('s3', 'SECRET_ACCESS_KEY')
@@ -194,8 +195,18 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
 
 # 화이트노이즈 비활성화시 자동으로 s3로 정적파일을 서빙함
 if config.get('deploy', 'WHITENOISE') == 'False':
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    STATIC_URL = 'http://{0}.{1}/'.format(AWS_STORAGE_BUCKET_NAME,AWS_S3_HOST)
+    STATICFILES_LOCATION = 'static'
+    try:
+        AWS_CLOUDFRONT_DOMAIN = config.get('s3', 'CLOUDFRONT_DOMAIN')
+        STATIC_URL = 'http://{0}/{1}/'.format(AWS_CLOUDFRONT_DOMAIN,STATICFILES_LOCATION)
+    except:
+        # 클라우드 프론트 도메인이 없을시에 자동으로 s3로 변경됨
+        AWS_CLOUDFRONT_DOMAIN = None
+        STATIC_URL = 'http://{0}.{1}/'.format(AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+
+
 
 # 디스커스 설정
 SHORTNAME = config.get('disqus', 'SHORTNAME')

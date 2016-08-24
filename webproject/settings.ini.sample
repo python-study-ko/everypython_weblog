@@ -38,6 +38,8 @@ ACCESS_KEY_ID: xxxxxxxxxxxxxxxxxx
 SECRET_ACCESS_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 # s3 버킷이름
 BUCKET: xxxxxxxxxxxxxxxxxxxxx
+# cloudfront 도메인 / coludfront를 미사용시 꼭 아래 설정을 주석 처리해주세요
+CLOUDFRONT_DOMAIN: xxxxxx.cloudfront.net
 
 [disqus]
 # disqus 가입시 할당받는 shortname을 입력하세요.
