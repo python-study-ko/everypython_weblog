@@ -49,9 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # ckeditor
-    'ckeditor',
-    'ckeditor_uploader',
     # storages
     'storages',
     # 태그
@@ -64,6 +61,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     # werkzeug 디버거를 위한 추가
     'django_extensions',
+    'django_summernote',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -160,13 +158,11 @@ USE_TZ = True
 ## 템플릿 파일 설정
 TEMPLATES_DIRS = [os.path.join(BASE_DIR, 'templates')]
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-# ckeditor 설정
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
-CKEDITOR_UPLOAD_PATH = "uploads/"
+# 할일: 테스트용으로 임시 주석침 혹시 작동안될경우 주석 해제
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # django jet 설정
 if config.get('jet', 'SIDE_MENU') == "True":
@@ -191,7 +187,12 @@ AWS_QUERYSTRING_AUTH = False
 AWS_ACCESS_KEY_ID = config.get('s3', 'ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config.get('s3', 'SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config.get('s3', 'BUCKET')
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+
+# 미디어 파일 s3전송
+MEDIAFILES_LOCATION = 'media'
+STATIC_URL = 'http://{0}.{1}/{2}/'.format(AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST,MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = "custom_storages.MediaStorage"
+
 
 # 화이트노이즈 비활성화시 자동으로 s3로 정적파일을 서빙함
 if config.get('deploy', 'WHITENOISE') == 'False':
@@ -247,56 +248,4 @@ except:
     OG_TAG = { 'name': False, 'local': False, 'img_url': False, 'img_type': False, 'img_width':False, 'img_height': False, }
 
 
-# CKEditor 설정
-CKEDITOR_BROWSE_SHOW_DIRS = True
-CKEDITOR_RESTRICT_BY_USER = True  # 사용자 별로 본인이 업로드한 이미지만 보이도록함
 
-# ckeditor 설정
-CKEDITOR_CONFIGS = {
-    'default': {
-        'skin': 'flat',
-        # 'skin': 'moono,flat',
-        'toolbar_Posting': [
-            {'name': 'document', 'items': ['Source', 'Preview', '-', 'Find', 'Replace', 'SelectAll']},
-
-            {'name': 'paragraph',
-             'items': ['Image', 'Table', 'HorizontalRule', 'CodeSnippet', 'NumberedList', 'BulletedList', '-',
-                       'Blockquote', 'CreateDiv']},
-            {'name': 'insert',
-             'items': ['Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
-            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
-            '/',
-            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
-            {'name': 'styles', 'items': ['Styles', 'Format', 'FontSize']},
-            {'name': 'basicstyles',
-             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
-            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
-        ],
-        'toolbar': 'Posting',
-        'codeSnippet_theme': 'monokai_sublime',
-        # 'height': 291,
-        # 'width': '100%',
-        # 'filebrowserWindowHeight': 725,
-        # 'filebrowserWindowWidth': 940,
-        'toolbarCanCollapse': True,
-        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
-        'tabSpaces': 4,
-        'extraPlugins': ','.join(
-            [
-                # your extra plugins here
-                'div',
-                'autolink',
-                'autoembed',
-                'embedsemantic',
-                'autogrow',
-                # 'devtools',
-                'widget',
-                'lineutils',
-                'clipboard',
-                'dialog',
-                'dialogui',
-                'elementspath',
-                'codesnippet'
-            ]),
-    }
-}
