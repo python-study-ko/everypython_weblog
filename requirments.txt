@@ -1,7 +1,6 @@
 boto==2.41.0
 configparser==3.5.0
 Django==1.9.9
-django-ckeditor==5.0.3
 django-debug-toolbar==1.4
 django-extensions==1.6.7
 django-hitcount==1.2.2
