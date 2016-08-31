@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Category, Post, OrderCategory
 from django.utils.html import format_html
+from django_summernote.admin import SummernoteModelAdmin
+
 
 def Tag_list(obj):
     tags = obj.tag.get_queryset().values_list('name',flat=True)
@@ -11,7 +13,7 @@ def Tag_list(obj):
 Tag_list.short_description = '태그'
 Tag_list.allow_tags = True
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(SummernoteModelAdmin):
     list_display = ('pk','category','publish','title',Tag_list,'create_date','edit_date')
     list_display_links = ['title']
     list_filter = ('category', 'publish','edit_date')
