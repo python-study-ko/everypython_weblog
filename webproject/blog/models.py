@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
 from taggit.models import Tag
 from hitcount.models import HitCountMixin, HitCount
