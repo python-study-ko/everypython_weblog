@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     # werkzeug 디버거를 위한 추가
     'django_extensions',
+    'django_summernote',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -160,13 +161,11 @@ USE_TZ = True
 ## 템플릿 파일 설정
 TEMPLATES_DIRS = [os.path.join(BASE_DIR, 'templates')]
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-# ckeditor 설정
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
-CKEDITOR_UPLOAD_PATH = "uploads/"
+# 할일: 테스트용으로 임시 주석침 혹시 작동안될경우 주석 해제
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # django jet 설정
 if config.get('jet', 'SIDE_MENU') == "True":
@@ -191,7 +190,12 @@ AWS_QUERYSTRING_AUTH = False
 AWS_ACCESS_KEY_ID = config.get('s3', 'ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config.get('s3', 'SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config.get('s3', 'BUCKET')
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+
+# 미디어 파일 s3전송
+MEDIAFILES_LOCATION = 'media'
+STATIC_URL = 'http://{0}.{1}/{2}/'.format(AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST,MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = "custom_storages.MediaStorage"
+
 
 # 화이트노이즈 비활성화시 자동으로 s3로 정적파일을 서빙함
 if config.get('deploy', 'WHITENOISE') == 'False':
