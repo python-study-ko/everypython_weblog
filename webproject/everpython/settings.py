@@ -187,6 +187,7 @@ AWS_QUERYSTRING_AUTH = False
 AWS_ACCESS_KEY_ID = config.get('s3', 'ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config.get('s3', 'SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config.get('s3', 'BUCKET')
+STATICFILES_LOCATION = 'collect_static'
 
 # 미디어 파일 s3전송
 MEDIAFILES_LOCATION = 'media'
