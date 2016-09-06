@@ -104,8 +104,17 @@
                 </div>
                 {% if object.markdown %}
                     <script src="//cdnjs.cloudflare.com/ajax/libs/showdown/1.4.2/showdown.min.js"></script>
+                    <script src="{% static 'js/postdetailMD.js' %}"></script>
                     <script>
-                        var converter = new showdown.Converter();
+                        //마크다운 내용을 시맨틱ui에 맞추기 위한 확장
+                        var markpost = function () {
+                            var ch_list = {
+                                type: 'output',
+
+                            }
+
+                        }
+                        var converter = new showdown.Converter({strikethrough: true, extensions: ['semantic',]});
                         {# 마크다운 파일을 html로 변경해준다 #}
                         var text = "{{ object.content|safe|escapejs }}";
                         var bodytext = converter.makeHtml(text);
@@ -113,17 +122,19 @@
                     </script>
                 {% endif %}
                 {# 본문 하단 광고 #}
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- 블로그 모바일 배너 광고 -->
                 {% if ad.down %}
                     <div class="ui centered large leaderboard ad">
-                    <!-- 블로그 반응형 광고 -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="{{ ad.client }}"
-                         data-ad-slot="{{ ad.slot }}"
-                         data-ad-format="auto"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                        <!-- 블로그 반응형 광고 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:320px;height:100px"
+                             data-ad-client="{{ ad.client }}"
+                             data-ad-slot="{{ ad.slot }}"
+                             data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
                 {% endif %}
                 {# 댓글 영역 #}
