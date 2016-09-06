@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
+SYSTEM=$(uname)
+
+# pgsql requierments 설치
+# 운영체제가 리눅스일 경우
+if [ $SYSTEM = 'Linux' ]; then
+	SYSTEM_TYPE=$SYSTEM
+	sudo apt-get install libpq-dev
+# 운영체제가 맥일 경우
+elif [ $SYSTEM = 'Darwin' ]; then
+	SYSTEM_TYPE='Mac OS X'
+	INSTALL_COMMAND="brew -y "
+else
+	SYSTEM_TYPE='NOT VALID'
+fi
+
+sudo apt-get install libpq-dev
+
 echo "-------파이썬 가상환경 생성기-------"
 if [ -d .venv ]
 then
