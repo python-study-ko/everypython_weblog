@@ -56,7 +56,7 @@ class Index(View):
 
         # 인기글 목록 추출
         q_starposts = publish.order_by('-posthits__hits')[:3]
-        starposts = Post.published.posts_info(q_newposts)
+        starposts = Post.published.posts_info(q_starposts)
 
 
         # 사이드바에 필요한 context를 합쳐줌
