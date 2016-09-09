@@ -191,7 +191,7 @@ STATICFILES_LOCATION = 'collect_static'
 
 # 미디어 파일 s3전송
 MEDIAFILES_LOCATION = 'media'
-STATIC_URL = 'http://{0}.{1}/{2}/'.format(AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST,MEDIAFILES_LOCATION)
+STATIC_URL = '/collect_static/'
 DEFAULT_FILE_STORAGE = "custom_storages.MediaStorage"
 
 

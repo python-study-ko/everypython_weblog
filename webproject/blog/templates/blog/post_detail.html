@@ -6,17 +6,17 @@
 {% block link %}
     {# facebook 공유를 위한 메타태그 #}
 
-    <link href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css' %}"
+    <link href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/tomorrow-night-eighties.css' %}"
           rel="stylesheet">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.010/css/hack.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumgothiccoding/nanumgothiccoding.css">
+    <link href="{% static 'css/post.css' %}"
 {% endblock link %}
 {# head title tag #}
-{% block title %}EVERYPYTHON{% endblock title %}
+          {% block title %}EVERYPYTHON{% endblock title %}
 
 {# style tag #}
 {% block pagestyle %}
-    code { font-family: Hack, NanumGothicCoding, '나눔고딕코딩', monospace; line-height: 1.4em;}
 {% endblock pagestyle %}
 
 {% block headscript %}
@@ -125,10 +125,11 @@
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- 블로그 모바일 배너 광고 -->
                 {% if ad.down %}
-                    <div class="ui centered large leaderboard ad">
+                    <div class="ui centered banner ad">
                         <!-- 블로그 반응형 광고 -->
+                        <!-- style="display:inline-block;width:320px;height:100px" -->
                         <ins class="adsbygoogle"
-                             style="display:inline-block;width:320px;height:100px"
+                             style="display: block"
                              data-ad-client="{{ ad.client }}"
                              data-ad-slot="{{ ad.slot }}"
                              data-ad-format="auto"></ins>
