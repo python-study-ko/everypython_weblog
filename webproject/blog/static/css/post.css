@@ -1,0 +1,19 @@
+/* 코드블럭 스타일 */
+code {
+    font-family: Hack, NanumGothicCoding, '나눔고딕코딩', monospace;
+    line-height: 1.4em;
+}
+
+p > code {
+    background-color: rgba(34, 36, 38, .15);
+    color: #e03997;
+    padding: 0.08em 0.3em 0.08em 0.3em;
+    border-radius: 2px
+}
+
+pre > code {
+    padding: 1em !important;
+    border-radius: 8px;
+    border: 3px solid rgba(255, 255, 255, .5);
+    margin: 0 0 0.8em;
+}
