@@ -15,7 +15,7 @@
         </div>
         <a class="header" href="{% url 'blog:PostDetail' pk %}">{{ title }}</a>
         <div class="description">
-            <p>{{ description|striptags|linebreaksbr }}</p>
+            <p>{{ description|linebreaksbr|striptags }}</p>
         </div>
         <div class="extra">
             <div class="ui right floated mini teal tag labels">
