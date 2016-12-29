@@ -22,5 +22,12 @@ showdown.extension('semantic', function() {
                 return '<ul class="ui list">' + match + '</ul>';
             }
         },
+        {
+            type: 'output',
+            regex: /<code>([^]+?)<\/code>/gi,
+            replace: function(s,match) {
+                return '<pre><code>' + match + '</code></pre>';
+            }
+        },
     ]
 });
