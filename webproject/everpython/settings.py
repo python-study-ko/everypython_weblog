@@ -28,6 +28,8 @@ config.read(os.path.join(BASE_DIR, 'settings.ini'))
 # SSL 적용 여부
 if config.get('deploy','SSL') == "True":
     SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.get('deploy', 'SECRET_KEY')
