@@ -7,6 +7,7 @@ DEBUG: True
 ALLOWED_HOSTS: *
 # whitenoise 설정 : 정적 파일을 CDN으로 배포시 False, CDN이 없다면 True
 WHITENOISE: True
+SSL: False
 
 [language]
 LANGUAGE_CODE: ko
