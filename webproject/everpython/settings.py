@@ -25,6 +25,10 @@ config.read(os.path.join(BASE_DIR, 'settings.ini'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
+# SSL 적용 여부
+if config.get('deploy','SSL') == "True":
+    SECURE_SSL_REDIRECT = True
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.get('deploy', 'SECRET_KEY')
 
