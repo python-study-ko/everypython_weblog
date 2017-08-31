@@ -98,3 +98,5 @@ migrations/
 webproject/blog/migrations/ 제거할 예정
 webproject/collect_static/ 제거할 예정
 webproject/settings.ini 제거할 예정
+
+\.DS_Store
